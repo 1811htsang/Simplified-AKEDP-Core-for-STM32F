@@ -1,0 +1,3 @@
+../Drivers/AK_Imported_Driver/app/task_if.cpp:25:6:void task_if(ak_msg_t*)	4
+../Drivers/AK_Imported_Driver/app/task_if.cpp:38:6:void if_des_type_rf24_handler(ak_msg_t*)	5
+../Drivers/AK_Imported_Driver/app/task_if.cpp:79:6:void if_des_type_uart_handler(ak_msg_t*)	7

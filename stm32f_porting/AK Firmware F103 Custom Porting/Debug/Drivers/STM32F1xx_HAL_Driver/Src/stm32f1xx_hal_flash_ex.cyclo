@@ -1,0 +1,16 @@
+../Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_flash_ex.c:157:19:HAL_StatusTypeDef HAL_FLASHEx_Erase(FLASH_EraseInitTypeDef*, uint32_t*)	7
+../Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_flash_ex.c:317:19:HAL_StatusTypeDef HAL_FLASHEx_Erase_IT(FLASH_EraseInitTypeDef*)	3
+../Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_flash_ex.c:392:19:HAL_StatusTypeDef HAL_FLASHEx_OBErase()	3
+../Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_flash_ex.c:441:19:HAL_StatusTypeDef HAL_FLASHEx_OBProgram(FLASH_OBProgramInitTypeDef*)	11
+../Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_flash_ex.c:522:6:void HAL_FLASHEx_OBGetConfig(FLASH_OBProgramInitTypeDef*)	1
+../Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_flash_ex.c:544:10:uint32_t HAL_FLASHEx_OBGetUserData(uint32_t)	2
+../Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_flash_ex.c:590:13:void FLASH_MassErase(uint32_t)	1
+../Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_flash_ex.c:639:26:HAL_StatusTypeDef FLASH_OB_EnableWRP(uint32_t)	10
+../Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_flash_ex.c:762:26:HAL_StatusTypeDef FLASH_OB_DisableWRP(uint32_t)	10
+../Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_flash_ex.c:881:26:HAL_StatusTypeDef FLASH_OB_RDP_LevelConfig(uint8_t)	3
+../Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_flash_ex.c:932:26:HAL_StatusTypeDef FLASH_OB_UserConfig(uint8_t)	2
+../Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_flash_ex.c:983:26:HAL_StatusTypeDef FLASH_OB_ProgramData(uint32_t, uint8_t)	2
+../Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_flash_ex.c:1016:17:uint32_t FLASH_OB_GetWRP()	1
+../Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_flash_ex.c:1029:17:uint32_t FLASH_OB_GetRDP()	2
+../Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_flash_ex.c:1055:16:uint8_t FLASH_OB_GetUser()	1
+../Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_flash_ex.c:1084:6:void FLASH_PageErase(uint32_t)	1

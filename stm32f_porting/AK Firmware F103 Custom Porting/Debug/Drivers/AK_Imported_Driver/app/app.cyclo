@@ -1,0 +1,11 @@
+C:\ST\STM32CubeIDE_2.0.0\STM32CubeIDE\plugins\com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.13.3.rel1.win32_1.0.100.202509120712\tools\arm-none-eabi\include\c++\13.3.1\arm-none-eabi\thumb\v7-m\nofp\bits\gthr-default.h:229:1:int __gthread_key_delete(__gthread_key_t)	1
+C:/Users/shanghuang/Documents/PERSON-PROJECT-CV/AK-STM32/stm32f_porting/AK Firmware F103 Custom Porting/Drivers/AK_Imported_Driver/sys/SPI.h:6:7:void SPIClass::begin()	1
+../Drivers/AK_Imported_Driver/app/app.cpp:105:5:int main_app()	2
+../Drivers/AK_Imported_Driver/app/app.cpp:287:6:void task_polling_zigbee()	1
+../Drivers/AK_Imported_Driver/app/app.cpp:293:6:void task_polling_console()	9
+../Drivers/AK_Imported_Driver/app/app.cpp:348:6:void app_start_timer()	1
+../Drivers/AK_Imported_Driver/app/app.cpp:358:6:void app_init_state_machine()	1
+../Drivers/AK_Imported_Driver/app/app.cpp:365:6:void app_task_init()	1
+../Drivers/AK_Imported_Driver/app/app.cpp:380:6:void sys_irq_timer_10ms()	1
+../Drivers/AK_Imported_Driver/app/app.cpp:388:6:void app_power_on_reset()	1
+../Drivers/AK_Imported_Driver/app/app.cpp:392:7:void* app_get_boot_share_data()	1

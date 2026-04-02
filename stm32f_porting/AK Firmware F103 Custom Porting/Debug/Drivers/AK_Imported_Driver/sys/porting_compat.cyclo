@@ -1,0 +1,105 @@
+../Drivers/CMSIS/Include/core_cm3.h:1762:34:void __NVIC_SystemReset()	1
+../Drivers/AK_Imported_Driver/sys/porting_compat.cpp:48:13:void init_gpio_output(GPIO_TypeDef*, uint16_t)	1
+../Drivers/AK_Imported_Driver/sys/porting_compat.cpp:58:13:void init_gpio_input_pullup(GPIO_TypeDef*, uint16_t)	1
+../Drivers/AK_Imported_Driver/sys/porting_compat.cpp:67:16:uint8_t gpio_read_active_low(GPIO_TypeDef*, uint16_t)	1
+../Drivers/AK_Imported_Driver/sys/porting_compat.cpp:72:13:void gpio_set(GPIO_TypeDef*, uint16_t, GPIO_PinState)	1
+../Drivers/AK_Imported_Driver/sys/porting_compat.cpp:77:13:void enable_dwt_cycle_counter()	1
+../Drivers/AK_Imported_Driver/sys/porting_compat.cpp:84:17:uint32_t get_flash_length_bytes()	1
+../Drivers/AK_Imported_Driver/sys/porting_compat.cpp:89:17:uint32_t normalize_flash_address(uint32_t)	2
+../Drivers/AK_Imported_Driver/sys/porting_compat.cpp:97:16:uint8_t is_internal_flash_address(uint32_t)	3
+../Drivers/AK_Imported_Driver/sys/porting_compat.cpp:103:13:void flash_program_bytes(uint32_t, const uint8_t*, uint32_t)	6
+../Drivers/AK_Imported_Driver/sys/porting_compat.cpp:127:13:void flash_erase_pages(uint32_t, uint32_t)	3
+../Drivers/AK_Imported_Driver/sys/porting_compat.cpp:151:6:void platform_enter_critical()	1
+../Drivers/AK_Imported_Driver/sys/porting_compat.cpp:156:6:void platform_exit_critical()	1
+../Drivers/AK_Imported_Driver/sys/porting_compat.cpp:161:6:void button_init(button_t*, uint16_t, uint8_t, button_init_func_t, button_read_func_t, button_callback_t)	3
+../Drivers/AK_Imported_Driver/sys/porting_compat.cpp:186:6:void button_enable(button_t*)	2
+../Drivers/AK_Imported_Driver/sys/porting_compat.cpp:193:6:void button_disable(button_t*)	2
+../Drivers/AK_Imported_Driver/sys/porting_compat.cpp:200:6:void button_timer_polling(button_t*)	11
+../Drivers/AK_Imported_Driver/sys/porting_compat.cpp:227:6:void led_init(led_t*, led_init_func_t, led_action_func_t, led_action_func_t)	3
+../Drivers/AK_Imported_Driver/sys/porting_compat.cpp:246:6:void led_on(led_t*)	3
+../Drivers/AK_Imported_Driver/sys/porting_compat.cpp:254:6:void led_off(led_t*)	3
+../Drivers/AK_Imported_Driver/sys/porting_compat.cpp:262:6:void led_toggle(led_t*)	3
+../Drivers/AK_Imported_Driver/sys/porting_compat.cpp:275:9:uint8_t io_button_mode_init()	1
+../Drivers/AK_Imported_Driver/sys/porting_compat.cpp:282:9:uint8_t io_button_up_init()	1
+../Drivers/AK_Imported_Driver/sys/porting_compat.cpp:288:9:uint8_t io_button_down_init()	1
+../Drivers/AK_Imported_Driver/sys/porting_compat.cpp:296:9:uint8_t io_button_mode_read()	1
+../Drivers/AK_Imported_Driver/sys/porting_compat.cpp:301:9:uint8_t io_button_up_read()	1
+../Drivers/AK_Imported_Driver/sys/porting_compat.cpp:306:9:uint8_t io_button_down_read()	1
+../Drivers/AK_Imported_Driver/sys/porting_compat.cpp:311:6:void led_life_init()	1
+../Drivers/AK_Imported_Driver/sys/porting_compat.cpp:317:6:void led_life_on()	1
+../Drivers/AK_Imported_Driver/sys/porting_compat.cpp:322:6:void led_life_off()	1
+../Drivers/AK_Imported_Driver/sys/porting_compat.cpp:327:6:void flash_io_ctrl_init()	1
+../Drivers/AK_Imported_Driver/sys/porting_compat.cpp:362:6:void flash_cs_low()	1
+../Drivers/AK_Imported_Driver/sys/porting_compat.cpp:367:6:void flash_cs_high()	1
+../Drivers/AK_Imported_Driver/sys/porting_compat.cpp:372:9:uint8_t flash_transfer(uint8_t)	1
+../Drivers/AK_Imported_Driver/sys/porting_compat.cpp:379:6:void nrf24l01_io_ctrl_init()	1
+../Drivers/AK_Imported_Driver/sys/porting_compat.cpp:401:6:void nrf24l01_spi_ctrl_init()	1
+../Drivers/AK_Imported_Driver/sys/porting_compat.cpp:406:6:void nrf24l01_ce_low()	1
+../Drivers/AK_Imported_Driver/sys/porting_compat.cpp:411:6:void nrf24l01_ce_high()	1
+../Drivers/AK_Imported_Driver/sys/porting_compat.cpp:416:6:void nrf24l01_csn_low()	1
+../Drivers/AK_Imported_Driver/sys/porting_compat.cpp:421:6:void nrf24l01_csn_high()	1
+../Drivers/AK_Imported_Driver/sys/porting_compat.cpp:426:9:uint8_t nrf24l01_spi_rw(uint8_t)	1
+../Drivers/AK_Imported_Driver/sys/porting_compat.cpp:431:6:void io_cfg_adc1()	1
+../Drivers/AK_Imported_Driver/sys/porting_compat.cpp:452:6:void adc_bat_io_cfg()	1
+../Drivers/AK_Imported_Driver/sys/porting_compat.cpp:461:10:uint16_t adc_bat_io_read(uint8_t)	3
+../Drivers/AK_Imported_Driver/sys/porting_compat.cpp:479:6:void ssd1306_clk_input_mode()	1
+../Drivers/AK_Imported_Driver/sys/porting_compat.cpp:480:6:void ssd1306_clk_output_mode()	1
+../Drivers/AK_Imported_Driver/sys/porting_compat.cpp:481:6:void ssd1306_clk_digital_write_low()	1
+../Drivers/AK_Imported_Driver/sys/porting_compat.cpp:482:6:void ssd1306_clk_digital_write_high()	1
+../Drivers/AK_Imported_Driver/sys/porting_compat.cpp:483:5:int ssd1306_clk_digital_read()	1
+../Drivers/AK_Imported_Driver/sys/porting_compat.cpp:484:6:void ssd1306_data_input_mode()	1
+../Drivers/AK_Imported_Driver/sys/porting_compat.cpp:485:6:void ssd1306_data_output_mode()	1
+../Drivers/AK_Imported_Driver/sys/porting_compat.cpp:486:6:void ssd1306_data_digital_write_low()	1
+../Drivers/AK_Imported_Driver/sys/porting_compat.cpp:487:6:void ssd1306_data_digital_write_high()	1
+../Drivers/AK_Imported_Driver/sys/porting_compat.cpp:488:5:int ssd1306_data_digital_read()	1
+../Drivers/AK_Imported_Driver/sys/porting_compat.cpp:490:6:void io_uart2_cfg()	1
+../Drivers/AK_Imported_Driver/sys/porting_compat.cpp:508:6:void io_uart_rs485_cfg()	1
+../Drivers/AK_Imported_Driver/sys/porting_compat.cpp:519:6:void internal_flash_unlock()	1
+../Drivers/AK_Imported_Driver/sys/porting_compat.cpp:524:6:void internal_flash_lock()	1
+../Drivers/AK_Imported_Driver/sys/porting_compat.cpp:529:6:void internal_flash_erase_pages_cal(uint32_t, uint32_t)	1
+../Drivers/AK_Imported_Driver/sys/porting_compat.cpp:534:6:void internal_flash_write_cal(uint32_t, uint8_t*, uint32_t)	1
+../Drivers/AK_Imported_Driver/sys/porting_compat.cpp:539:6:void flash_read(uint32_t, uint8_t*, uint32_t)	3
+../Drivers/AK_Imported_Driver/sys/porting_compat.cpp:555:6:void flash_write(uint32_t, uint8_t*, uint32_t)	1
+../Drivers/AK_Imported_Driver/sys/porting_compat.cpp:560:6:void flash_erase_sector(uint32_t)	1
+../Drivers/AK_Imported_Driver/sys/porting_compat.cpp:565:6:void flash_erase_block_64k(uint32_t)	1
+../Drivers/AK_Imported_Driver/sys/porting_compat.cpp:570:6:void eeprom_read(uint32_t, uint8_t*, uint32_t)	2
+../Drivers/AK_Imported_Driver/sys/porting_compat.cpp:580:6:void eeprom_write(uint32_t, const uint8_t*, uint32_t)	2
+../Drivers/AK_Imported_Driver/sys/porting_compat.cpp:587:6:void eeprom_erase(uint32_t, uint32_t)	2
+../Drivers/AK_Imported_Driver/sys/porting_compat.cpp:623:6:void BUZZER_Init()	1
+../Drivers/AK_Imported_Driver/sys/porting_compat.cpp:630:6:void BUZZER_PlayTones(const buzzer_tone_t*)	6
+../Drivers/AK_Imported_Driver/sys/porting_compat.cpp:648:6:void sys_cfg_clock()	1
+../Drivers/AK_Imported_Driver/sys/porting_compat.cpp:655:6:void sys_cfg_tick()	1
+../Drivers/AK_Imported_Driver/sys/porting_compat.cpp:660:6:void sys_cfg_console()	1
+../Drivers/AK_Imported_Driver/sys/porting_compat.cpp:693:6:void sys_cfg_update_info()	1
+../Drivers/AK_Imported_Driver/sys/porting_compat.cpp:712:6:void sys_cfg_init()	1
+../Drivers/AK_Imported_Driver/sys/porting_compat.cpp:720:6:void sys_ctrl_reset()	0
+../Drivers/AK_Imported_Driver/sys/porting_compat.cpp:725:6:void sys_ctrl_independent_watchdog_init()	3
+../Drivers/AK_Imported_Driver/sys/porting_compat.cpp:740:6:void sys_ctrl_independent_watchdog_reset()	1
+../Drivers/AK_Imported_Driver/sys/porting_compat.cpp:745:6:void sys_ctrl_soft_watchdog_init(uint32_t)	1
+../Drivers/AK_Imported_Driver/sys/porting_compat.cpp:752:6:void sys_ctrl_soft_watchdog_reset()	1
+../Drivers/AK_Imported_Driver/sys/porting_compat.cpp:757:6:void sys_ctrl_soft_watchdog_enable()	1
+../Drivers/AK_Imported_Driver/sys/porting_compat.cpp:762:6:void sys_ctrl_soft_watchdog_disable()	1
+../Drivers/AK_Imported_Driver/sys/porting_compat.cpp:767:6:void sys_ctrl_soft_watchdog_increase_counter()	4
+../Drivers/AK_Imported_Driver/sys/porting_compat.cpp:777:6:void sys_ctrl_delay(uint32_t)	2
+../Drivers/AK_Imported_Driver/sys/porting_compat.cpp:784:6:void sys_ctrl_delay_ms(uint32_t)	1
+../Drivers/AK_Imported_Driver/sys/porting_compat.cpp:789:6:void sys_ctrl_delay_us(uint32_t)	2
+../Drivers/AK_Imported_Driver/sys/porting_compat.cpp:798:10:uint32_t sys_ctrl_micros()	2
+../Drivers/AK_Imported_Driver/sys/porting_compat.cpp:807:10:uint32_t sys_ctrl_millis()	1
+../Drivers/AK_Imported_Driver/sys/porting_compat.cpp:812:9:uint8_t sys_ctrl_shell_get_char()	2
+../Drivers/AK_Imported_Driver/sys/porting_compat.cpp:820:6:void sys_ctrl_shell_put_char(uint8_t)	1
+../Drivers/AK_Imported_Driver/sys/porting_compat.cpp:828:6:void sys_ctrl_shell_put_char_block(uint8_t)	1
+../Drivers/AK_Imported_Driver/sys/porting_compat.cpp:833:6:void sys_ctrl_shell_sw_to_block()	1
+../Drivers/AK_Imported_Driver/sys/porting_compat.cpp:839:6:void sys_ctrl_shell_sw_to_nonblock()	1
+../Drivers/AK_Imported_Driver/sys/porting_compat.cpp:845:6:void sys_ctrl_get_firmware_info(firmware_header_t*)	2
+../Drivers/AK_Imported_Driver/sys/porting_compat.cpp:856:6:void sys_ctr_sleep_wait_for_irq()	1
+../Drivers/AK_Imported_Driver/sys/porting_compat.cpp:861:10:uint32_t sys_ctr_get_exception_number()	1
+../Drivers/AK_Imported_Driver/sys/porting_compat.cpp:866:6:void sys_ctr_restart_app()	1
+../Drivers/AK_Imported_Driver/sys/porting_compat.cpp:871:10:uint32_t sys_ctr_get_vbat_voltage()	1
+../Drivers/AK_Imported_Driver/sys/porting_compat.cpp:877:10:uint32_t sys_ctr_get_mcu_temperature()	1
+../Drivers/AK_Imported_Driver/sys/porting_compat.cpp:882:6:void sys_ctr_stop_mcu()	1
+../Drivers/AK_Imported_Driver/sys/porting_compat.cpp:887:5:int asm_test_add(int, int)	1
+../Drivers/AK_Imported_Driver/sys/porting_compat.cpp:892:10:uint32_t sys_stack_count_init()	1
+../Drivers/AK_Imported_Driver/sys/porting_compat.cpp:897:10:uint32_t sys_stack_usage()	1
+../Drivers/AK_Imported_Driver/sys/porting_compat.cpp:904:10:uint32_t sys_stack_get_size()	1
+../Drivers/AK_Imported_Driver/sys/porting_compat.cpp:911:6:void sys_irq_nrf24l01()	1
+../Drivers/AK_Imported_Driver/sys/porting_compat.cpp:915:6:void sys_irq_uart2()	1

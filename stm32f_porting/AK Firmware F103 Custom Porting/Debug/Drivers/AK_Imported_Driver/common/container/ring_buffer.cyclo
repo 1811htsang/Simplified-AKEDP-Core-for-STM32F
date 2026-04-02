@@ -1,0 +1,12 @@
+../Drivers/AK_Imported_Driver/common/container/ring_buffer.c:8:6:void ring_buffer_init(ring_buffer_t*, void*, uint16_t, uint16_t)	1
+../Drivers/AK_Imported_Driver/common/container/ring_buffer.c:18:10:uint16_t ring_buffer_availble(ring_buffer_t*)	1
+../Drivers/AK_Imported_Driver/common/container/ring_buffer.c:22:6:bool ring_buffer_is_empty(ring_buffer_t*)	1
+../Drivers/AK_Imported_Driver/common/container/ring_buffer.c:26:6:bool ring_buffer_is_full(ring_buffer_t*)	1
+../Drivers/AK_Imported_Driver/common/container/ring_buffer.c:30:9:uint8_t ring_buffer_put(ring_buffer_t*, void*)	3
+../Drivers/AK_Imported_Driver/common/container/ring_buffer.c:55:9:uint8_t ring_buffer_get(ring_buffer_t*, void*)	3
+../Drivers/AK_Imported_Driver/common/container/ring_buffer.c:77:6:void ring_buffer_char_init(ring_buffer_char_t*, void*, uint16_t)	1
+../Drivers/AK_Imported_Driver/common/container/ring_buffer.c:86:10:uint16_t ring_buffer_char_availble(ring_buffer_char_t*)	1
+../Drivers/AK_Imported_Driver/common/container/ring_buffer.c:90:6:bool ring_buffer_char_is_empty(ring_buffer_char_t*)	1
+../Drivers/AK_Imported_Driver/common/container/ring_buffer.c:94:6:bool ring_buffer_char_is_full(ring_buffer_char_t*)	1
+../Drivers/AK_Imported_Driver/common/container/ring_buffer.c:98:6:void ring_buffer_char_put(ring_buffer_char_t*, uint8_t)	2
+../Drivers/AK_Imported_Driver/common/container/ring_buffer.c:116:9:uint8_t ring_buffer_char_get(ring_buffer_char_t*)	2

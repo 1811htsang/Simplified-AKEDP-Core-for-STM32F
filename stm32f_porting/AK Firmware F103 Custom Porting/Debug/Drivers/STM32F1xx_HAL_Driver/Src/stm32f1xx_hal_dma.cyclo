@@ -1,0 +1,13 @@
+../Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_dma.c:142:19:HAL_StatusTypeDef HAL_DMA_Init(DMA_HandleTypeDef*)	2
+../Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_dma.c:219:19:HAL_StatusTypeDef HAL_DMA_DeInit(DMA_HandleTypeDef*)	2
+../Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_dma.c:318:19:HAL_StatusTypeDef HAL_DMA_Start(DMA_HandleTypeDef*, uint32_t, uint32_t, uint32_t)	3
+../Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_dma.c:361:19:HAL_StatusTypeDef HAL_DMA_Start_IT(DMA_HandleTypeDef*, uint32_t, uint32_t, uint32_t)	4
+../Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_dma.c:415:19:HAL_StatusTypeDef HAL_DMA_Abort(DMA_HandleTypeDef*)	2
+../Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_dma.c:456:19:HAL_StatusTypeDef HAL_DMA_Abort_IT(DMA_HandleTypeDef*)	9
+../Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_dma.c:501:19:HAL_StatusTypeDef HAL_DMA_PollForTransfer(DMA_HandleTypeDef*, uint32_t, uint32_t)	41
+../Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_dma.c:602:6:void HAL_DMA_IRQHandler(DMA_HandleTypeDef*)	24
+../Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_dma.c:692:19:HAL_StatusTypeDef HAL_DMA_RegisterCallback(DMA_HandleTypeDef*, HAL_DMA_CallbackIDTypeDef, void (*)(DMA_HandleTypeDef*))	7
+../Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_dma.c:743:19:HAL_StatusTypeDef HAL_DMA_UnRegisterCallback(DMA_HandleTypeDef*, HAL_DMA_CallbackIDTypeDef)	8
+../Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_dma.c:819:22:HAL_DMA_StateTypeDef HAL_DMA_GetState(DMA_HandleTypeDef*)	1
+../Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_dma.c:831:10:uint32_t HAL_DMA_GetError(DMA_HandleTypeDef*)	1
+../Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_dma.c:857:13:void DMA_SetConfig(DMA_HandleTypeDef*, uint32_t, uint32_t, uint32_t)	2
