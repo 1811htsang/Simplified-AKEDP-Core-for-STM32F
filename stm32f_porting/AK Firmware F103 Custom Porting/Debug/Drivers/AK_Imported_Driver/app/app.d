@@ -12,8 +12,6 @@ Drivers/AK_Imported_Driver/app/app.o: \
  C:/Users/shanghuang/Documents/PERSON-PROJECT-CV/AK-STM32/stm32f_porting/AK\ Firmware\ F103\ Custom\ Porting/Drivers/AK_Imported_Driver/ak/inc/timer.h \
  C:/Users/shanghuang/Documents/PERSON-PROJECT-CV/AK-STM32/stm32f_porting/AK\ Firmware\ F103\ Custom\ Porting/Drivers/AK_Imported_Driver/ak/inc/fsm.h \
  C:/Users/shanghuang/Documents/PERSON-PROJECT-CV/AK-STM32/stm32f_porting/AK\ Firmware\ F103\ Custom\ Porting/Drivers/AK_Imported_Driver/sys/led.h \
- C:/Users/shanghuang/Documents/PERSON-PROJECT-CV/AK-STM32/stm32f_porting/AK\ Firmware\ F103\ Custom\ Porting/Drivers/AK_Imported_Driver/sys/button.h \
- C:/Users/shanghuang/Documents/PERSON-PROJECT-CV/AK-STM32/stm32f_porting/AK\ Firmware\ F103\ Custom\ Porting/Drivers/AK_Imported_Driver/sys/flash.h \
  ../Drivers/AK_Imported_Driver/app/app.h \
  ../Drivers/AK_Imported_Driver/app/app_if.h \
  ../Drivers/AK_Imported_Driver/app/app_eeprom.h \
@@ -26,44 +24,40 @@ Drivers/AK_Imported_Driver/app/app.o: \
  C:/Users/shanghuang/Documents/PERSON-PROJECT-CV/AK-STM32/stm32f_porting/AK\ Firmware\ F103\ Custom\ Porting/Drivers/AK_Imported_Driver/app/app_data.h \
  C:/Users/shanghuang/Documents/PERSON-PROJECT-CV/AK-STM32/stm32f_porting/AK\ Firmware\ F103\ Custom\ Porting/Drivers/AK_Imported_Driver/sys/system.h \
  C:/Users/shanghuang/Documents/PERSON-PROJECT-CV/AK-STM32/stm32f_porting/AK\ Firmware\ F103\ Custom\ Porting/Drivers/AK_Imported_Driver/sys/platform.h \
- ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h \
- ../Core/Inc/stm32f1xx_hal_conf.h \
- ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc.h \
- ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_def.h \
- ../Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f1xx.h \
- ../Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f103xb.h \
- ../Drivers/CMSIS/Include/core_cm3.h \
- ../Drivers/CMSIS/Include/cmsis_version.h \
- ../Drivers/CMSIS/Include/cmsis_compiler.h \
- ../Drivers/CMSIS/Include/cmsis_gcc.h \
- ../Drivers/CMSIS/Device/ST/STM32F1xx/Include/system_stm32f1xx.h \
- ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy/stm32_hal_legacy.h \
- ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc_ex.h \
- ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_gpio.h \
- ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_gpio_ex.h \
- ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_exti.h \
- ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma.h \
- ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma_ex.h \
- ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_cortex.h \
- ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_adc.h \
- ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_adc_ex.h \
- ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flash.h \
- ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flash_ex.h \
- ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_pwr.h \
- ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_spi.h \
- ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h \
+ C:/Users/shanghuang/Documents/PERSON-PROJECT-CV/AK-STM32/stm32f_porting/AK\ Firmware\ F103\ Custom\ Porting/Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h \
+ C:/Users/shanghuang/Documents/PERSON-PROJECT-CV/AK-STM32/stm32f_porting/AK\ Firmware\ F103\ Custom\ Porting/Core/Inc/stm32f1xx_hal_conf.h \
+ C:/Users/shanghuang/Documents/PERSON-PROJECT-CV/AK-STM32/stm32f_porting/AK\ Firmware\ F103\ Custom\ Porting/Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc.h \
+ C:/Users/shanghuang/Documents/PERSON-PROJECT-CV/AK-STM32/stm32f_porting/AK\ Firmware\ F103\ Custom\ Porting/Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_def.h \
+ C:/Users/shanghuang/Documents/PERSON-PROJECT-CV/AK-STM32/stm32f_porting/AK\ Firmware\ F103\ Custom\ Porting/Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f1xx.h \
+ C:/Users/shanghuang/Documents/PERSON-PROJECT-CV/AK-STM32/stm32f_porting/AK\ Firmware\ F103\ Custom\ Porting/Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f103xb.h \
+ C:/Users/shanghuang/Documents/PERSON-PROJECT-CV/AK-STM32/stm32f_porting/AK\ Firmware\ F103\ Custom\ Porting/Drivers/CMSIS/Include/core_cm3.h \
+ C:/Users/shanghuang/Documents/PERSON-PROJECT-CV/AK-STM32/stm32f_porting/AK\ Firmware\ F103\ Custom\ Porting/Drivers/CMSIS/Include/cmsis_version.h \
+ C:/Users/shanghuang/Documents/PERSON-PROJECT-CV/AK-STM32/stm32f_porting/AK\ Firmware\ F103\ Custom\ Porting/Drivers/CMSIS/Include/cmsis_compiler.h \
+ C:/Users/shanghuang/Documents/PERSON-PROJECT-CV/AK-STM32/stm32f_porting/AK\ Firmware\ F103\ Custom\ Porting/Drivers/CMSIS/Include/cmsis_gcc.h \
+ C:/Users/shanghuang/Documents/PERSON-PROJECT-CV/AK-STM32/stm32f_porting/AK\ Firmware\ F103\ Custom\ Porting/Drivers/CMSIS/Device/ST/STM32F1xx/Include/system_stm32f1xx.h \
+ C:/Users/shanghuang/Documents/PERSON-PROJECT-CV/AK-STM32/stm32f_porting/AK\ Firmware\ F103\ Custom\ Porting/Drivers/STM32F1xx_HAL_Driver/Inc/Legacy/stm32_hal_legacy.h \
+ C:/Users/shanghuang/Documents/PERSON-PROJECT-CV/AK-STM32/stm32f_porting/AK\ Firmware\ F103\ Custom\ Porting/Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc_ex.h \
+ C:/Users/shanghuang/Documents/PERSON-PROJECT-CV/AK-STM32/stm32f_porting/AK\ Firmware\ F103\ Custom\ Porting/Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_gpio.h \
+ C:/Users/shanghuang/Documents/PERSON-PROJECT-CV/AK-STM32/stm32f_porting/AK\ Firmware\ F103\ Custom\ Porting/Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_gpio_ex.h \
+ C:/Users/shanghuang/Documents/PERSON-PROJECT-CV/AK-STM32/stm32f_porting/AK\ Firmware\ F103\ Custom\ Porting/Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_exti.h \
+ C:/Users/shanghuang/Documents/PERSON-PROJECT-CV/AK-STM32/stm32f_porting/AK\ Firmware\ F103\ Custom\ Porting/Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma.h \
+ C:/Users/shanghuang/Documents/PERSON-PROJECT-CV/AK-STM32/stm32f_porting/AK\ Firmware\ F103\ Custom\ Porting/Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma_ex.h \
+ C:/Users/shanghuang/Documents/PERSON-PROJECT-CV/AK-STM32/stm32f_porting/AK\ Firmware\ F103\ Custom\ Porting/Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_cortex.h \
+ C:/Users/shanghuang/Documents/PERSON-PROJECT-CV/AK-STM32/stm32f_porting/AK\ Firmware\ F103\ Custom\ Porting/Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_adc.h \
+ C:/Users/shanghuang/Documents/PERSON-PROJECT-CV/AK-STM32/stm32f_porting/AK\ Firmware\ F103\ Custom\ Porting/Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_adc_ex.h \
+ C:/Users/shanghuang/Documents/PERSON-PROJECT-CV/AK-STM32/stm32f_porting/AK\ Firmware\ F103\ Custom\ Porting/Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flash.h \
+ C:/Users/shanghuang/Documents/PERSON-PROJECT-CV/AK-STM32/stm32f_porting/AK\ Firmware\ F103\ Custom\ Porting/Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flash_ex.h \
+ C:/Users/shanghuang/Documents/PERSON-PROJECT-CV/AK-STM32/stm32f_porting/AK\ Firmware\ F103\ Custom\ Porting/Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_pwr.h \
+ C:/Users/shanghuang/Documents/PERSON-PROJECT-CV/AK-STM32/stm32f_porting/AK\ Firmware\ F103\ Custom\ Porting/Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_spi.h \
+ C:/Users/shanghuang/Documents/PERSON-PROJECT-CV/AK-STM32/stm32f_porting/AK\ Firmware\ F103\ Custom\ Porting/Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h \
  C:/Users/shanghuang/Documents/PERSON-PROJECT-CV/AK-STM32/stm32f_porting/AK\ Firmware\ F103\ Custom\ Porting/Drivers/AK_Imported_Driver/common/xprintf.h \
  ../Drivers/AK_Imported_Driver/app/app_dbg.h \
- ../Drivers/AK_Imported_Driver/app/app_bsp.h \
- ../Drivers/AK_Imported_Driver/app/app_flash.h \
- ../Drivers/AK_Imported_Driver/app/app_non_clear_ram.h \
  ../Drivers/AK_Imported_Driver/app/task_list.h \
  ../Drivers/AK_Imported_Driver/app/task_shell.h \
  C:/Users/shanghuang/Documents/PERSON-PROJECT-CV/AK-STM32/stm32f_porting/AK\ Firmware\ F103\ Custom\ Porting/Drivers/AK_Imported_Driver/common/cmd_line.h \
  C:/Users/shanghuang/Documents/PERSON-PROJECT-CV/AK-STM32/stm32f_porting/AK\ Firmware\ F103\ Custom\ Porting/Drivers/AK_Imported_Driver/common/container/ring_buffer.h \
  ../Drivers/AK_Imported_Driver/app/task_life.h \
  ../Drivers/AK_Imported_Driver/app/task_if.h \
- ../Drivers/AK_Imported_Driver/app/task_rf24_if.h \
  ../Drivers/AK_Imported_Driver/app/task_uart_if.h \
  ../Drivers/AK_Imported_Driver/app/task_display.h \
  C:/Users/shanghuang/Documents/PERSON-PROJECT-CV/AK-STM32/stm32f_porting/AK\ Firmware\ F103\ Custom\ Porting/Drivers/AK_Imported_Driver/common/screen_manager.h \
@@ -84,14 +78,13 @@ Drivers/AK_Imported_Driver/app/app.o: \
  C:/Users/shanghuang/Documents/PERSON-PROJECT-CV/AK-STM32/stm32f_porting/AK\ Firmware\ F103\ Custom\ Porting/Drivers/AK_Imported_Driver/app/screens/scr_es35sw_th_sensor.h \
  C:/Users/shanghuang/Documents/PERSON-PROJECT-CV/AK-STM32/stm32f_porting/AK\ Firmware\ F103\ Custom\ Porting/Drivers/AK_Imported_Driver/app/app_modbus_pull.h \
  C:/Users/shanghuang/Documents/PERSON-PROJECT-CV/AK-STM32/stm32f_porting/AK\ Firmware\ F103\ Custom\ Porting/Drivers/AK_Imported_Driver/app/screens/scr_lhio404_io_device.h \
- ../Drivers/AK_Imported_Driver/app/task_zigbee.h \
  C:/Users/shanghuang/Documents/PERSON-PROJECT-CV/AK-STM32/stm32f_porting/AK\ Firmware\ F103\ Custom\ Porting/Drivers/AK_Imported_Driver/sys/sys_irq.h \
  C:/Users/shanghuang/Documents/PERSON-PROJECT-CV/AK-STM32/stm32f_porting/AK\ Firmware\ F103\ Custom\ Porting/Drivers/AK_Imported_Driver/sys/sys_io.h \
  C:/Users/shanghuang/Documents/PERSON-PROJECT-CV/AK-STM32/stm32f_porting/AK\ Firmware\ F103\ Custom\ Porting/Drivers/AK_Imported_Driver/sys/io_cfg.h \
- ../Core/Inc/main.h \
+ C:/Users/shanghuang/Documents/PERSON-PROJECT-CV/AK-STM32/stm32f_porting/AK\ Firmware\ F103\ Custom\ Porting/Core/Inc/main.h \
  C:/Users/shanghuang/Documents/PERSON-PROJECT-CV/AK-STM32/stm32f_porting/AK\ Firmware\ F103\ Custom\ Porting/Drivers/AK_Imported_Driver/sys/buzzer.h \
  C:/Users/shanghuang/Documents/PERSON-PROJECT-CV/AK-STM32/stm32f_porting/AK\ Firmware\ F103\ Custom\ Porting/Drivers/AK_Imported_Driver/sys/SPI.h \
- ../Core/Inc/SPI.h \
+ C:/Users/shanghuang/Documents/PERSON-PROJECT-CV/AK-STM32/stm32f_porting/AK\ Firmware\ F103\ Custom\ Porting/Core/Inc/SPI.h \
  C:/Users/shanghuang/Documents/PERSON-PROJECT-CV/AK-STM32/stm32f_porting/AK\ Firmware\ F103\ Custom\ Porting/Drivers/AK_Imported_Driver/sys/WString.h \
  C:/Users/shanghuang/Documents/PERSON-PROJECT-CV/AK-STM32/stm32f_porting/AK\ Firmware\ F103\ Custom\ Porting/Drivers/AK_Imported_Driver/sys/HardwareSerial.h \
  C:/Users/shanghuang/Documents/PERSON-PROJECT-CV/AK-STM32/stm32f_porting/AK\ Firmware\ F103\ Custom\ Porting/Drivers/AK_Imported_Driver/sys/ArduinoJson.h
@@ -107,8 +100,6 @@ C:/Users/shanghuang/Documents/PERSON-PROJECT-CV/AK-STM32/stm32f_porting/AK\ Firm
 C:/Users/shanghuang/Documents/PERSON-PROJECT-CV/AK-STM32/stm32f_porting/AK\ Firmware\ F103\ Custom\ Porting/Drivers/AK_Imported_Driver/ak/inc/timer.h:
 C:/Users/shanghuang/Documents/PERSON-PROJECT-CV/AK-STM32/stm32f_porting/AK\ Firmware\ F103\ Custom\ Porting/Drivers/AK_Imported_Driver/ak/inc/fsm.h:
 C:/Users/shanghuang/Documents/PERSON-PROJECT-CV/AK-STM32/stm32f_porting/AK\ Firmware\ F103\ Custom\ Porting/Drivers/AK_Imported_Driver/sys/led.h:
-C:/Users/shanghuang/Documents/PERSON-PROJECT-CV/AK-STM32/stm32f_porting/AK\ Firmware\ F103\ Custom\ Porting/Drivers/AK_Imported_Driver/sys/button.h:
-C:/Users/shanghuang/Documents/PERSON-PROJECT-CV/AK-STM32/stm32f_porting/AK\ Firmware\ F103\ Custom\ Porting/Drivers/AK_Imported_Driver/sys/flash.h:
 ../Drivers/AK_Imported_Driver/app/app.h:
 ../Drivers/AK_Imported_Driver/app/app_if.h:
 ../Drivers/AK_Imported_Driver/app/app_eeprom.h:
@@ -121,44 +112,40 @@ C:/Users/shanghuang/Documents/PERSON-PROJECT-CV/AK-STM32/stm32f_porting/AK\ Firm
 C:/Users/shanghuang/Documents/PERSON-PROJECT-CV/AK-STM32/stm32f_porting/AK\ Firmware\ F103\ Custom\ Porting/Drivers/AK_Imported_Driver/app/app_data.h:
 C:/Users/shanghuang/Documents/PERSON-PROJECT-CV/AK-STM32/stm32f_porting/AK\ Firmware\ F103\ Custom\ Porting/Drivers/AK_Imported_Driver/sys/system.h:
 C:/Users/shanghuang/Documents/PERSON-PROJECT-CV/AK-STM32/stm32f_porting/AK\ Firmware\ F103\ Custom\ Porting/Drivers/AK_Imported_Driver/sys/platform.h:
-../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h:
-../Core/Inc/stm32f1xx_hal_conf.h:
-../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc.h:
-../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_def.h:
-../Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f1xx.h:
-../Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f103xb.h:
-../Drivers/CMSIS/Include/core_cm3.h:
-../Drivers/CMSIS/Include/cmsis_version.h:
-../Drivers/CMSIS/Include/cmsis_compiler.h:
-../Drivers/CMSIS/Include/cmsis_gcc.h:
-../Drivers/CMSIS/Device/ST/STM32F1xx/Include/system_stm32f1xx.h:
-../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy/stm32_hal_legacy.h:
-../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc_ex.h:
-../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_gpio.h:
-../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_gpio_ex.h:
-../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_exti.h:
-../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma.h:
-../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma_ex.h:
-../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_cortex.h:
-../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_adc.h:
-../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_adc_ex.h:
-../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flash.h:
-../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flash_ex.h:
-../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_pwr.h:
-../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_spi.h:
-../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h:
+C:/Users/shanghuang/Documents/PERSON-PROJECT-CV/AK-STM32/stm32f_porting/AK\ Firmware\ F103\ Custom\ Porting/Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h:
+C:/Users/shanghuang/Documents/PERSON-PROJECT-CV/AK-STM32/stm32f_porting/AK\ Firmware\ F103\ Custom\ Porting/Core/Inc/stm32f1xx_hal_conf.h:
+C:/Users/shanghuang/Documents/PERSON-PROJECT-CV/AK-STM32/stm32f_porting/AK\ Firmware\ F103\ Custom\ Porting/Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc.h:
+C:/Users/shanghuang/Documents/PERSON-PROJECT-CV/AK-STM32/stm32f_porting/AK\ Firmware\ F103\ Custom\ Porting/Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_def.h:
+C:/Users/shanghuang/Documents/PERSON-PROJECT-CV/AK-STM32/stm32f_porting/AK\ Firmware\ F103\ Custom\ Porting/Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f1xx.h:
+C:/Users/shanghuang/Documents/PERSON-PROJECT-CV/AK-STM32/stm32f_porting/AK\ Firmware\ F103\ Custom\ Porting/Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f103xb.h:
+C:/Users/shanghuang/Documents/PERSON-PROJECT-CV/AK-STM32/stm32f_porting/AK\ Firmware\ F103\ Custom\ Porting/Drivers/CMSIS/Include/core_cm3.h:
+C:/Users/shanghuang/Documents/PERSON-PROJECT-CV/AK-STM32/stm32f_porting/AK\ Firmware\ F103\ Custom\ Porting/Drivers/CMSIS/Include/cmsis_version.h:
+C:/Users/shanghuang/Documents/PERSON-PROJECT-CV/AK-STM32/stm32f_porting/AK\ Firmware\ F103\ Custom\ Porting/Drivers/CMSIS/Include/cmsis_compiler.h:
+C:/Users/shanghuang/Documents/PERSON-PROJECT-CV/AK-STM32/stm32f_porting/AK\ Firmware\ F103\ Custom\ Porting/Drivers/CMSIS/Include/cmsis_gcc.h:
+C:/Users/shanghuang/Documents/PERSON-PROJECT-CV/AK-STM32/stm32f_porting/AK\ Firmware\ F103\ Custom\ Porting/Drivers/CMSIS/Device/ST/STM32F1xx/Include/system_stm32f1xx.h:
+C:/Users/shanghuang/Documents/PERSON-PROJECT-CV/AK-STM32/stm32f_porting/AK\ Firmware\ F103\ Custom\ Porting/Drivers/STM32F1xx_HAL_Driver/Inc/Legacy/stm32_hal_legacy.h:
+C:/Users/shanghuang/Documents/PERSON-PROJECT-CV/AK-STM32/stm32f_porting/AK\ Firmware\ F103\ Custom\ Porting/Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc_ex.h:
+C:/Users/shanghuang/Documents/PERSON-PROJECT-CV/AK-STM32/stm32f_porting/AK\ Firmware\ F103\ Custom\ Porting/Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_gpio.h:
+C:/Users/shanghuang/Documents/PERSON-PROJECT-CV/AK-STM32/stm32f_porting/AK\ Firmware\ F103\ Custom\ Porting/Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_gpio_ex.h:
+C:/Users/shanghuang/Documents/PERSON-PROJECT-CV/AK-STM32/stm32f_porting/AK\ Firmware\ F103\ Custom\ Porting/Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_exti.h:
+C:/Users/shanghuang/Documents/PERSON-PROJECT-CV/AK-STM32/stm32f_porting/AK\ Firmware\ F103\ Custom\ Porting/Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma.h:
+C:/Users/shanghuang/Documents/PERSON-PROJECT-CV/AK-STM32/stm32f_porting/AK\ Firmware\ F103\ Custom\ Porting/Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma_ex.h:
+C:/Users/shanghuang/Documents/PERSON-PROJECT-CV/AK-STM32/stm32f_porting/AK\ Firmware\ F103\ Custom\ Porting/Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_cortex.h:
+C:/Users/shanghuang/Documents/PERSON-PROJECT-CV/AK-STM32/stm32f_porting/AK\ Firmware\ F103\ Custom\ Porting/Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_adc.h:
+C:/Users/shanghuang/Documents/PERSON-PROJECT-CV/AK-STM32/stm32f_porting/AK\ Firmware\ F103\ Custom\ Porting/Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_adc_ex.h:
+C:/Users/shanghuang/Documents/PERSON-PROJECT-CV/AK-STM32/stm32f_porting/AK\ Firmware\ F103\ Custom\ Porting/Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flash.h:
+C:/Users/shanghuang/Documents/PERSON-PROJECT-CV/AK-STM32/stm32f_porting/AK\ Firmware\ F103\ Custom\ Porting/Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flash_ex.h:
+C:/Users/shanghuang/Documents/PERSON-PROJECT-CV/AK-STM32/stm32f_porting/AK\ Firmware\ F103\ Custom\ Porting/Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_pwr.h:
+C:/Users/shanghuang/Documents/PERSON-PROJECT-CV/AK-STM32/stm32f_porting/AK\ Firmware\ F103\ Custom\ Porting/Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_spi.h:
+C:/Users/shanghuang/Documents/PERSON-PROJECT-CV/AK-STM32/stm32f_porting/AK\ Firmware\ F103\ Custom\ Porting/Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h:
 C:/Users/shanghuang/Documents/PERSON-PROJECT-CV/AK-STM32/stm32f_porting/AK\ Firmware\ F103\ Custom\ Porting/Drivers/AK_Imported_Driver/common/xprintf.h:
 ../Drivers/AK_Imported_Driver/app/app_dbg.h:
-../Drivers/AK_Imported_Driver/app/app_bsp.h:
-../Drivers/AK_Imported_Driver/app/app_flash.h:
-../Drivers/AK_Imported_Driver/app/app_non_clear_ram.h:
 ../Drivers/AK_Imported_Driver/app/task_list.h:
 ../Drivers/AK_Imported_Driver/app/task_shell.h:
 C:/Users/shanghuang/Documents/PERSON-PROJECT-CV/AK-STM32/stm32f_porting/AK\ Firmware\ F103\ Custom\ Porting/Drivers/AK_Imported_Driver/common/cmd_line.h:
 C:/Users/shanghuang/Documents/PERSON-PROJECT-CV/AK-STM32/stm32f_porting/AK\ Firmware\ F103\ Custom\ Porting/Drivers/AK_Imported_Driver/common/container/ring_buffer.h:
 ../Drivers/AK_Imported_Driver/app/task_life.h:
 ../Drivers/AK_Imported_Driver/app/task_if.h:
-../Drivers/AK_Imported_Driver/app/task_rf24_if.h:
 ../Drivers/AK_Imported_Driver/app/task_uart_if.h:
 ../Drivers/AK_Imported_Driver/app/task_display.h:
 C:/Users/shanghuang/Documents/PERSON-PROJECT-CV/AK-STM32/stm32f_porting/AK\ Firmware\ F103\ Custom\ Porting/Drivers/AK_Imported_Driver/common/screen_manager.h:
@@ -179,14 +166,13 @@ C:/Users/shanghuang/Documents/PERSON-PROJECT-CV/AK-STM32/stm32f_porting/AK\ Firm
 C:/Users/shanghuang/Documents/PERSON-PROJECT-CV/AK-STM32/stm32f_porting/AK\ Firmware\ F103\ Custom\ Porting/Drivers/AK_Imported_Driver/app/screens/scr_es35sw_th_sensor.h:
 C:/Users/shanghuang/Documents/PERSON-PROJECT-CV/AK-STM32/stm32f_porting/AK\ Firmware\ F103\ Custom\ Porting/Drivers/AK_Imported_Driver/app/app_modbus_pull.h:
 C:/Users/shanghuang/Documents/PERSON-PROJECT-CV/AK-STM32/stm32f_porting/AK\ Firmware\ F103\ Custom\ Porting/Drivers/AK_Imported_Driver/app/screens/scr_lhio404_io_device.h:
-../Drivers/AK_Imported_Driver/app/task_zigbee.h:
 C:/Users/shanghuang/Documents/PERSON-PROJECT-CV/AK-STM32/stm32f_porting/AK\ Firmware\ F103\ Custom\ Porting/Drivers/AK_Imported_Driver/sys/sys_irq.h:
 C:/Users/shanghuang/Documents/PERSON-PROJECT-CV/AK-STM32/stm32f_porting/AK\ Firmware\ F103\ Custom\ Porting/Drivers/AK_Imported_Driver/sys/sys_io.h:
 C:/Users/shanghuang/Documents/PERSON-PROJECT-CV/AK-STM32/stm32f_porting/AK\ Firmware\ F103\ Custom\ Porting/Drivers/AK_Imported_Driver/sys/io_cfg.h:
-../Core/Inc/main.h:
+C:/Users/shanghuang/Documents/PERSON-PROJECT-CV/AK-STM32/stm32f_porting/AK\ Firmware\ F103\ Custom\ Porting/Core/Inc/main.h:
 C:/Users/shanghuang/Documents/PERSON-PROJECT-CV/AK-STM32/stm32f_porting/AK\ Firmware\ F103\ Custom\ Porting/Drivers/AK_Imported_Driver/sys/buzzer.h:
 C:/Users/shanghuang/Documents/PERSON-PROJECT-CV/AK-STM32/stm32f_porting/AK\ Firmware\ F103\ Custom\ Porting/Drivers/AK_Imported_Driver/sys/SPI.h:
-../Core/Inc/SPI.h:
+C:/Users/shanghuang/Documents/PERSON-PROJECT-CV/AK-STM32/stm32f_porting/AK\ Firmware\ F103\ Custom\ Porting/Core/Inc/SPI.h:
 C:/Users/shanghuang/Documents/PERSON-PROJECT-CV/AK-STM32/stm32f_porting/AK\ Firmware\ F103\ Custom\ Porting/Drivers/AK_Imported_Driver/sys/WString.h:
 C:/Users/shanghuang/Documents/PERSON-PROJECT-CV/AK-STM32/stm32f_porting/AK\ Firmware\ F103\ Custom\ Porting/Drivers/AK_Imported_Driver/sys/HardwareSerial.h:
 C:/Users/shanghuang/Documents/PERSON-PROJECT-CV/AK-STM32/stm32f_porting/AK\ Firmware\ F103\ Custom\ Porting/Drivers/AK_Imported_Driver/sys/ArduinoJson.h:

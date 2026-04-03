@@ -17,18 +17,14 @@
   */
 /* USER CODE END Header */
 /* Includes ------------------------------------------------------------------*/
-extern "C" {
 #include "main.h"
 #include "adc.h"
 #include "spi.h"
 #include "usart.h"
 #include "gpio.h"
-}
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-#include "app.h"
-#include "sys_cfg.h"
 
 /* USER CODE END Includes */
 
@@ -54,7 +50,7 @@ extern "C" {
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
-extern "C" void SystemClock_Config(void);
+void SystemClock_Config(void);
 /* USER CODE BEGIN PFP */
 
 /* USER CODE END PFP */
@@ -68,7 +64,7 @@ extern "C" void SystemClock_Config(void);
   * @brief  The application entry point.
   * @retval int
   */
-extern "C" int main(void)
+int main(void)
 {
 
   /* USER CODE BEGIN 1 */
@@ -97,8 +93,6 @@ extern "C" int main(void)
   MX_SPI1_Init();
   MX_USART1_UART_Init();
   /* USER CODE BEGIN 2 */
-  sys_cfg_init();
-  (void)main_app();
 
   /* USER CODE END 2 */
 
@@ -117,7 +111,7 @@ extern "C" int main(void)
   * @brief System Clock Configuration
   * @retval None
   */
-extern "C" void SystemClock_Config(void)
+void SystemClock_Config(void)
 {
   RCC_OscInitTypeDef RCC_OscInitStruct = {0};
   RCC_ClkInitTypeDef RCC_ClkInitStruct = {0};
@@ -167,7 +161,7 @@ extern "C" void SystemClock_Config(void)
   * @brief  This function is executed in case of error occurrence.
   * @retval None
   */
-extern "C" void Error_Handler(void)
+void Error_Handler(void)
 {
   /* USER CODE BEGIN Error_Handler_Debug */
   /* User can add his own implementation to report the HAL error return state */
@@ -185,7 +179,7 @@ extern "C" void Error_Handler(void)
   * @param  line: assert_param error line source number
   * @retval None
   */
-extern "C" void assert_failed(uint8_t *file, uint32_t line)
+void assert_failed(uint8_t *file, uint32_t line)
 {
   /* USER CODE BEGIN 6 */
   /* User can add his own implementation to report the file name and line number,

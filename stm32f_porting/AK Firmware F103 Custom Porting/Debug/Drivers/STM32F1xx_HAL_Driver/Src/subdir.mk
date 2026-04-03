@@ -21,23 +21,6 @@ C_SRCS += \
 ../Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_spi.c \
 ../Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_uart.c 
 
-OBJS += \
-./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal.o \
-./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc.o \
-./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc_ex.o \
-./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.o \
-./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_dma.o \
-./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_exti.o \
-./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_flash.o \
-./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_flash_ex.o \
-./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_gpio.o \
-./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_gpio_ex.o \
-./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_pwr.o \
-./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rcc.o \
-./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rcc_ex.o \
-./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_spi.o \
-./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_uart.o 
-
 C_DEPS += \
 ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal.d \
 ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc.d \
@@ -55,10 +38,27 @@ C_DEPS += \
 ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_spi.d \
 ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_uart.d 
 
+OBJS += \
+./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal.o \
+./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc.o \
+./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc_ex.o \
+./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.o \
+./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_dma.o \
+./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_exti.o \
+./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_flash.o \
+./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_flash_ex.o \
+./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_gpio.o \
+./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_gpio_ex.o \
+./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_pwr.o \
+./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rcc.o \
+./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rcc_ex.o \
+./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_spi.o \
+./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_uart.o 
+
 
 # Each subdirectory must supply rules for building sources it contributes
 Drivers/STM32F1xx_HAL_Driver/Src/%.o Drivers/STM32F1xx_HAL_Driver/Src/%.su Drivers/STM32F1xx_HAL_Driver/Src/%.cyclo: ../Drivers/STM32F1xx_HAL_Driver/Src/%.c Drivers/STM32F1xx_HAL_Driver/Src/subdir.mk
-	arm-none-eabi-g++ "$<" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103xB -c -I../Core/Inc -I"C:/Users/shanghuang/Documents/PERSON-PROJECT-CV/AK-STM32/stm32f_porting/AK Firmware F103 Custom Porting/Drivers/AK_Imported_Driver/common" -I"C:/Users/shanghuang/Documents/PERSON-PROJECT-CV/AK-STM32/stm32f_porting/AK Firmware F103 Custom Porting/Drivers/AK_Imported_Driver/app" -I"C:/Users/shanghuang/Documents/PERSON-PROJECT-CV/AK-STM32/stm32f_porting/AK Firmware F103 Custom Porting/Drivers/AK_Imported_Driver/app/screens" -I"C:/Users/shanghuang/Documents/PERSON-PROJECT-CV/AK-STM32/stm32f_porting/AK Firmware F103 Custom Porting/Drivers/AK_Imported_Driver/common/container" -I"C:/Users/shanghuang/Documents/PERSON-PROJECT-CV/AK-STM32/stm32f_porting/AK Firmware F103 Custom Porting/Drivers/AK_Imported_Driver/sys" -I"C:/Users/shanghuang/Documents/PERSON-PROJECT-CV/AK-STM32/stm32f_porting/AK Firmware F103 Custom Porting/Drivers/AK_Imported_Driver/ak/inc" -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"$(@:%.o=%.d)" -MT"$@" --specs=nano.specs -mfloat-abi=soft -mthumb -o "$@"
+	arm-none-eabi-g++ "$<" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103xB -c -I../Core/Inc -I"C:/Users/shanghuang/Documents/PERSON-PROJECT-CV/AK-STM32/stm32f_porting/AK Firmware F103 Custom Porting/Core/Src" -I"C:/Users/shanghuang/Documents/PERSON-PROJECT-CV/AK-STM32/stm32f_porting/AK Firmware F103 Custom Porting/Drivers/AK_Imported_Driver" -I"C:/Users/shanghuang/Documents/PERSON-PROJECT-CV/AK-STM32/stm32f_porting/AK Firmware F103 Custom Porting/Drivers/AK_Imported_Driver/ak/inc" -I"C:/Users/shanghuang/Documents/PERSON-PROJECT-CV/AK-STM32/stm32f_porting/AK Firmware F103 Custom Porting/Drivers/AK_Imported_Driver/ak/src" -I"C:/Users/shanghuang/Documents/PERSON-PROJECT-CV/AK-STM32/stm32f_porting/AK Firmware F103 Custom Porting/Drivers/AK_Imported_Driver/app" -I"C:/Users/shanghuang/Documents/PERSON-PROJECT-CV/AK-STM32/stm32f_porting/AK Firmware F103 Custom Porting/Drivers/AK_Imported_Driver/app/screens" -I"C:/Users/shanghuang/Documents/PERSON-PROJECT-CV/AK-STM32/stm32f_porting/AK Firmware F103 Custom Porting/Drivers/AK_Imported_Driver/common" -I"C:/Users/shanghuang/Documents/PERSON-PROJECT-CV/AK-STM32/stm32f_porting/AK Firmware F103 Custom Porting/Drivers/AK_Imported_Driver/common/container" -I"C:/Users/shanghuang/Documents/PERSON-PROJECT-CV/AK-STM32/stm32f_porting/AK Firmware F103 Custom Porting/Drivers/AK_Imported_Driver/sys" -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"$(@:%.o=%.d)" -MT"$@" --specs=nano.specs -mfloat-abi=soft -mthumb -o "$@"
 
 clean: clean-Drivers-2f-STM32F1xx_HAL_Driver-2f-Src
 

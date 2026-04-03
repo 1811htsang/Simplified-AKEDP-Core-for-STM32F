@@ -1,4 +1,4 @@
-../Drivers/CMSIS/Include/core_cm3.h:1762:34:void __NVIC_SystemReset()	4	static,ignoring_inline_asm
+C:/Users/shanghuang/Documents/PERSON-PROJECT-CV/AK-STM32/stm32f_porting/AK Firmware F103 Custom Porting/Drivers/CMSIS/Include/core_cm3.h:1762:34:void __NVIC_SystemReset()	4	static,ignoring_inline_asm
 ../Drivers/AK_Imported_Driver/sys/porting_compat.cpp:48:13:void init_gpio_output(GPIO_TypeDef*, uint16_t)	32	static
 ../Drivers/AK_Imported_Driver/sys/porting_compat.cpp:58:13:void init_gpio_input_pullup(GPIO_TypeDef*, uint16_t)	32	static
 ../Drivers/AK_Imported_Driver/sys/porting_compat.cpp:67:16:uint8_t gpio_read_active_low(GPIO_TypeDef*, uint16_t)	16	static
