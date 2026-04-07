@@ -36,6 +36,9 @@ void sys_irq_shell() {
 	volatile uint8_t c = 0;
 
 	c = sys_ctrl_shell_get_char();
+	if (c == 0U) {
+		return;
+	}
 
 	ENTRY_CRITICAL();
 	ring_buffer_char_put(&ring_buffer_console_rev, c);

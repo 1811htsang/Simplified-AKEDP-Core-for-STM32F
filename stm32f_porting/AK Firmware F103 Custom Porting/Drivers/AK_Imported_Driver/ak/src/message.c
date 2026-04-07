@@ -1,49 +1,75 @@
-/**
- ******************************************************************************
- * @author: GaoKong
- * @date:   13/08/2016
- ******************************************************************************
-**/
+﻿// Khai báo các thư viện sử dụng
+#include <string.h>
+#include <stdio.h>
+#include <stdint.h>
+#include <stdlib.h>
+#include "ak.h"				// Khai báo các hằng số và macro liên quan đến tin nhắn
+#include "ak_dbg.h"		// Khai báo các hàm và macro liên quan đến debug
+#include "message.h"	// Khai báo các cấu trúc và hàm để quản lý tin nhắn
+#include "task.h"			// Khai báo các cấu trúc và hàm để quản lý tác vụ
+#include "sys_dbg.h"	// Khai báo các hàm và macro liên quan đến debug hệ thống
 
-#include "ak.h"
-#include "ak_dbg.h"
-#include "message.h"
-#include "task.h"
+// Khai báo bộ nhớ cho pool tin nhắn thuần túy
+static ak_msg_pure_t msg_pure_pool[AK_PURE_MSG_POOL_SIZE]; // Biến đại diện
+static ak_msg_t* free_list_pure_msg_pool; // Quản lý con trỏ đến danh sách liên kết của pool tin nhắn thuần túy
+static uint32_t free_list_pure_used;			// Quản lý số lượng tin nhắn thuần túy đã được sử dụng từ pool
+static uint32_t free_list_pure_used_max;	// Quản lý số lượng tin nhắn thuần túy đã được sử dụng tối đa từ pool
 
-#include "sys_dbg.h"
+// Khai báo bộ nhớ cho pool tin nhắn thông thường
+static ak_msg_common_t msg_common_pool[AK_COMMON_MSG_POOL_SIZE]; // Biến đại diện
+static ak_msg_t* free_list_common_msg_pool; // Quản lý con trỏ đến danh sách liên kết của pool tin nhắn thông thường
+static uint32_t free_list_common_used;			// Quản lý số lượng tin nhắn thông thường đã được sử dụng từ pool
+static uint32_t free_list_common_used_max;	// Quản lý số lượng tin nhắn thông thường đã được sử dụng tối đa từ pool
 
-/* pure pool memory */
-static ak_msg_pure_t msg_pure_pool[AK_PURE_MSG_POOL_SIZE];
-static ak_msg_t* free_list_pure_msg_pool;
-static uint32_t free_list_pure_used;
-static uint32_t free_list_pure_used_max;
+// Khai báo bộ nhớ cho pool tin nhắn động
+static ak_msg_dynamic_t msg_dynamic_pool[AK_DYNAMIC_MSG_POOL_SIZE]; // Biến đại diện
+static ak_msg_t* free_list_dynamic_msg_pool; // Quản lý con trỏ đến danh sách liên kết của pool tin nhắn động
+static uint32_t free_list_dynamic_used;			// Quản lý số lượng tin nhắn động đã được sử dụng từ pool
+static uint32_t free_list_dynamic_used_max;	// Quản lý số lượng tin nhắn động đã được sử dụng tối đa từ pool
 
-/* common pool memory */
-static ak_msg_common_t msg_common_pool[AK_COMMON_MSG_POOL_SIZE];
-static ak_msg_t* free_list_common_msg_pool;
-static uint32_t free_list_common_used;
-static uint32_t free_list_common_used_max;
+// Khai báo các hàm tĩnh để khởi tạo pool tin nhắn
+static void pure_msg_pool_init(); 		// Khởi tạo pool tin nhắn thuần túy
+static void common_msg_pool_init();		// Khởi tạo pool tin nhắn thông thường
+static void dynamic_msg_pool_init();	// Khởi tạo pool tin nhắn động
 
-/* dynamic pool memory */
-static ak_msg_dynamic_t msg_dynamic_pool[AK_DYNAMIC_MSG_POOL_SIZE];
-static ak_msg_t* free_list_dynamic_msg_pool;
-static uint32_t free_list_dynamic_used;
-static uint32_t free_list_dynamic_used_max;
+// Khai báo các hàm tĩnh để giải phóng tin nhắn
+static void free_pure_msg(ak_msg_t* msg);			// Giải phóng tin nhắn thuần túy
+static void free_common_msg(ak_msg_t* msg);		// Giải phóng tin nhắn thông thường
+static void free_dynamic_msg(ak_msg_t* msg);	// Giải phóng tin nhắn động
 
-static void pure_msg_pool_init();
-static void common_msg_pool_init();
-static void dynamic_msg_pool_init();
+// Hàm kiểm tra con trỏ tin nhắn có thuộc về pool nào hay không
+static uint8_t msg_ptr_belongs_to_pool(const ak_msg_t* msg) {
+	uint32_t index = 0;
 
-static void free_pure_msg(ak_msg_t* msg);
-static void free_common_msg(ak_msg_t* msg);
-static void free_dynamic_msg(ak_msg_t* msg);
+	for (index = 0; index < AK_PURE_MSG_POOL_SIZE; index++) {
+		if (msg == &msg_pure_pool[index].msg_header) {
+			return AK_MSG_OK;
+		}
+	}
 
+	for (index = 0; index < AK_COMMON_MSG_POOL_SIZE; index++) {
+		if (msg == &msg_common_pool[index].msg_header) {
+			return AK_MSG_OK;
+		}
+	}
+
+	for (index = 0; index < AK_DYNAMIC_MSG_POOL_SIZE; index++) {
+		if (msg == &msg_dynamic_pool[index].msg_header) {
+			return AK_MSG_OK;
+		}
+	}
+
+	return AK_MSG_NG; // Trả về AK_MSG_NG nếu con trỏ tin nhắn không thuộc về bất kỳ pool nào
+}
+
+// Hàm khởi tạo pool tin nhắn và chuẩn bị hệ thống tin nhắn để sử dụng
 void msg_init() {
 	pure_msg_pool_init();
 	common_msg_pool_init();
 	dynamic_msg_pool_init();
 }
 
+// Hàm giải phóng tin nhắn, giảm số lượng tham chiếu và nếu số lượng tham chiếu về 0 thì giải phóng bộ nhớ của tin nhắn
 void msg_free(ak_msg_t* msg) {
 	uint8_t pool_type;
 
@@ -73,6 +99,7 @@ void msg_free(ak_msg_t* msg) {
 	}
 }
 
+// Hàm giải phóng tin nhắn một cách cưỡng bức, bỏ qua việc giảm số lượng tham chiếu và trực tiếp giải phóng bộ nhớ của tin nhắn
 void msg_force_free(ak_msg_t* msg) {
 	uint8_t pool_type = get_msg_type(msg);
 
@@ -95,6 +122,7 @@ void msg_force_free(ak_msg_t* msg) {
 	}
 }
 
+// Hàm tăng số lượng tham chiếu của tin nhắn, giúp theo dõi số lượng tác vụ đang sử dụng tin nhắn để quản lý bộ nhớ hiệu quả
 void msg_inc_ref_count(ak_msg_t* msg) {
 	if (get_msg_ref_count(msg) < AK_MSG_REF_COUNT_MAX) {
 		msg->ref_count++;
@@ -104,6 +132,7 @@ void msg_inc_ref_count(ak_msg_t* msg) {
 	}
 }
 
+// Hàm giảm số lượng tham chiếu của tin nhắn, giúp theo dõi số lượng tác vụ đang sử dụng tin nhắn và giải phóng bộ nhớ khi không còn tác vụ nào sử dụng tin nhắn nữa
 void msg_dec_ref_count(ak_msg_t* msg) {
 	if (get_msg_ref_count(msg) > 0) {
 		msg->ref_count--;
@@ -113,11 +142,12 @@ void msg_dec_ref_count(ak_msg_t* msg) {
 	}
 }
 
+// Hàm cấp phát bộ nhớ cho tin nhắn
 void* ak_malloc(size_t size) {
 	extern uint32_t __heap_end__;
 	static uint8_t* ak_heap = NULL;
 
-	if (ak_heap != NULL) {
+	if (ak_heap != NULL) { // trường hợp khác NULL có nghĩa là đã có bộ nhớ được cấp phát trước đó, nên cần kiểm tra xem có đủ bộ nhớ để cấp phát thêm hay không
 		if (((uint32_t)ak_heap + size + __AK_MALLOC_CTRL_SIZE) > ((uint32_t)&__heap_end__)) {
 			FATAL("ak_malloc", 0x01);
 		}
@@ -147,9 +177,17 @@ void pure_msg_pool_init() {
 	free_list_pure_msg_pool = (ak_msg_t*)msg_pure_pool;
 
 	for (index = 0; index < AK_PURE_MSG_POOL_SIZE; index++) {
-		msg_pure_pool[index].msg_header.ref_count |= PURE_MSG_TYPE;
+		msg_pure_pool[index].msg_header.src_task_id = 0;
+		msg_pure_pool[index].msg_header.des_task_id = 0;
+		msg_pure_pool[index].msg_header.sig = 0;
+		msg_pure_pool[index].msg_header.if_src_task_id = 0;
+		msg_pure_pool[index].msg_header.if_des_task_id = 0;
+		msg_pure_pool[index].msg_header.if_src_type = 0;
+		msg_pure_pool[index].msg_header.if_des_type = 0;
+		msg_pure_pool[index].msg_header.if_sig = 0;
+		msg_pure_pool[index].msg_header.ref_count = PURE_MSG_TYPE;
 		if (index == (AK_PURE_MSG_POOL_SIZE - 1)) {
-			msg_pure_pool[index].msg_header.next = AK_MSG_NULL;
+			msg_pure_pool[index].msg_header.next = NULL;
 		}
 		else {
 			msg_pure_pool[index].msg_header.next = (ak_msg_t*)&msg_pure_pool[index + 1];
@@ -177,7 +215,7 @@ ak_msg_t* get_pure_msg() {
 
 	allocate_message = free_list_pure_msg_pool;
 
-	if (allocate_message == AK_MSG_NULL) {
+	if (allocate_message == NULL) {
 		FATAL("MF", 0x31);
 	}
 	else {
@@ -193,6 +231,13 @@ ak_msg_t* get_pure_msg() {
 
 	allocate_message->ref_count++;
 	allocate_message->src_task_id = get_current_task_id();
+	allocate_message->des_task_id = 0;
+	allocate_message->sig = 0;
+	allocate_message->if_src_task_id = 0;
+	allocate_message->if_des_task_id = 0;
+	allocate_message->if_src_type = 0;
+	allocate_message->if_des_type = 0;
+	allocate_message->if_sig = 0;
 
 	EXIT_CRITICAL();
 
@@ -222,9 +267,18 @@ void common_msg_pool_init() {
 	free_list_common_msg_pool = (ak_msg_t*)msg_common_pool;
 
 	for (index = 0; index < AK_COMMON_MSG_POOL_SIZE; index++) {
-		msg_common_pool[index].msg_header.ref_count |= COMMON_MSG_TYPE;
+		msg_common_pool[index].msg_header.src_task_id = 0;
+		msg_common_pool[index].msg_header.des_task_id = 0;
+		msg_common_pool[index].msg_header.sig = 0;
+		msg_common_pool[index].msg_header.if_src_task_id = 0;
+		msg_common_pool[index].msg_header.if_des_task_id = 0;
+		msg_common_pool[index].msg_header.if_src_type = 0;
+		msg_common_pool[index].msg_header.if_des_type = 0;
+		msg_common_pool[index].msg_header.if_sig = 0;
+		msg_common_pool[index].msg_header.ref_count = COMMON_MSG_TYPE;
+		msg_common_pool[index].len = 0;
 		if (index == (AK_COMMON_MSG_POOL_SIZE - 1)) {
-			msg_common_pool[index].msg_header.next = AK_MSG_NULL;
+			msg_common_pool[index].msg_header.next = NULL;
 		}
 		else {
 			msg_common_pool[index].msg_header.next = (ak_msg_t*)&msg_common_pool[index + 1];
@@ -252,7 +306,7 @@ ak_msg_t* get_common_msg() {
 
 	allocate_message = free_list_common_msg_pool;
 
-	if (allocate_message == AK_MSG_NULL) {
+	if (allocate_message == NULL) {
 		FATAL("MF", 0x21);
 	}
 	else {
@@ -268,6 +322,13 @@ ak_msg_t* get_common_msg() {
 
 	allocate_message->ref_count++;
 	allocate_message->src_task_id = get_current_task_id();
+	allocate_message->des_task_id = 0;
+	allocate_message->sig = 0;
+	allocate_message->if_src_task_id = 0;
+	allocate_message->if_des_task_id = 0;
+	allocate_message->if_src_type = 0;
+	allocate_message->if_des_type = 0;
+	allocate_message->if_sig = 0;
 
 	((ak_msg_common_t*)allocate_message)->len = 0;
 
@@ -332,9 +393,19 @@ void dynamic_msg_pool_init() {
 	free_list_dynamic_msg_pool = (ak_msg_t*)msg_dynamic_pool;
 
 	for (index = 0; index < AK_DYNAMIC_MSG_POOL_SIZE; index++) {
-		msg_dynamic_pool[index].msg_header.ref_count |= DYNAMIC_MSG_TYPE;
+		msg_dynamic_pool[index].msg_header.src_task_id = 0;
+		msg_dynamic_pool[index].msg_header.des_task_id = 0;
+		msg_dynamic_pool[index].msg_header.sig = 0;
+		msg_dynamic_pool[index].msg_header.if_src_task_id = 0;
+		msg_dynamic_pool[index].msg_header.if_des_task_id = 0;
+		msg_dynamic_pool[index].msg_header.if_src_type = 0;
+		msg_dynamic_pool[index].msg_header.if_des_type = 0;
+		msg_dynamic_pool[index].msg_header.if_sig = 0;
+		msg_dynamic_pool[index].msg_header.ref_count = DYNAMIC_MSG_TYPE;
+		msg_dynamic_pool[index].len = 0;
+		msg_dynamic_pool[index].data = ((uint8_t*)0);
 		if (index == (AK_DYNAMIC_MSG_POOL_SIZE - 1)) {
-			msg_dynamic_pool[index].msg_header.next = AK_MSG_NULL;
+			msg_dynamic_pool[index].msg_header.next = NULL;
 		}
 		else {
 			msg_dynamic_pool[index].msg_header.next = (ak_msg_t*)&msg_dynamic_pool[index + 1];
@@ -376,7 +447,7 @@ ak_msg_t* get_dynamic_msg() {
 
 	allocate_message = free_list_dynamic_msg_pool;
 
-	if (allocate_message == AK_MSG_NULL) {
+	if (allocate_message == NULL) {
 		FATAL("MF", 0x41);
 	}
 	else {
@@ -392,6 +463,13 @@ ak_msg_t* get_dynamic_msg() {
 
 	allocate_message->ref_count++;
 	allocate_message->src_task_id = get_current_task_id();
+	allocate_message->des_task_id = 0;
+	allocate_message->sig = 0;
+	allocate_message->if_src_task_id = 0;
+	allocate_message->if_des_task_id = 0;
+	allocate_message->if_src_type = 0;
+	allocate_message->if_des_type = 0;
+	allocate_message->if_sig = 0;
 
 	((ak_msg_dynamic_t*)allocate_message)->len = 0;
 	((ak_msg_dynamic_t*)allocate_message)->data = ((uint8_t*)0);
@@ -425,6 +503,22 @@ uint32_t get_data_len_dynamic_msg(ak_msg_t* msg) {
 	return ((ak_msg_dynamic_t*)msg)->len;
 }
 
+uint8_t msg_is_valid_ptr(const ak_msg_t* msg) {
+	if (msg == NULL) {
+		return AK_MSG_NG;
+	}
+
+	return msg_ptr_belongs_to_pool(msg);
+}
+
+uint8_t msg_is_valid_or_null(const ak_msg_t* msg) {
+	if (msg == NULL) {
+		return AK_MSG_OK;
+	}
+
+	return msg_ptr_belongs_to_pool(msg);
+}
+
 /*****************************************************************************
  * debug message function define.
  *****************************************************************************/
@@ -441,3 +535,4 @@ void msg_dbg_dum(ak_msg_t* msg) {
 			msg->if_sig			\
 			);
 }
+

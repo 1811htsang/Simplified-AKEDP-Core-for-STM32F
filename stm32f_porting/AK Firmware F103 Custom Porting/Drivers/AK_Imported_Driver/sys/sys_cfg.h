@@ -10,6 +10,14 @@ extern "C"
 #include "main.h"
 #include "system.h"
 
+#define SYS_WATCHDOG_MODE_NONE 0U
+#define SYS_WATCHDOG_MODE_IWDG 1U
+#define SYS_WATCHDOG_MODE_SOFT 2U
+
+#define SYS_WATCHDOG_MODE SYS_WATCHDOG_MODE_NONE
+#define SYS_IWDG_FREEZE_IN_DEBUG 1U
+
+#define SYS_CONSOLE_ENABLE 0U
 #define SYS_CONSOLE_BAUDRATE 115200U
 
 extern UART_HandleTypeDef huart1;

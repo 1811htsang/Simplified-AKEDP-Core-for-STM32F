@@ -1,20 +1,16 @@
-/**
- ******************************************************************************
- * @author: GaoKong
- * @date:   13/08/2016
- ******************************************************************************
-**/
-
 #ifndef __PORT_H__
-#define __PORT_H__
+  #define __PORT_H__
 
-#define __AK_PACKETED	__attribute__((__packed__))
-#define __AK_WEAK		__attribute__((__weak__))
+  // Khai báo các attribute cho AK
+  #define __AK_PACKETED	__attribute__((__packed__)) // Cho phép định nghĩa struct gọn nhất
+  #define __AK_WEAK		  __attribute__((__weak__))   // Hỗ trợ overriding
 
-#define __AK_MALLOC_CTRL_SIZE	8
+  // Khai báo kích thước của control block cho malloc
+  #define __AK_MALLOC_CTRL_SIZE	8
 
-#ifndef PROGMEM
-#define PROGMEM
-#endif
+  // Khai báo hỗ trợ tuân thủ
+  #ifndef PROGMEM
+    #define PROGMEM
+  #endif
 
 #endif //__PORT_H__

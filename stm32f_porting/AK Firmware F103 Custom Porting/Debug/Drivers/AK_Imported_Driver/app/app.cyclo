@@ -1,8 +1,13 @@
-C:/Users/shanghuang/Documents/PERSON-PROJECT-CV/AK-STM32/stm32f_porting/AK Firmware F103 Custom Porting/Drivers/AK_Imported_Driver/sys/SPI.h:6:7:void SPIClass::begin()	1
-../Drivers/AK_Imported_Driver/app/app.cpp:67:5:int main_app()	1
-../Drivers/AK_Imported_Driver/app/app.cpp:130:6:void task_polling_console()	9
-../Drivers/AK_Imported_Driver/app/app.cpp:185:6:void app_start_timer()	1
-../Drivers/AK_Imported_Driver/app/app.cpp:195:6:void app_init_state_machine()	1
-../Drivers/AK_Imported_Driver/app/app.cpp:202:6:void app_task_init()	1
-../Drivers/AK_Imported_Driver/app/app.cpp:216:6:void sys_irq_timer_10ms()	1
-../Drivers/AK_Imported_Driver/app/app.cpp:219:7:void* app_get_boot_share_data()	1
+../Drivers/AK_Imported_Driver/app/app.cpp:179:16:uint8_t app_run_edp_init_probe()	6
+../Drivers/AK_Imported_Driver/app/app.cpp:220:13:void app_task_edp_dbg_a(ak_msg_t*)	3
+../Drivers/AK_Imported_Driver/app/app.cpp:237:13:void app_task_edp_dbg_b(ak_msg_t*)	4
+../Drivers/AK_Imported_Driver/app/app.cpp:267:12:int app_run_edp_two_task_debug()	6
+../Drivers/AK_Imported_Driver/app/app.cpp:302:16:uint8_t app_validate_task_table(const task_t*)	9
+../Drivers/AK_Imported_Driver/app/app.cpp:350:16:uint8_t app_validate_polling_table(const task_polling_t*)	11
+../Drivers/AK_Imported_Driver/app/app.cpp:403:5:int main_app()	8
+../Drivers/AK_Imported_Driver/app/app.cpp:478:6:void task_polling_console()	9
+../Drivers/AK_Imported_Driver/app/app.cpp:533:6:void app_start_timer()	1
+../Drivers/AK_Imported_Driver/app/app.cpp:543:6:void app_init_state_machine()	1
+../Drivers/AK_Imported_Driver/app/app.cpp:550:6:void app_task_init()	1
+../Drivers/AK_Imported_Driver/app/app.cpp:564:6:void sys_irq_timer_10ms()	1
+../Drivers/AK_Imported_Driver/app/app.cpp:567:7:void* app_get_boot_share_data()	1

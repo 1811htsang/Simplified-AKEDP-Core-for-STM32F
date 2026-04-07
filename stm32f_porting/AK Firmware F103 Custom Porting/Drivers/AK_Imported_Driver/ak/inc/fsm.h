@@ -1,37 +1,34 @@
-/**
- ******************************************************************************
- * @author: GaoKong
- * @date:   13/08/2016
- * @brief:  Finite state machine.
- ******************************************************************************
-**/
-
 #ifndef __FSM_H__
-#define __FSM_H__
+	#define __FSM_H__
 
-#ifdef __cplusplus
-extern "C"
-{
-#endif
+	// Khai báo C directive cho C++ 
+	#ifdef __cplusplus
+	extern "C"
+	{
+	#endif
 
-#include <stdint.h>
+		// Khai báo thư viện sử dụng
+		#include <stdint.h>
+		#include "ak.h"
+		#include "message.h"
 
-#include "ak.h"
-#include "message.h"
+		// Khai báo macro cho máy trạng thái hữu hạn (FSM)
+		#define FSM(me, init_func)		((fsm_t*)me)->state = (state_handler)init_func
+		#define FSM_TRAN(me, target)	((fsm_t*)me)->state = (state_handler)target
 
-#define FSM(me, init_func)		((fsm_t*)me)->state = (state_handler)init_func
-#define FSM_TRAN(me, target)	((fsm_t*)me)->state = (state_handler)target
+		// Khai báo con trỏ hàm
+		typedef void (*state_handler)(ak_msg_t* msg);
 
-typedef void (*state_handler)(ak_msg_t* msg);
+		// Khai báo cấu trúc FSM
+		typedef struct {
+			state_handler state;
+		} fsm_t;
 
-typedef struct {
-	state_handler state;
-} fsm_t;
+		// Khai báo hàm để xử lý tin nhắn trong FSM
+		void fsm_dispatch(fsm_t* me, ak_msg_t* msg);
 
-void fsm_dispatch(fsm_t* me, ak_msg_t* msg);
-
-#ifdef __cplusplus
-}
-#endif
+	#ifdef __cplusplus
+	}
+	#endif
 
 #endif //__FSM_H__

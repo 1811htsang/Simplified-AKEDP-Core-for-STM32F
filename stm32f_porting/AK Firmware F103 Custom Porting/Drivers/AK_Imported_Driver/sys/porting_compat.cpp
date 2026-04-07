@@ -34,6 +34,7 @@ static uint32_t soft_watchdog_limit_ticks = 0;
 static uint32_t soft_watchdog_counter_ticks = 0;
 static uint8_t soft_watchdog_enabled = 0;
 static uint8_t shell_use_blocking_output = 1;
+static uint8_t console_ready = 0;
 static uint8_t eeprom_storage[EEPROM_END_ADDR];
 
 extern uint32_t _etext;
@@ -659,6 +660,7 @@ void sys_cfg_tick(void)
 
 void sys_cfg_console(void)
 {
+#if (SYS_CONSOLE_ENABLE != 0U)
 	GPIO_InitTypeDef gpio_init = {0};
 
 	__HAL_RCC_GPIOA_CLK_ENABLE();
@@ -688,6 +690,11 @@ void sys_cfg_console(void)
 	HAL_NVIC_EnableIRQ(USART1_IRQn);
 	xdev_out(sys_ctrl_shell_put_char_block);
 	system_info.console_baudrate = SYS_CONSOLE_BAUDRATE;
+	console_ready = 1U;
+#else
+	console_ready = 0U;
+	system_info.console_baudrate = 0U;
+#endif
 }
 
 void sys_cfg_update_info(void)
@@ -724,9 +731,14 @@ void sys_ctrl_reset(void)
 
 void sys_ctrl_independent_watchdog_init(void)
 {
+	#if (SYS_WATCHDOG_MODE == SYS_WATCHDOG_MODE_IWDG)
 	__HAL_RCC_LSI_ENABLE();
 	while (__HAL_RCC_GET_FLAG(RCC_FLAG_LSIRDY) == RESET) {
 	}
+
+	#if (SYS_IWDG_FREEZE_IN_DEBUG != 0U)
+	__HAL_DBGMCU_FREEZE_IWDG();
+	#endif
 
 	IWDG->KR = 0x5555U;
 	IWDG->PR = 0x06U;
@@ -735,11 +747,18 @@ void sys_ctrl_independent_watchdog_init(void)
 	}
 	IWDG->KR = 0xCCCCU;
 	IWDG->KR = 0xAAAAU;
+	#else
+	/* watchdog is disabled or handled by another source in this build */
+	#endif
 }
 
 void sys_ctrl_independent_watchdog_reset(void)
 {
+	#if (SYS_WATCHDOG_MODE == SYS_WATCHDOG_MODE_IWDG)
 	IWDG->KR = 0xAAAAU;
+	#else
+	/* keep API compatibility when IWDG is not selected */
+	#endif
 }
 
 void sys_ctrl_soft_watchdog_init(uint32_t timeout_ticks)
@@ -811,6 +830,10 @@ uint32_t sys_ctrl_millis(void)
 
 uint8_t sys_ctrl_shell_get_char(void)
 {
+	if (console_ready == 0U || huart1.Instance == NULL) {
+		return 0U;
+	}
+
 	if (__HAL_UART_GET_FLAG(&huart1, UART_FLAG_RXNE) == RESET) {
 		return 0U;
 	}
@@ -819,6 +842,10 @@ uint8_t sys_ctrl_shell_get_char(void)
 
 void sys_ctrl_shell_put_char(uint8_t c)
 {
+	if (console_ready == 0U || huart1.Instance == NULL) {
+		return;
+	}
+
 	if (shell_use_blocking_output == 0U) {
 		/* keep the API stable even though the port uses a blocking console */
 	}
@@ -827,6 +854,10 @@ void sys_ctrl_shell_put_char(uint8_t c)
 
 void sys_ctrl_shell_put_char_block(uint8_t c)
 {
+	if (console_ready == 0U || huart1.Instance == NULL) {
+		return;
+	}
+
 	(void)HAL_UART_Transmit(&huart1, &c, 1U, HAL_MAX_DELAY);
 }
 

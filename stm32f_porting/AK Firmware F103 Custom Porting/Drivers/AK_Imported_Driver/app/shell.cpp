@@ -114,7 +114,8 @@ const cmd_line_t lgn_cmd_table[] = {
 };
 
 uint8_t str_parser(char* str) {
-	strcpy(cmd_buffer, str);
+	strncpy(cmd_buffer, str, STR_BUFFER_SIZE - 1U);
+	cmd_buffer[STR_BUFFER_SIZE - 1U] = 0;
 	str_list_len = 0;
 
 	uint8_t i = 0;
@@ -127,6 +128,9 @@ uint8_t str_parser(char* str) {
 			flag_insert_str = 1;
 		}
 		else if (flag_insert_str) {
+			if (str_list_index >= STR_LIST_MAX_SIZE) {
+				break;
+			}
 			str_list[str_list_index++] = &cmd_buffer[i];
 			flag_insert_str = 0;
 		}

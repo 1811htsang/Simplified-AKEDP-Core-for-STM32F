@@ -17,6 +17,10 @@ void platform_exit_critical(void);
 #define EXIT_CRITICAL() platform_exit_critical()
 
 #ifndef LOG2LKUP
+/*
+ * Trả về vị trí bit ưu tiên cao nhất đang sẵn sàng từ biến mask.
+ * Lưu ý: x bắt buộc khác 0. Gọi __CLZ(0) sẽ tạo hành vi không xác định.
+ */
 #define LOG2LKUP(x) ((uint32_t)(31U - __CLZ((uint32_t)(x))))
 #endif
 

@@ -1,13 +1,7 @@
-/**
- ******************************************************************************
- * @author: GaoKong
- * @date:   13/08/2016
- * Mechanism of task scheduler is referenced by doc/Samek0607.pdf
- ******************************************************************************
-**/
-
-#include "ak.h"
+﻿#include "ak.h"
 #include "ak_dbg.h"
+
+#include <string.h>
 
 #include "task.h"
 #include "timer.h"
@@ -53,6 +47,20 @@ static uint8_t	task_polling_table_size = 0;
 
 static void task_sheduler();
 
+static void task_queue_integrity_check(tcb_t* t_tcb, uint8_t err_code) {
+	if (msg_is_valid_or_null(t_tcb->qhead) == AK_MSG_NG) {
+		FATAL("TK", err_code);
+	}
+
+	if (msg_is_valid_or_null(t_tcb->qtail) == AK_MSG_NG) {
+		FATAL("TK", err_code);
+	}
+
+	if ((t_tcb->qhead == NULL) && (t_tcb->qtail != NULL)) {
+		FATAL("TK", err_code);
+	}
+}
+
 /* function MUST-BE redefine */
 __AK_WEAK void task_irq_io_entry_trigger() {
 #if defined(AK_IO_IRQ_ANALYZER)
@@ -67,11 +75,23 @@ __AK_WEAK void task_irq_io_exit_trigger() {
 #endif
 }
 
+/*
+ * Đăng ký bảng task theo cơ chế event-driven.
+ * Bảng phải kết thúc bằng AK_TASK_EOT_ID và mỗi phần tử phải có hàm xử lý task.
+ */
 void task_create(task_t* task_tbl) {
 	uint8_t idx = 0;
 	if (task_tbl) {
 		task_table = task_tbl;
 		while (task_tbl[idx].id != AK_TASK_EOT_ID) {
+			if (task_tbl[idx].task == (pf_task)0) {
+				FATAL("TK", 0x12);
+			}
+
+			if (idx >= AK_TASK_EOT_ID) {
+				FATAL("TK", 0x13);
+			}
+
 			idx++;
 		}
 		task_table_size = idx;
@@ -81,11 +101,23 @@ void task_create(task_t* task_tbl) {
 	}
 }
 
+/*
+ * Đăng ký bảng task polling.
+ * Bảng phải kết thúc bằng AK_TASK_POLLING_EOT_ID và mỗi phần tử phải có hàm polling.
+ */
 void task_polling_create(task_polling_t* task_polling_tbl) {
 	uint8_t idx = 0;
 	if (task_polling_tbl) {
 		task_polling_table = task_polling_tbl;
 		while (task_polling_tbl[idx].id != AK_TASK_POLLING_EOT_ID) {
+			if (task_polling_tbl[idx].task_polling == (pf_task_polling)0) {
+				FATAL("TK", 0x14);
+			}
+
+			if (idx >= AK_TASK_POLLING_EOT_ID) {
+				FATAL("TK", 0x15);
+			}
+
 			idx++;
 		}
 		task_polling_table_size = idx;
@@ -95,8 +127,16 @@ void task_polling_create(task_polling_t* task_polling_tbl) {
 	}
 }
 
+/*
+ * Đẩy một message AK vào queue của task đích.
+ * Hàm này tự cập nhật metadata nguồn/đích của message và đặt cờ task sẵn sàng.
+ */
 void task_post(task_id_t des_task_id, ak_msg_t* msg) {
 	tcb_t* t_tcb;
+
+	if (msg_is_valid_ptr(msg) == AK_MSG_NG) {
+		FATAL("TK", 0x0D);
+	}
 
 	if (des_task_id >= task_table_size) {
 		FATAL("TK", 0x02);
@@ -105,9 +145,13 @@ void task_post(task_id_t des_task_id, ak_msg_t* msg) {
 	t_tcb = &task_pri_queue[task_table[des_task_id].pri - 1];
 
 	ENTRY_CRITICAL();
+	task_queue_integrity_check(t_tcb, 0x0E);
 
-	msg->next = AK_MSG_NULL;
+	msg->next = NULL;
+	msg->src_task_id = current_task_id;
 	msg->des_task_id = des_task_id;
+	msg->if_src_task_id = msg->src_task_id;
+	msg->if_des_task_id = des_task_id;
 
 #if defined(AK_TASK_OBJ_LOG_ENABLE)
 	if (get_msg_ref_count(msg) <= 1) {
@@ -117,7 +161,7 @@ void task_post(task_id_t des_task_id, ak_msg_t* msg) {
 	}
 #endif
 
-	if (t_tcb->qtail == AK_MSG_NULL) {
+	if (t_tcb->qtail == NULL) {
 		/* put message to queue */
 		t_tcb->qtail = msg;
 		t_tcb->qhead = msg;
@@ -126,6 +170,14 @@ void task_post(task_id_t des_task_id, ak_msg_t* msg) {
 		task_ready |= t_tcb->mask;
 	}
 	else {
+		if (msg_is_valid_ptr(t_tcb->qtail) == AK_MSG_NG) {
+			FATAL("TK", 0x0E);
+		}
+
+		if (msg_is_valid_or_null(t_tcb->qtail->next) == AK_MSG_NG) {
+			FATAL("TK", 0x0E);
+		}
+
 		/* put message to queue */
 		t_tcb->qtail->next = msg;
 		t_tcb->qtail = msg;
@@ -138,8 +190,8 @@ uint8_t task_remove_msg(task_id_t task_id, uint8_t sig) {
 	tcb_t* t_tcb;
 	uint8_t total_rm_msg = 0;
 
-	ak_msg_t* del_msg = AK_MSG_NULL; /* MUST-BE initialized AK_MSG_NULL */
-	ak_msg_t* trace_msg = AK_MSG_NULL;
+	ak_msg_t* del_msg = NULL; /* MUST-BE initialized NULL */
+	ak_msg_t* trace_msg = NULL;
 	ak_msg_t* traverse_msg;
 
 
@@ -151,6 +203,7 @@ uint8_t task_remove_msg(task_id_t task_id, uint8_t sig) {
 
 	/* get task table control */
 	t_tcb = &task_pri_queue[task_table[task_id].pri - 1];
+	task_queue_integrity_check(t_tcb, 0x0F);
 
 	/* check task queue available */
 	if (task_ready & t_tcb->mask) {
@@ -158,7 +211,14 @@ uint8_t task_remove_msg(task_id_t task_id, uint8_t sig) {
 		/* get first message of queue */
 		traverse_msg = t_tcb->qhead;
 
-		while (traverse_msg != AK_MSG_NULL) {
+		while (traverse_msg != NULL) {
+			if (msg_is_valid_ptr(traverse_msg) == AK_MSG_NG) {
+				FATAL("TK", 0x0F);
+			}
+
+			if (msg_is_valid_or_null(traverse_msg->next) == AK_MSG_NG) {
+				FATAL("TK", 0x0F);
+			}
 
 			/* check message task id and signal */
 			if (traverse_msg->des_task_id == task_id && traverse_msg->sig == sig) {
@@ -174,11 +234,11 @@ uint8_t task_remove_msg(task_id_t task_id, uint8_t sig) {
 				}
 
 				/* last message of queue */
-				if (del_msg->next == AK_MSG_NULL) {
+				if (del_msg->next == NULL) {
 					t_tcb->qtail = trace_msg;
 
 					/* Check if no message exist after remove current message */
-					if (t_tcb->qhead == AK_MSG_NULL) {
+					if (t_tcb->qhead == NULL) {
 
 						/* change status of task to inactive */
 						task_ready &= ~t_tcb->mask;
@@ -193,9 +253,9 @@ uint8_t task_remove_msg(task_id_t task_id, uint8_t sig) {
 			traverse_msg = traverse_msg->next;
 
 			/* free the message if it's found */
-			if (del_msg != AK_MSG_NULL) {
+			if (del_msg != NULL) {
 				msg_force_free(del_msg);
-				del_msg = AK_MSG_NULL;
+				del_msg = NULL;
 				total_rm_msg++;
 			}
 		}
@@ -257,7 +317,15 @@ int task_init() {
 	uint8_t pri;
 	tcb_t* t_tcb;
 
+	/*
+	 * Reset trạng thái scheduler và toàn bộ queue theo từng mức ưu tiên
+	 * trước khi chạy runtime AK.
+	 * Bắt buộc gọi trước task_create()/task_polling_create()/task_run().
+	 */
 	/* init task manager variable */
+	current_task_id = 0;
+	memset(&current_task_info, 0, sizeof(task_t));
+	memset(&current_active_object, 0, sizeof(ak_msg_t));
 	task_current = 0;
 	task_ready = 0;
 
@@ -265,8 +333,9 @@ int task_init() {
 	for (pri = 1; pri <= TASK_PRI_MAX_SIZE; pri++) {
 		t_tcb = &task_pri_queue[pri - 1];
 		t_tcb->mask     = (1 << (pri - 1));
-		t_tcb->qhead    = AK_MSG_NULL;
-		t_tcb->qtail    = AK_MSG_NULL;
+		t_tcb->qhead    = NULL;
+		t_tcb->qtail    = NULL;
+		task_queue_integrity_check(t_tcb, 0x10);
 	}
 
 	/* message manager must be initial fist */
@@ -278,6 +347,11 @@ int task_init() {
 	return 0;
 }
 
+/*
+ * Vòng lặp runtime chính của AK.
+ * Luôn ưu tiên chạy task có mức ưu tiên cao nhất đang sẵn sàng,
+ * sau đó mới chạy nhóm task polling.
+ */
 int task_run() {
 	/* init active object log queue */
 #if defined(AK_TASK_OBJ_LOG_ENABLE)
@@ -305,6 +379,63 @@ int task_run() {
 		task_sheduler();
 		task_polling_run();
 	}
+}
+
+/*
+ * Chạy một vòng scheduler phục vụ debug mà không đi vào vòng lặp vô hạn.
+ * Trả về 1 nếu có task sẵn sàng để xử lý, trả về 0 nếu không có task nào trong queue.
+ */
+int task_debug_run_once() {
+	ENTRY_CRITICAL();
+
+	if (task_ready == 0) {
+		EXIT_CRITICAL();
+		return 0;
+	}
+
+	EXIT_CRITICAL();
+
+	task_sheduler();
+	task_polling_run();
+
+	return 1;
+}
+
+/*
+ * Deinit task manager cho mục đích test/debug:
+ * - xóa liên kết bảng task/polling,
+ * - reset queue và trạng thái scheduler,
+ * - reset message/timer pool về trạng thái mới khởi tạo.
+ */
+void task_deinit() {
+	uint8_t pri;
+	tcb_t* t_tcb;
+
+	ENTRY_CRITICAL();
+
+	current_task_id = 0;
+	memset(&current_task_info, 0, sizeof(task_t));
+	memset(&current_active_object, 0, sizeof(ak_msg_t));
+
+	task_table = (task_t*)0;
+	task_table_size = 0;
+	task_current = 0;
+	task_ready = 0;
+
+	task_polling_table = (task_polling_t*)0;
+	task_polling_table_size = 0;
+
+	for (pri = 1; pri <= TASK_PRI_MAX_SIZE; pri++) {
+		t_tcb = &task_pri_queue[pri - 1];
+		t_tcb->mask = (1 << (pri - 1));
+		t_tcb->qhead = NULL;
+		t_tcb->qtail = NULL;
+	}
+
+	EXIT_CRITICAL();
+
+	msg_init();
+	timer_init();
 }
 
 void task_polling_set_ability(task_id_t task_polling_id, uint8_t ability) {
@@ -356,17 +487,30 @@ void task_sheduler() {
 
 	uint8_t t_task_current = task_current;
 
-	while ((t_task_new = LOG2LKUP(task_ready)) > t_task_current) {
+	/* task_ready phải có ít nhất một bit được set trước khi gọi LOG2LKUP(). */
+	while ((task_ready != 0) && ((t_task_new = LOG2LKUP(task_ready)) > t_task_current)) {
 		/* get task */
-		tcb_t* t_tcb = &task_pri_queue[t_task_new - 1];
+		tcb_t* t_tcb = &task_pri_queue[t_task_new];
+		task_queue_integrity_check(t_tcb, 0x11);
+
+		if (t_tcb->qhead == NULL) {
+			FATAL("TK", 0x11);
+		}
 
 		/* get message */
 		ak_msg_t* t_msg = t_tcb->qhead;
+		if (msg_is_valid_ptr(t_msg) == AK_MSG_NG) {
+			FATAL("TK", 0x11);
+		}
+
+		if (msg_is_valid_or_null(t_msg->next) == AK_MSG_NG) {
+			FATAL("TK", 0x11);
+		}
 		t_tcb->qhead = t_msg->next;
 
 		/* last message of queue */
-		if (t_msg->next == AK_MSG_NULL) {
-			t_tcb->qtail = AK_MSG_NULL;
+		if (t_msg->next == NULL) {
+			t_tcb->qtail = NULL;
 			/* change status of task to inactive */
 			task_ready &= ~t_tcb->mask;
 		}
@@ -378,17 +522,30 @@ void task_sheduler() {
 #if defined(AK_TASK_OBJ_LOG_ENABLE) || defined(AK_TASK_LOG_CONSOLE_ENABLE)
 		t_msg->dbg_handler.start_exe = sys_ctrl_millis();
 #endif
+		if (t_msg->des_task_id >= task_table_size) {
+			FATAL("TK", 0x09);
+		}
+
+		if (task_table[t_msg->des_task_id].task == (pf_task)0) {
+			FATAL("TK", 0x0A);
+		}
+
 		/* update current ak object */
 		memcpy(&current_task_info, &task_table[t_msg->des_task_id], sizeof(task_t));
 		memcpy(&current_active_object, t_msg, sizeof(ak_msg_t));
 
-		/* update current task id NOTE: current task id will be change when entry interrupt handler */
-		current_task_id = t_msg->if_des_task_id;
+		/* update current task id by local scheduler destination */
+		current_task_id = t_msg->des_task_id;
 
 		/* execute task */
 		EXIT_CRITICAL();
 
-		task_table[t_msg->des_task_id].task(t_msg);
+		pf_task task_handler = task_table[t_msg->des_task_id].task;
+		if ((((uint32_t)task_handler) & 0x01U) == 0U) {
+			FATAL("TK", 0x08);
+		}
+
+		task_handler(t_msg);
 
 		ENTRY_CRITICAL();
 
@@ -469,7 +626,7 @@ void task_pri_queue_dump() {
 			/* get first message of queue */
 			t_msg = t_tcb->qhead;
 
-			while (t_msg != AK_MSG_NULL) {
+			while (t_msg != NULL) {
 
 				/* dump message queue */
 				xprintf("srcTaskID:%d\tdesTaskID:%d\tmsgType:0x%x\trefCnt:%d\tsig:%d\n"\
@@ -503,3 +660,8 @@ task_t* get_current_task_info() {
 ak_msg_t* get_current_active_object() {
 	return (ak_msg_t*)&current_active_object;
 }
+
+uint8_t get_task_table_size() {
+	return task_table_size;
+}
+

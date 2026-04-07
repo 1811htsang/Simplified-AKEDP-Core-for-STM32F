@@ -43,6 +43,12 @@ void timer_msg_pool_init() {
 	free_list_timer_pool = (ak_timer_t*)timer_pool;
 
 	for (index = 0; index < AK_TIMER_POOL_SIZE; index++) {
+		/* Zero initialize all fields to prevent garbage values */
+		timer_pool[index].des_task_id = 0;
+		timer_pool[index].sig = 0;
+		timer_pool[index].counter = 0;
+		timer_pool[index].period = 0;
+
 		if (index == (AK_TIMER_POOL_SIZE - 1)) {
 			timer_pool[index].next = TIMER_MSG_NULL;
 		}
@@ -198,6 +204,11 @@ void timer_tick(uint32_t t) {
 uint8_t timer_set(task_id_t des_task_id, timer_sig_t sig, uint32_t duty, timer_type_t type) {
 	ak_timer_t* timer_msg;
 
+	/* Validate des_task_id before processing */
+	if (des_task_id >= get_task_table_size()) {
+		FATAL("TK", 0x0B);
+	}
+
 	ENTRY_CRITICAL();
 
 	timer_msg = timer_list_head;
@@ -247,6 +258,11 @@ uint8_t timer_set(task_id_t des_task_id, timer_sig_t sig, uint32_t duty, timer_t
 uint8_t timer_remove_msg(task_id_t des_task_id, timer_sig_t sig) {
 	ak_timer_t* timer_msg;
 	ak_timer_t* timer_msg_prev;
+
+	/* Validate des_task_id before processing */
+	if (des_task_id >= get_task_table_size()) {
+		FATAL("TK", 0x0C);
+	}
 
 	ENTRY_CRITICAL();
 
