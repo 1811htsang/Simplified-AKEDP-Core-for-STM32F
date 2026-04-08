@@ -1,0 +1,25 @@
+../Drivers/EDP/ak/src/task.c:48:13:void task_queue_integrity_check(tcb_t*, uint8_t)	5
+../Drivers/EDP/ak/src/task.c:63:16:void task_irq_io_entry_trigger()	1
+../Drivers/EDP/ak/src/task.c:70:16:void task_irq_io_exit_trigger()	1
+../Drivers/EDP/ak/src/task.c:80:6:void task_create(task_t*)	5
+../Drivers/EDP/ak/src/task.c:106:6:void task_polling_create(task_polling_t*)	5
+../Drivers/EDP/ak/src/task.c:132:6:void task_post(task_id_t, ak_msg_t*)	6
+../Drivers/EDP/ak/src/task.c:187:9:uint8_t task_remove_msg(task_id_t, uint8_t)	13
+../Drivers/EDP/ak/src/task.c:266:6:void task_post_pure_msg(task_id_t, uint8_t)	1
+../Drivers/EDP/ak/src/task.c:272:6:void task_post_common_msg(task_id_t, uint8_t, uint8_t*, uint8_t)	1
+../Drivers/EDP/ak/src/task.c:279:6:void task_post_dynamic_msg(task_id_t, uint8_t, uint8_t*, uint32_t)	1
+../Drivers/EDP/ak/src/task.c:286:6:void task_entry_interrupt()	1
+../Drivers/EDP/ak/src/task.c:304:6:void task_exit_interrupt()	1
+../Drivers/EDP/ak/src/task.c:314:5:int task_init()	2
+../Drivers/EDP/ak/src/task.c:353:5:int task_run()	1
+../Drivers/EDP/ak/src/task.c:386:5:int task_debug_run_once()	2
+../Drivers/EDP/ak/src/task.c:408:6:void task_deinit()	2
+../Drivers/EDP/ak/src/task.c:439:6:void task_polling_set_ability(task_id_t, uint8_t)	4
+../Drivers/EDP/ak/src/task.c:463:6:void task_polling_run()	3
+../Drivers/EDP/ak/src/task.c:481:6:void task_sheduler()	11
+../Drivers/EDP/ak/src/task.c:609:6:void task_pri_queue_dump()	4
+../Drivers/EDP/ak/src/task.c:646:11:task_id_t task_self()	1
+../Drivers/EDP/ak/src/task.c:650:11:task_id_t get_current_task_id()	1
+../Drivers/EDP/ak/src/task.c:654:9:task_t* get_current_task_info()	1
+../Drivers/EDP/ak/src/task.c:658:11:ak_msg_t* get_current_active_object()	1
+../Drivers/EDP/ak/src/task.c:662:9:uint8_t get_task_table_size()	1

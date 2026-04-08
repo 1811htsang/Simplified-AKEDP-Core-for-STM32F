@@ -1,0 +1,11 @@
+../Drivers/EDP/ak/src/timer.c:37:6:void timer_msg_pool_init()	16	static
+../Drivers/EDP/ak/src/timer.c:66:13:ak_timer_t* get_timer_msg()	16	static,ignoring_inline_asm
+../Drivers/EDP/ak/src/timer.c:90:6:void free_timer_msg(ak_timer_t*)	16	static
+../Drivers/EDP/ak/src/timer.c:102:10:uint32_t get_timer_msg_pool_used()	4	static
+../Drivers/EDP/ak/src/timer.c:106:10:uint32_t get_timer_msg_pool_used_max()	4	static
+../Drivers/EDP/ak/src/timer.c:110:6:void task_timer_tick(ak_msg_t*)	40	static
+../Drivers/EDP/ak/src/timer.c:179:6:void timer_init()	8	static
+../Drivers/EDP/ak/src/timer.c:190:6:void timer_tick(uint32_t)	24	static
+../Drivers/EDP/ak/src/timer.c:204:9:uint8_t timer_set(task_id_t, timer_sig_t, uint32_t, timer_type_t)	24	static,ignoring_inline_asm
+../Drivers/EDP/ak/src/timer.c:258:9:uint8_t timer_remove_msg(task_id_t, timer_sig_t)	24	static,ignoring_inline_asm
+../Drivers/EDP/ak/src/timer.c:301:9:uint8_t timer_remove_attr(task_id_t, timer_sig_t)	24	static

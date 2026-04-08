@@ -1,0 +1,6 @@
+../Drivers/EDP/common/container/fifo.c:8:6:void fifo_init(fifo_t*, void*, uint32_t, uint32_t)	1
+../Drivers/EDP/common/container/fifo.c:18:10:uint32_t fifo_availble(fifo_t*)	1
+../Drivers/EDP/common/container/fifo.c:22:6:bool fifo_is_empty(fifo_t*)	1
+../Drivers/EDP/common/container/fifo.c:26:6:bool fifo_is_full(fifo_t*)	1
+../Drivers/EDP/common/container/fifo.c:30:9:uint8_t fifo_put(fifo_t*, void*)	3
+../Drivers/EDP/common/container/fifo.c:52:9:uint8_t fifo_get(fifo_t*, void*)	3

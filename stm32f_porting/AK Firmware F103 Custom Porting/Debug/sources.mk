@@ -40,11 +40,10 @@ CPP_DEPS :=
 SUBDIRS := \
 Core/Src \
 Core/Startup \
-Drivers/AK_Imported_Driver/ak/src \
-Drivers/AK_Imported_Driver/app \
-Drivers/AK_Imported_Driver/app/screens \
-Drivers/AK_Imported_Driver/common \
-Drivers/AK_Imported_Driver/common/container \
-Drivers/AK_Imported_Driver/sys \
+Drivers/EDP/ak/src \
+Drivers/EDP/app \
+Drivers/EDP/common/container \
+Drivers/EDP/common \
+Drivers/EDP/sys \
 Drivers/STM32F1xx_HAL_Driver/Src \
 

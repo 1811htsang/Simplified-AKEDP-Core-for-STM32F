@@ -1,3 +1,0 @@
-../Drivers/AK_Imported_Driver/app/task_fw.cpp:42:6:void task_fw(ak_msg_t*)	19
-../Drivers/AK_Imported_Driver/app/task_fw.cpp:317:6:void fw_update_app_req_c_external_flash_io_none(firmware_header_t*)	1
-../Drivers/AK_Imported_Driver/app/task_fw.cpp:335:6:void fw_update_boot_req_c_external_flash_io_none(firmware_header_t*)	3

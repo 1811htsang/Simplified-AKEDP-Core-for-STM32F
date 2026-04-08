@@ -1,3 +1,4 @@
+
 /* USER CODE BEGIN Header */
 /**
   ******************************************************************************
@@ -27,8 +28,8 @@ extern "C" {
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-#include "app.h"
-#include "sys_cfg.h"
+#include "../../Drivers/EDP/app/app.h"
+#include "../../Drivers/EDP/sys/sys_cfg.h"
 
 /* USER CODE END Includes */
 

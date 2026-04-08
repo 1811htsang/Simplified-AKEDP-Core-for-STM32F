@@ -10,12 +10,11 @@ RM := rm -rf
 # All of the sources participating in the build are defined here
 -include sources.mk
 -include Drivers/STM32F1xx_HAL_Driver/Src/subdir.mk
--include Drivers/AK_Imported_Driver/sys/subdir.mk
--include Drivers/AK_Imported_Driver/common/container/subdir.mk
--include Drivers/AK_Imported_Driver/common/subdir.mk
--include Drivers/AK_Imported_Driver/app/screens/subdir.mk
--include Drivers/AK_Imported_Driver/app/subdir.mk
--include Drivers/AK_Imported_Driver/ak/src/subdir.mk
+-include Drivers/EDP/sys/subdir.mk
+-include Drivers/EDP/common/container/subdir.mk
+-include Drivers/EDP/common/subdir.mk
+-include Drivers/EDP/app/subdir.mk
+-include Drivers/EDP/ak/src/subdir.mk
 -include Core/Startup/subdir.mk
 -include Core/Src/subdir.mk
 -include objects.mk

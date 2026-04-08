@@ -1,0 +1,12 @@
+../Drivers/EDP/common/container/ring_buffer.c:9:6:void ring_buffer_init(ring_buffer_t*, void*, uint16_t, uint16_t)	1
+../Drivers/EDP/common/container/ring_buffer.c:19:10:uint16_t ring_buffer_availble(ring_buffer_t*)	1
+../Drivers/EDP/common/container/ring_buffer.c:23:6:bool ring_buffer_is_empty(ring_buffer_t*)	1
+../Drivers/EDP/common/container/ring_buffer.c:27:6:bool ring_buffer_is_full(ring_buffer_t*)	1
+../Drivers/EDP/common/container/ring_buffer.c:31:9:uint8_t ring_buffer_put(ring_buffer_t*, void*)	3
+../Drivers/EDP/common/container/ring_buffer.c:56:9:uint8_t ring_buffer_get(ring_buffer_t*, void*)	3
+../Drivers/EDP/common/container/ring_buffer.c:78:6:void ring_buffer_char_init(ring_buffer_char_t*, void*, uint16_t)	1
+../Drivers/EDP/common/container/ring_buffer.c:87:10:uint16_t ring_buffer_char_availble(ring_buffer_char_t*)	1
+../Drivers/EDP/common/container/ring_buffer.c:91:6:bool ring_buffer_char_is_empty(ring_buffer_char_t*)	1
+../Drivers/EDP/common/container/ring_buffer.c:95:6:bool ring_buffer_char_is_full(ring_buffer_char_t*)	1
+../Drivers/EDP/common/container/ring_buffer.c:99:6:void ring_buffer_char_put(ring_buffer_char_t*, uint8_t)	2
+../Drivers/EDP/common/container/ring_buffer.c:117:9:uint8_t ring_buffer_char_get(ring_buffer_char_t*)	2

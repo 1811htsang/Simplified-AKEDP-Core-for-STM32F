@@ -1,7 +1,0 @@
-C:/Users/shanghuang/Documents/PERSON-PROJECT-CV/AK-STM32/stm32f_porting/AK Firmware F103 Custom Porting/Drivers/AK_Imported_Driver/sys/Adafruit_ssd1306syp.h:17:7:void Adafruit_ssd1306syp::clear()	1
-C:/Users/shanghuang/Documents/PERSON-PROJECT-CV/AK-STM32/stm32f_porting/AK Firmware F103 Custom Porting/Drivers/AK_Imported_Driver/sys/Adafruit_ssd1306syp.h:18:7:void Adafruit_ssd1306syp::update()	1
-C:/Users/shanghuang/Documents/PERSON-PROJECT-CV/AK-STM32/stm32f_porting/AK Firmware F103 Custom Porting/Drivers/AK_Imported_Driver/sys/Adafruit_ssd1306syp.h:28:7:void Adafruit_ssd1306syp::drawBitmap(int16_t, int16_t, const unsigned char*, int16_t, int16_t, uint8_t)	1
-C:/Users/shanghuang/Documents/PERSON-PROJECT-CV/AK-STM32/stm32f_porting/AK Firmware F103 Custom Porting/Drivers/AK_Imported_Driver/sys/Adafruit_ssd1306syp.h:32:10:int16_t Adafruit_ssd1306syp::width() const	1
-C:/Users/shanghuang/Documents/PERSON-PROJECT-CV/AK-STM32/stm32f_porting/AK Firmware F103 Custom Porting/Drivers/AK_Imported_Driver/sys/Arduino.h:11:20:long int random(long int, long int)	2
-../Drivers/AK_Imported_Driver/app/screens/scr_noen.cpp:67:6:void view_scr_noen()	2
-../Drivers/AK_Imported_Driver/app/screens/scr_noen.cpp:76:6:void scr_noen_handle(ak_msg_t*)	13

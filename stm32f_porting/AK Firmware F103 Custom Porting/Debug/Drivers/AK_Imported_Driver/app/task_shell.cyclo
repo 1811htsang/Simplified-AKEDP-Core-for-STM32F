@@ -1,2 +1,0 @@
-../Drivers/AK_Imported_Driver/app/task_shell.cpp:35:6:void sys_irq_shell()	2
-../Drivers/AK_Imported_Driver/app/task_shell.cpp:48:6:void task_shell(ak_msg_t*)	3

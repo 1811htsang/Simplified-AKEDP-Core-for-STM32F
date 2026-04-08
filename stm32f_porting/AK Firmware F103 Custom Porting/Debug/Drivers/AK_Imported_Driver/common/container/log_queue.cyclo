@@ -1,4 +1,0 @@
-../Drivers/AK_Imported_Driver/common/container/log_queue.c:11:9:uint8_t log_queue_init(log_queue_t*, uint32_t, uint32_t, uint32_t, q_ctrl, q_ctrl)	3
-../Drivers/AK_Imported_Driver/common/container/log_queue.c:39:10:uint32_t log_queue_len(log_queue_t*)	1
-../Drivers/AK_Imported_Driver/common/container/log_queue.c:43:9:uint8_t log_queue_put(log_queue_t*, void*)	9
-../Drivers/AK_Imported_Driver/common/container/log_queue.c:82:9:uint8_t log_queue_get(log_queue_t*, void*)	4

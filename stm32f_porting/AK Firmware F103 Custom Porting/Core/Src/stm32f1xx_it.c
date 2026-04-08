@@ -22,9 +22,10 @@
 #include "stm32f1xx_it.h"
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-#include "sys_irq.h"
-#include "sys_ctrl.h"
-#include "sys_cfg.h"
+
+#include "../../Drivers/EDP/sys/sys_cfg.h"
+#include "../../Drivers/EDP/sys/sys_ctrl.h"
+#include "../../Drivers/EDP/sys/sys_irq.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/

@@ -1,3 +1,0 @@
-../Drivers/AK_Imported_Driver/app/app_bsp.cpp:17:6:void btn_mode_callback(void*)	5
-../Drivers/AK_Imported_Driver/app/app_bsp.cpp:41:6:void btn_up_callback(void*)	5
-../Drivers/AK_Imported_Driver/app/app_bsp.cpp:65:6:void btn_down_callback(void*)	5
