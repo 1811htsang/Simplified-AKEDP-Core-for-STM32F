@@ -13,7 +13,6 @@
 #include "platform.h"
 #include "qrcode.h"
 #include "xprintf.h"
-#include "HardwareSerial.h"
 #include "SPI.h"
 #include "sys_boot.h"
 #include "sys_cfg.h"
@@ -42,7 +41,6 @@ extern uint32_t _etext;
 }
 
 SPIClass SPI;
-HardwareSerial Serial2;
 
 extern "C" {
 

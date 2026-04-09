@@ -20,14 +20,11 @@
 #include "task_life.h"
 #include "task_list.h"
 #include "task_uart_if.h"
-#include "ArduinoJson.h"
-#include "HardwareSerial.h"
 #include "led.h"
 #include "sys_ctrl.h"
 #include "sys_dbg.h"
 #include "sys_io.h"
 #include "sys_irq.h"
-#include "WString.h"
 
 /* ----------------------- Platform includes --------------------------------*/
 
