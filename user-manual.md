@@ -25,12 +25,14 @@
 
 ### Định nghĩa EDP Core
 
-**EDP (Embedded Development Platform)** là một nền tảng phát triển nhúm được thiết kế cho các hệ thống nhúm thời gian thực, đặc biệt tối ưu cho họ vi điều khiển STM32F1xx. EDP cung cấp một kiến trúc phần mềm hoàn chỉnh bao gồm:
+**EDP (Embedded Development Platform)** là một nền tảng phát triển nhúng được thiết kế cho các hệ thống nhúng thời gian thực, đặc biệt tối ưu cho họ vi điều khiển STM32F1xx. EDP cung cấp một kiến trúc phần mềm hoàn chỉnh bao gồm:
 
 - **Hạt nhân AK (AK Kernel)**: Bộ lập lịch tác vụ (Task Scheduler), quản lý tin nhắn, và bộ hẹn giờ
 - **Tầng ứng dụng (Application Layer)**: Các tác vụ ứng dụng (LIFE, UART IF, Debug tasks)
 - **Tầng hệ thống (System Layer)**: Trừu tượng hóa nền tảng, quản lý ngắt, I/O điều khiển
 - **Thư viện công cụ (Utility Libraries)**: Cấu trúc dữ liệu (FIFO, Ring Buffer), tiện ích in ra
+
+Ngoài ra EDP còn đại diện cho Event-Driven Programming, một mô hình lập trình trong đó luồng điều khiển được xác định bởi các sự kiện (events) như tin nhắn, ngắt, hoặc bộ hẹn giờ.
 
 ### Đặc điểm chính
 
