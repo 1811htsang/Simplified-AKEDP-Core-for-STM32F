@@ -1,50 +1,57 @@
-/*------------------------------------------------------------------------*/
-/* Universal string handler for user console interface  (C)ChaN, 2021     */
-/*------------------------------------------------------------------------*/
-
 #ifndef XPRINTF_DEF
-#define XPRINTF_DEF
+  #define XPRINTF_DEF
 
-#ifdef __cplusplus
-extern "C" {
-#endif
+  // Khai báo directive C cho C++
+  #ifdef __cplusplus
+    extern "C" {
+  #endif
 
-#define XF_USE_OUTPUT	1	/* 1: Enable output functions */
-#define	XF_CRLF			1	/* 1: Convert \n ==> \r\n in the output char */
-#define	XF_USE_DUMP		0	/* 1: Enable put_dump function */
-#define	XF_USE_LLI		1	/* 1: Enable long long integer in size prefix ll */
-#define	XF_USE_FP		1	/* 1: Enable support for floating point in type e and f */
-#define XF_DPC			'.'	/* Decimal separator for floating point */
-#define XF_USE_INPUT	0	/* 1: Enable input functions */
-#define	XF_INPUT_ECHO	0	/* 1: Echo back input chars in xgets function */
+    // Cấu hình cho xprintf
+    #define XF_USE_OUTPUT	1	// Cho phép sử dụng các hàm xuất dữ liệu
+    #define	XF_CRLF			  1	// Cho phép chuyển đổi LF thành CRLF trong các hàm xuất dữ liệu
+    #define	XF_USE_DUMP		0	// Cho phép sử dụng hàm put_dump để hiển thị dữ liệu thô (hex dump)
+    #define	XF_USE_LLI		1	// Cho phép sử dụng kiểu dữ liệu long long trong các hàm xuất dữ liệu
+    #define	XF_USE_FP		  1	// Cho phép sử dụng kiểu dữ liệu float/double trong các hàm xuất dữ liệu
+    #define XF_DPC			'.'	// Ký tự phân cách phần nguyên và phần thập phân trong định dạng số thực
+    #define XF_USE_INPUT	0	// Cho phép sử dụng các hàm nhập dữ liệu
+    #define	XF_INPUT_ECHO	0	// Cho phép echo ký tự khi nhập dữ liệu (ví dụ: hiển thị ký tự khi người dùng nhập)
 
-#if defined(__GNUC__) && __GNUC__ >= 10
-#pragma GCC diagnostic ignored "-Wcast-function-type"
-#endif
+    // Định nghĩa macro để tránh cảnh báo khi ép kiểu hàm con trỏ
+    #if defined(__GNUC__) && __GNUC__ >= 10
+      #pragma GCC diagnostic ignored "-Wcast-function-type"
+    #endif
 
-#if XF_USE_OUTPUT
-#define xdev_out(func) xfunc_output = (void(*)(int))(func)
-extern void (*xfunc_output)(int);
-void xputc (int chr);
-void xfputc (void (*func)(int), int chr);
-void xputs (const char* str);
-void xfputs (void (*func)(int), const char* str);
-void xprintf (const char* fmt, ...);
-void xsprintf (char* buff, const char* fmt, ...);
-void xfprintf (void (*func)(int), const char* fmt, ...);
-void put_dump (const void* buff, unsigned long addr, int len, int width);
-#endif
+    // Khai báo các hàm xuất dữ liệu nếu được phép sử dụng
+    #if XF_USE_OUTPUT
+      // Macro để thiết lập thiết bị xuất dữ liệu mặc định (xfunc_output)
+      #define xdev_out(func) xfunc_output = (void(*)(int))(func)
 
-#if XF_USE_INPUT
-#define xdev_in(func) xfunc_input = (int(*)(void))(func)
-extern int (*xfunc_input)(void);
-int xgets (char* buff, int len);
-int xatoi (char** str, long* res);
-int xatof (char** str, double* res);
-#endif
+      // Khai báo các hàm xuất dữ liệu
+      extern void (*xfunc_output)(int);
+      void xputc (int chr);
+      void xfputc (void (*func)(int), int chr);
+      void xputs (const char* str);
+      void xfputs (void (*func)(int), const char* str);
+      void xprintf (const char* fmt, ...);
+      void xsprintf (char* buff, const char* fmt, ...);
+      void xfprintf (void (*func)(int), const char* fmt, ...);
+      void put_dump (const void* buff, unsigned long addr, int len, int width);
+    #endif
 
-#ifdef __cplusplus
-}
-#endif
+    // Khai báo các hàm nhập dữ liệu nếu được phép sử dụng
+    #if XF_USE_INPUT
+      // Macro để thiết lập thiết bị nhập dữ liệu mặc định (xfunc_input)
+      #define xdev_in(func) xfunc_input = (int(*)(void))(func)
+      
+      // Khai báo các hàm nhập dữ liệu
+      extern int (*xfunc_input)(void);
+      int xgets (char* buff, int len);
+      int xatoi (char** str, long* res);
+      int xatof (char** str, double* res);
+    #endif
+
+  #ifdef __cplusplus
+    }
+  #endif
 
 #endif
