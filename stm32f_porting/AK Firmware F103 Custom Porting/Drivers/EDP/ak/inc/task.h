@@ -34,22 +34,22 @@
 		typedef void (*pf_task_polling)(); 	// Quáº£n lÃ½ cÃ¡c task theo polling-driven
 
 		/**
-		 * Ghi chÃº:
-		 * `pf_task` Ä‘Æ°á»£c sá»­ dá»¥ng Ä‘á»ƒ quáº£n lÃ½ cÃ¡c hÃ m thá»±c thi cá»§a tÃ¡c vá»¥ 
-		 * theo cÆ¡ cháº¿ message-driven, nÆ¡i má»—i tÃ¡c vá»¥ sáº½ Ä‘Æ°á»£c kÃ­ch hoáº¡t 
-		 * vÃ  thá»±c thi dá»±a trÃªn cÃ¡c tin nháº¯n mÃ  nÃ³ nháº­n Ä‘Æ°á»£c.
+		 * Ghi chú:
+		 * `pf_task` được sử dụng để quản lý các hàm thực thi của tác vụ 
+		 * theo cơ chế message-driven, nơi mỗi tác vụ sẽ được kích hoạt 
+		 * và thực thi dựa trên các tin nhắn mà nó nhận được.
 		 * 
-		 * `pf_task_polling` Ä‘Æ°á»£c sá»­ dá»¥ng Ä‘á»ƒ quáº£n lÃ½ cÃ¡c hÃ m thá»±c thi cá»§a tÃ¡c vá»¥ 
-		 * theo cÆ¡ cháº¿ polling-driven, nÆ¡i má»—i tÃ¡c vá»¥ sáº½ Ä‘Æ°á»£c kÃ­ch hoáº¡t 
-		 * vÃ  thá»±c thi liÃªn tá»¥c hoáº·c theo má»™t lá»‹ch trÃ¬nh nháº¥t Ä‘á»‹nh, 
-		 * khÃ´ng phá»¥ thuá»™c vÃ o viá»‡c nháº­n tin nháº¯n.
+		 * `pf_task_polling` được sử dụng để quản lý các hàm thực thi của tác vụ 
+		 * theo cơ chế polling-driven, nơi mỗi tác vụ sẽ được kích hoạt 
+		 * và thực thi liên tục hoặc theo một lịch trình nhất định, 
+		 * không phụ thuộc vào việc nhận tin nhắn.
 		 */
 
-		// Khai bÃ¡o cáº¥u trÃºc quáº£n lÃ½ thÃ´ng tin cá»§a tÃ¡c vá»¥
+		// Khai báo cấu trúc quản lý thông tin của tác vụ
 		typedef struct {
-			task_id_t id;		// Quáº£n lÃ½ ID cá»§a tÃ¡c vá»¥, giÃºp xÃ¡c Ä‘á»‹nh vÃ  quáº£n lÃ½ cÃ¡c tÃ¡c vá»¥ trong há»‡ thá»‘ng thÃ´ng qua ID cá»§a chÃºng
-			task_pri_t pri;	// Quáº£n lÃ½ má»©c Æ°u tiÃªn cá»§a tÃ¡c vá»¥, giÃºp xÃ¡c Ä‘á»‹nh má»©c Ä‘á»™ Æ°u tiÃªn cá»§a cÃ¡c tÃ¡c vá»¥ trong há»‡ thá»‘ng
-			pf_task task;		// Quáº£n lÃ½ hÃ m thá»±c thi cá»§a tÃ¡c vá»¥, giÃºp xÃ¡c Ä‘á»‹nh chá»©c nÄƒng vÃ  hÃ nh vi cá»§a tÃ¡c vá»¥ khi nÃ³ Ä‘Æ°á»£c kÃ­ch hoáº¡t vÃ  thá»±c thi dá»±a trÃªn cÃ¡c tin nháº¯n mÃ  nÃ³ nháº­n Ä‘Æ°á»£c
+			task_id_t id;		// Quản lý ID của tác vụ, giúp xác định và quản lý các tác vụ trong hệ thống thông qua ID của chúng
+			task_pri_t pri;	// Quản lý mức ưu tiên của tác vụ, giúp xác định mức độ ưu tiên của các tác vụ trong hệ thống
+			pf_task task;		// Quản lý hàm thực thi của tác vụ, giúp xác định chức năng và hành vi của tác vụ khi nó được kích hoạt và thực thi dựa trên các tin nhắn mà nó nhận được
 		} task_t;
 
 		// Khai bÃ¡o cáº¥u trÃºc quáº£n lÃ½ thÃ´ng tin cá»§a tÃ¡c vá»¥ polling
@@ -89,11 +89,12 @@
 		);																																	// Quáº£n lÃ½ viá»‡c Ä‘Äƒng má»™t tin nháº¯n Ä‘á»™ng (chá»©a pháº§n tiÃªu Ä‘á» vÃ  dá»¯ liá»‡u cÃ³ kÃ­ch thÆ°á»›c thay Ä‘á»•i Ä‘Æ°á»£c cáº¥p phÃ¡t táº¡i thá»i Ä‘iá»ƒm cháº¡y) Ä‘áº¿n má»™t tÃ¡c vá»¥ Ä‘Ã­ch cá»¥ thá»ƒ
 		extern uint8_t task_remove_msg(task_id_t task_id, uint8_t sig); 		// Quáº£n lÃ½ viá»‡c xÃ³a má»™t tin nháº¯n cá»¥ thá»ƒ dá»±a trÃªn ID cá»§a tÃ¡c vá»¥ vÃ  tÃ­n hiá»‡u cá»§a tin nháº¯n
 		
-		// Khai bÃ¡o cÃ¡c hÃ m Ä‘á»ƒ quáº£n lÃ½ tÃ¡c vá»¥
-		extern int task_init(void); // Quáº£n lÃ½ viá»‡c khá»Ÿi táº¡o há»‡ thá»‘ng tÃ¡c vá»¥, chuáº©n bá»‹ cÃ¡c cáº¥u trÃºc dá»¯ liá»‡u vÃ  tÃ i nguyÃªn cáº§n thiáº¿t Ä‘á»ƒ há»‡ thá»‘ng tÃ¡c vá»¥ hoáº¡t Ä‘á»™ng má»™t cÃ¡ch hiá»‡u quáº£
-		extern int task_run(void);	// Quáº£n lÃ½ viá»‡c cháº¡y há»‡ thá»‘ng tÃ¡c vá»¥, báº¯t Ä‘áº§u thá»±c thi cÃ¡c tÃ¡c vá»¥ Ä‘Ã£ Ä‘Æ°á»£c táº¡o vÃ  quáº£n lÃ½ viá»‡c chuyá»ƒn Ä‘á»•i giá»¯a cÃ¡c tÃ¡c vá»¥ dá»±a trÃªn cÃ¡c tin nháº¯n mÃ  chÃºng nháº­n Ä‘Æ°á»£c hoáº·c theo lá»‹ch trÃ¬nh cá»§a chÃºng
-		extern int task_debug_run_once(void); // Cháº¡y scheduler má»™t vÃ²ng phá»¥c vá»¥ debug há»¯u háº¡n, khÃ´ng Ä‘i vÃ o vÃ²ng láº·p vÃ´ háº¡n nhÆ° task_run
-		extern void task_deinit(void); // ÄÆ°a cÃ¡c cáº¥u trÃºc ná»™i bá»™ cá»§a task manager vá» tráº¡ng thÃ¡i trÆ°á»›c khá»Ÿi táº¡o Ä‘á»ƒ phá»¥c vá»¥ test/debug
+		// Khai báo các hàm quản lý task
+		extern int task_init(void); // Quản lý việc khởi tạo hệ thống tác vụ, chuẩn bị các tài nguyên cần thiết cho việc chạy hệ thống tác vụ, bao gồm nhưng không giới hạn ở việc khởi tạo các hàng đợi tin nhắn, cấu trúc dữ liệu quản lý tác vụ, và các tài nguyên khác liên quan đến việc quản lý và thực thi các tác vụ trong hệ thống
+		extern int task_run(void);	// Quản lý việc chạy hệ thống tác vụ, bao gồm việc điều phối và thực thi các tác vụ dựa trên các tin nhắn được đăng đến chúng, quản lý lịch trình thực thi của các tác vụ, và đảm bảo rằng các tác vụ được thực thi một cách hiệu quả và đúng theo thiết kế của hệ thống
+		extern int task_debug_run_once(void); // Chuẩn bị một hàm đặc biệt để chạy một lần duy nhất trong chế độ debug, cho phép quan sát và phân tích trạng thái của hệ thống tác vụ tại một thời điểm cụ thể, giúp phát hiện và sửa lỗi trong quá trình phát triển và debug hệ thống tác vụ
+		extern int task_sample_run_once(void); // Chuẩn bị một hàm đặc biệt để chạy một lần duy nhất trong chế độ sample, cho phép quan sát và phân tích trạng thái của hệ thống tác vụ tại một thời điểm cụ thể, giúp đánh giá hiệu suất và hành vi của hệ thống tác vụ trong các tình huống thực tế hoặc mô phỏng
+		extern void task_deinit(void); // Quản lý việc giải phóng các tài nguyên đã được cấp phát cho hệ thống tác vụ, đảm bảo rằng tất cả các tài nguyên như hàng đợi tin nhắn, cấu trúc dữ liệu quản lý tác vụ, và các tài nguyên khác liên quan đến việc quản lý và thực thi các tác vụ được giải phóng một cách an toàn và hiệu quả khi hệ thống tác vụ không còn cần thiết hoặc khi hệ thống đang tắt
 
 		// Khai bÃ¡o cÃ¡c hÃ m Ä‘á»ƒ quáº£n lÃ½ tÃ¡c vá»¥ polling
 		extern void task_polling_create(task_polling_t* task_polling_tbl);								// Quáº£n lÃ½ viá»‡c táº¡o cÃ¡c tÃ¡c vá»¥ polling dá»±a trÃªn báº£ng tÃ¡c vá»¥ polling Ä‘Æ°á»£c cung cáº¥p

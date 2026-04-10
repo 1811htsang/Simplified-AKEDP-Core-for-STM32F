@@ -69,33 +69,33 @@
 		// Tráº£ vá» loáº¡i cá»§a tin nháº¯n, giÃºp xÃ¡c Ä‘á»‹nh loáº¡i tin nháº¯n (thuáº§n tÃºy, thÃ´ng thÆ°á»ng, Ä‘á»™ng) Ä‘á»ƒ xá»­ lÃ½ phÃ¹ há»£p
 		#define get_msg_type(x)				((((ak_msg_t*)x)->ref_count) & AK_MSG_TYPE_MASK)
 
-		// Khai bÃ¡o cáº¥u trÃºc quáº£n lÃ½ debug cá»§a tin nháº¯n
+		// Khai báo cấu trúc quản lý debug
 		typedef struct {
-			uint32_t	start_post; // Quáº£n lÃ½ thá»i gian báº¯t Ä‘áº§u Ä‘Äƒng tin nháº¯n, giÃºp theo dÃµi thá»i gian Ä‘Äƒng tin nháº¯n Ä‘á»ƒ phÃ¢n tÃ­ch hiá»‡u suáº¥t vÃ  debug
-			uint32_t	start_exe;  // Quáº£n lÃ½ thá»i gian báº¯t Ä‘áº§u thá»±c thi tin nháº¯n, giÃºp theo dÃµi thá»i gian thá»±c thi cá»§a tin nháº¯n Ä‘á»ƒ phÃ¢n tÃ­ch hiá»‡u suáº¥t vÃ  debug
-			uint32_t	stop_exe;   // Quáº£n lÃ½ thá»i gian káº¿t thÃºc thá»±c thi tin nháº¯n, giÃºp theo dÃµi thá»i gian thá»±c thi cá»§a tin nháº¯n Ä‘á»ƒ phÃ¢n tÃ­ch hiá»‡u suáº¥t vÃ  debug
+			uint32_t	start_post; // Thời gian bắt đầu post message, giúp theo dõi thời gian để phân tích hiệu suất và debug
+			uint32_t	start_exe;  // Thời gian bắt đầu thực thi handler của message, giúp theo dõi thời gian để phân tích hiệu suất và debug
+			uint32_t	stop_exe;   // Quản lý thời gian kết thúc thực thi tin nhắn, giúp theo dõi thời gian thực thi của tin nhắn để phân tích hiệu suất và debug
 		} dbg_handler_t;
 
-		// Khai bÃ¡o cáº¥u trÃºc quáº£n lÃ½ tin nháº¯n
+		// Khai báo cấu trúc tin nhắn cơ bản, được sử dụng cho cả 3 loại tin nhắn (thuần túy, thông thường, động)
 		typedef struct ak_msg_t {
-			// Quáº£n lÃ½ con trá» Ä‘áº¿n tin nháº¯n tiáº¿p theo trong danh sÃ¡ch liÃªn káº¿t
-			struct ak_msg_t*	next; // Quáº£n lÃ½ con trá» Ä‘áº¿n tin nháº¯n tiáº¿p theo trong danh sÃ¡ch liÃªn káº¿t
+			// Quản lý liên kết tin nhắn trong pool và queue
+			struct ak_msg_t*	next; // Quản lý con trỏ đến tin nhắn tiếp theo trong pool hoặc queue, giúp xây dựng danh sách liên kết cho việc quản lý bộ nhớ và hàng đợi tin nhắn
 
-			// Quáº£n lÃ½ debug handler
+			// Quản lý debug handler
 			#if (AK_TASK_DEBUG == AK_ENABLE) 
-				dbg_handler_t		dbg_handler; // Quáº£n lÃ½ thÃ´ng tin debug cá»§a tin nháº¯n, giÃºp theo dÃµi thá»i gian Ä‘Äƒng vÃ  thá»±c thi cá»§a tin nháº¯n Ä‘á»ƒ phÃ¢n tÃ­ch hiá»‡u suáº¥t vÃ  debug
+				dbg_handler_t		dbg_handler; // Quản lý thông tin debug cho handler của tin nhắn
 			#endif
 
-			// Quáº£n lÃ½ thÃ´ng tin cÆ¡ báº£n cá»§a tin nháº¯n, bao gá»“m ID cá»§a tÃ¡c vá»¥ nguá»“n vÃ  Ä‘Ã­ch, sá»‘ lÆ°á»£ng tham chiáº¿u, tÃ­n hiá»‡u, vÃ  thÃ´ng tin giao diá»‡n bÃªn ngoÃ i
-			uint8_t				src_task_id; 	// Quáº£n lÃ½ ID cá»§a tÃ¡c vá»¥ nguá»“n gá»­i tin nháº¯n
-			uint8_t				des_task_id; 	// Quáº£n lÃ½ ID cá»§a tÃ¡c vá»¥ Ä‘Ã­ch nháº­n tin nháº¯n
-			uint8_t				ref_count; 	 	// Quáº£n lÃ½ sá»‘ lÆ°á»£ng tham chiáº¿u Ä‘áº¿n tin nháº¯n, giÃºp quáº£n lÃ½ bá»™ nhá»› hiá»‡u quáº£
-			uint8_t				sig; 					// Quáº£n lÃ½ tÃ­n hiá»‡u cá»§a tin nháº¯n, giÃºp xÃ¡c Ä‘á»‹nh loáº¡i tin nháº¯n vÃ  cÃ¡ch xá»­ lÃ½ nÃ³
-			uint8_t				if_src_task_id; // Quáº£n lÃ½ ID cá»§a tÃ¡c vá»¥ nguá»“n gá»­i tin nháº¯n qua giao diá»‡n bÃªn ngoÃ i
-			uint8_t				if_des_task_id; // Quáº£n lÃ½ ID cá»§a tÃ¡c vá»¥ Ä‘Ã­ch nháº­n tin nháº¯n qua giao diá»‡n bÃªn ngoÃ i
-			uint8_t				if_src_type; // Quáº£n lÃ½ loáº¡i nguá»“n cá»§a tin nháº¯n qua giao diá»‡n bÃªn ngoÃ i, giÃºp xÃ¡c Ä‘á»‹nh nguá»“n gá»‘c cá»§a tin nháº¯n
-			uint8_t				if_des_type; // Quáº£n lÃ½ loáº¡i Ä‘Ã­ch cá»§a tin nháº¯n qua giao diá»‡n bÃªn ngoÃ i, giÃºp xÃ¡c Ä‘á»‹nh Ä‘Ã­ch Ä‘áº¿n cá»§a tin nháº¯n
-			uint8_t				if_sig; // Quáº£n lÃ½ tÃ­n hiá»‡u cá»§a tin nháº¯n qua giao diá»‡n bÃªn ngoÃ i, giÃºp xÃ¡c Ä‘á»‹nh loáº¡i tin nháº¯n vÃ  cÃ¡ch xá»­ lÃ½ nÃ³
+			// Quản lý thông tin cơ bản của tin nhắn, bao gồm ID của tác vụ nguồn và đích, số lượng tham chiếu, tín hiệu, và thông tin giao diện bên ngoài
+			uint8_t				src_task_id; 	// Quản lý ID của tác vụ nguồn gởi tin nhắn
+			uint8_t				des_task_id; 	// Quản lý ID của tác vụ đích nhận tin nhắn
+			uint8_t				ref_count; 	 	// Quản lý số lượng tham chiếu đến tin nhắn, giúp quản lý bộ nhớ hiệu quả
+			uint8_t				sig; 					// Quản lý tín hiệu của tin nhắn, giúp xác định loại tin nhắn và cách xử lý nó
+			uint8_t				if_src_task_id; // Quản lý ID của tác vụ nguồn gởi tin nhắn qua giao diện bên ngoài
+			uint8_t				if_des_task_id; // Quản lý ID của tác vụ đích nhận tin nhắn qua giao diện bên ngoài
+			uint8_t				if_src_type; // Quản lý loại nguồn của tin nhắn qua giao diện bên ngoài, giúp xác định nguồn gốc của tin nhắn
+			uint8_t				if_des_type; // Quản lý loại đích của tin nhắn qua giao diện bên ngoài, giúp xác định đích đến của tin nhắn
+			uint8_t				if_sig; // Quản lý tín hiệu của tin nhắn qua giao diện bên ngoài, giúp xác định loại tin nhắn và cách xử lý nó
 		} ak_msg_t;
 
 		// Khai bÃ¡o cáº¥u trÃºc quáº£n lÃ½ tin nháº¯n thÃ´ng thÆ°á»ng

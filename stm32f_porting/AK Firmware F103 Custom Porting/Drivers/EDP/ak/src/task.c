@@ -399,6 +399,21 @@ int task_debug_run_once() {
 	return 1;
 }
 
+int task_sample_run_once() {
+	ENTRY_CRITICAL();
+
+	if (task_ready == 0) {
+		EXIT_CRITICAL();
+		return 0;
+	}
+
+	EXIT_CRITICAL();
+
+	task_sheduler();
+
+	return 1;
+}
+
 /*
  * Deinit task manager cho mục đích test/debug:
  * - xóa liên kết bảng task/polling,

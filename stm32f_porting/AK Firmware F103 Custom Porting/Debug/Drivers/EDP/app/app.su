@@ -1,10 +1,10 @@
-../Drivers/EDP/app/app.cpp:165:16:uint8_t app_run_edp_init_probe()	8	static
-../Drivers/EDP/app/app.cpp:206:13:void app_task_edp_dbg_a(ak_msg_t*)	40	static
-../Drivers/EDP/app/app.cpp:223:13:void app_task_edp_dbg_b(ak_msg_t*)	24	static
-../Drivers/EDP/app/app.cpp:253:12:int app_run_edp_two_task_debug()	8	static
-../Drivers/EDP/app/app.cpp:288:16:uint8_t app_validate_task_table(const task_t*)	24	static
-../Drivers/EDP/app/app.cpp:336:16:uint8_t app_validate_polling_table(const task_polling_t*)	24	static
-../Drivers/EDP/app/app.cpp:389:5:int main_app()	16	static
-../Drivers/EDP/app/app.cpp:464:6:void task_polling_console()	4	static
-../Drivers/EDP/app/app.cpp:483:6:void sys_irq_timer_10ms()	4	static
-../Drivers/EDP/app/app.cpp:486:7:void* app_get_boot_share_data()	4	static
+../Drivers/EDP/app/app.cpp:133:16:uint8_t app_run_edp_init_probe()	8	static
+../Drivers/EDP/app/app.cpp:171:13:void app_task_edp_dbg_a(ak_msg_t*)	40	static
+../Drivers/EDP/app/app.cpp:185:13:void app_task_edp_dbg_b(ak_msg_t*)	24	static
+../Drivers/EDP/app/app.cpp:208:12:int app_run_edp_two_task_debug()	8	static
+../Drivers/EDP/app/app.cpp:240:16:uint8_t app_validate_task_table(const task_t*)	24	static
+../Drivers/EDP/app/app.cpp:288:16:uint8_t app_validate_polling_table(const task_polling_t*)	24	static
+../Drivers/EDP/app/app.cpp:341:5:int main_app()	16	static
+../Drivers/EDP/app/app.cpp:416:6:void task_polling_console()	4	static
+../Drivers/EDP/app/app.cpp:435:6:void sys_irq_timer_10ms()	4	static
+../Drivers/EDP/app/app.cpp:438:7:void* app_get_boot_share_data()	4	static

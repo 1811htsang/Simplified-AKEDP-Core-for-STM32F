@@ -13,13 +13,14 @@
 ../Drivers/EDP/ak/src/task.c:314:5:int task_init()	2
 ../Drivers/EDP/ak/src/task.c:353:5:int task_run()	1
 ../Drivers/EDP/ak/src/task.c:386:5:int task_debug_run_once()	2
-../Drivers/EDP/ak/src/task.c:408:6:void task_deinit()	2
-../Drivers/EDP/ak/src/task.c:439:6:void task_polling_set_ability(task_id_t, uint8_t)	4
-../Drivers/EDP/ak/src/task.c:463:6:void task_polling_run()	3
-../Drivers/EDP/ak/src/task.c:481:6:void task_sheduler()	11
-../Drivers/EDP/ak/src/task.c:609:6:void task_pri_queue_dump()	4
-../Drivers/EDP/ak/src/task.c:646:11:task_id_t task_self()	1
-../Drivers/EDP/ak/src/task.c:650:11:task_id_t get_current_task_id()	1
-../Drivers/EDP/ak/src/task.c:654:9:task_t* get_current_task_info()	1
-../Drivers/EDP/ak/src/task.c:658:11:ak_msg_t* get_current_active_object()	1
-../Drivers/EDP/ak/src/task.c:662:9:uint8_t get_task_table_size()	1
+../Drivers/EDP/ak/src/task.c:402:5:int task_sample_run_once()	2
+../Drivers/EDP/ak/src/task.c:423:6:void task_deinit()	2
+../Drivers/EDP/ak/src/task.c:454:6:void task_polling_set_ability(task_id_t, uint8_t)	4
+../Drivers/EDP/ak/src/task.c:478:6:void task_polling_run()	3
+../Drivers/EDP/ak/src/task.c:496:6:void task_sheduler()	11
+../Drivers/EDP/ak/src/task.c:624:6:void task_pri_queue_dump()	4
+../Drivers/EDP/ak/src/task.c:661:11:task_id_t task_self()	1
+../Drivers/EDP/ak/src/task.c:665:11:task_id_t get_current_task_id()	1
+../Drivers/EDP/ak/src/task.c:669:9:task_t* get_current_task_info()	1
+../Drivers/EDP/ak/src/task.c:673:11:ak_msg_t* get_current_active_object()	1
+../Drivers/EDP/ak/src/task.c:677:9:uint8_t get_task_table_size()	1

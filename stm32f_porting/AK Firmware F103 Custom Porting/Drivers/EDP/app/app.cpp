@@ -1,16 +1,7 @@
-﻿/**
- ******************************************************************************
- * @author: GaoKong
- * @date:   13/08/2016
- ******************************************************************************
-**/
-/* kernel include */
-#include "app.h"
-
+﻿// Khai báo thư viện sử dụng
 #include <stdint.h>
-
 #include "SPI.h"
-
+#include "app.h"
 #include "ak.h"
 #include "fsm.h"
 #include "message.h"
@@ -26,15 +17,11 @@
 #include "sys_io.h"
 #include "sys_irq.h"
 
-/* ----------------------- Platform includes --------------------------------*/
-
-/* ----------------------- Json includes ------------------------------------*/
-//#include "json.hpp"
-
+// Khai báo directive build
 #if defined(RELEASE)
-const char* app_run_mode = "RELEASE";
+	const char* app_run_mode = "RELEASE";
 #else
-static const char* app_run_mode = "DEBUG";
+	// static const char* app_run_mode = "DEBUG";
 #endif
 
 const app_info_t app_info { \
@@ -42,15 +29,11 @@ const app_info_t app_info { \
 			APP_VER, \
 };
 
-static void app_start_timer();
-static void app_init_state_machine();
-static void app_task_init();
 static uint8_t app_run_edp_init_probe();
 static int app_run_edp_two_task_debug();
 static void app_task_edp_dbg_a(ak_msg_t* msg);
 static void app_task_edp_dbg_b(ak_msg_t* msg);
 
-/* TÃ­n hiá»‡u riÃªng dÃ¹ng cho startup probe Ä‘á»ƒ kiá»ƒm tra luá»“ng post/remove queue. */
 #define APP_EDP_PROBE_SIG (0xF1u)
 #define APP_EDP_DBG_SIG_START (0xA1u)
 #define APP_EDP_DBG_SIG_FORWARD (0xB1u)
@@ -61,10 +44,6 @@ typedef enum {
 	APP_EDP_DBG_TASK_EOT_ID
 } app_edp_dbg_task_id_t;
 
-/*
- * Tráº¡ng thÃ¡i debug cho luá»“ng chuyá»ƒn message giá»¯a 2 task ná»™i bá»™.
- * Táº­p trung quan sÃ¡t cÃ¡c biáº¿n nÃ y Ä‘á»ƒ kiá»ƒm tra vÃ²ng Ä‘á»i message vÃ  thá»© tá»± xá»­ lÃ½ task.
- */
 typedef struct {
 	uint8_t init_ret;
 	uint8_t created_ret;
@@ -107,10 +86,6 @@ static task_polling_t app_edp_dbg_polling_table[] = {
 	{AK_TASK_POLLING_EOT_ID, AK_DISABLE, (pf_task_polling)0}
 };
 
-/*
- * Snapshot cháº©n Ä‘oÃ¡n giai Ä‘oáº¡n bring-up cá»§a AK-EDP.
- * CÃ¡c trÆ°á»ng nÃ y Ä‘Æ°á»£c thiáº¿t káº¿ Ä‘á»ƒ theo dÃµi trá»±c tiáº¿p trong cá»­a sá»• watch cá»§a debugger.
- */
 typedef struct {
 	uint8_t app_info_valid;
 	uint8_t task_table_valid;
@@ -155,13 +130,6 @@ volatile app_startup_diag_t g_app_startup_diag = {
 	(task_polling_t*)0
 };
 
-/*
- * Cháº¡y probe khá»Ÿi táº¡o AK-EDP theo kiá»ƒu khÃ´ng cháº·n:
- * 1) khá»Ÿi táº¡o lÃµi task vÃ  Ä‘Äƒng kÃ½ báº£ng task/polling,
- * 2) post má»™t message kiá»ƒm thá»­,
- * 3) remove láº¡i message Ä‘Ã³ khá»i queue,
- * 4) xÃ¡c nháº­n má»©c dÃ¹ng pool quay vá» giÃ¡ trá»‹ ban Ä‘áº§u.
- */
 static uint8_t app_run_edp_init_probe() {
 	g_app_startup_diag.edp_probe_valid = AK_DISABLE;
 	g_app_startup_diag.created_task_table_size = 0;
@@ -200,9 +168,6 @@ static uint8_t app_run_edp_init_probe() {
 	return g_app_startup_diag.edp_probe_valid;
 }
 
-/*
- * Task A: nháº­n message khá»Ÿi Ä‘á»™ng vÃ  chuyá»ƒn tiáº¿p má»™t message máº«u sang Task B.
- */
 static void app_task_edp_dbg_a(ak_msg_t* msg) {
 	if (msg == (ak_msg_t*)0) {
 		return;
@@ -217,9 +182,6 @@ static void app_task_edp_dbg_a(ak_msg_t* msg) {
 	}
 }
 
-/*
- * Task B: nháº­n message chuyá»ƒn tiáº¿p tá»« Task A vÃ  lÆ°u payload Ä‘á»ƒ debug.
- */
 static void app_task_edp_dbg_b(ak_msg_t* msg) {
 	if (msg == (ak_msg_t*)0) {
 		return;
@@ -243,13 +205,6 @@ static void app_task_edp_dbg_b(ak_msg_t* msg) {
 	}
 }
 
-/*
- * Ká»‹ch báº£n debug trá»n váº¹n khÃ´ng dÃ¹ng ngoáº¡i vi:
- * - Khá»Ÿi táº¡o component AK-EDP,
- * - Táº¡o 2 task debug,
- * - Chuyá»ƒn 1 message máº«u tá»« task A sang task B,
- * - Deinit há»‡ thá»‘ng vá» tráº¡ng thÃ¡i trÆ°á»›c khi khá»Ÿi táº¡o.
- */
 static int app_run_edp_two_task_debug() {
 	memset((void*)&g_app_edp_two_task_dbg, 0, sizeof(app_edp_two_task_dbg_t));
 
@@ -262,13 +217,10 @@ static int app_run_edp_two_task_debug() {
 	task_polling_create((task_polling_t*)app_edp_dbg_polling_table);
 	g_app_edp_two_task_dbg.created_ret = AK_ENABLE;
 
-	/* Äáº©y message Ä‘áº§u tiÃªn vÃ o task A Ä‘á»ƒ kÃ­ch hoáº¡t chuá»—i chuyá»ƒn tiáº¿p A -> B. */
 	task_post_pure_msg(APP_EDP_DBG_TASK_A_ID, APP_EDP_DBG_SIG_START);
 
-	/* Láº§n dispatch 1: xá»­ lÃ½ task A, task A sáº½ forward message sang task B. */
 	g_app_edp_two_task_dbg.first_dispatch_ret = (uint8_t)task_debug_run_once();
 
-	/* Láº§n dispatch 2: xá»­ lÃ½ task B Ä‘á»ƒ hoÃ n táº¥t nháº­n message máº«u. */
 	g_app_edp_two_task_dbg.second_dispatch_ret = (uint8_t)task_debug_run_once();
 
 	if ((g_app_edp_two_task_dbg.task_a_rx_count == 0)

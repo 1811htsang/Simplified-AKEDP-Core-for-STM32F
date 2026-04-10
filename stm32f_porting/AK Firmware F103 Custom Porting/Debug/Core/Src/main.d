@@ -31,12 +31,17 @@ Core/Src/main.o: ../Core/Src/main.cpp \
  C:/Users/shanghuang/Documents/PERSON-PROJECT-CV/AK-STM32/stm32f_porting/AK\ Firmware\ F103\ Custom\ Porting/Core/Inc/spi.h \
  C:/Users/shanghuang/Documents/PERSON-PROJECT-CV/AK-STM32/stm32f_porting/AK\ Firmware\ F103\ Custom\ Porting/Core/Inc/usart.h \
  C:/Users/shanghuang/Documents/PERSON-PROJECT-CV/AK-STM32/stm32f_porting/AK\ Firmware\ F103\ Custom\ Porting/Core/Inc/gpio.h \
- ../Core/Src/../../Drivers/EDP/app/app.h \
+ C:/Users/shanghuang/Documents/PERSON-PROJECT-CV/AK-STM32/stm32f_porting/AK\ Firmware\ F103\ Custom\ Porting/Test/Sample/sample.h \
  C:/Users/shanghuang/Documents/PERSON-PROJECT-CV/AK-STM32/stm32f_porting/AK\ Firmware\ F103\ Custom\ Porting/Drivers/EDP/ak/inc/ak.h \
  C:/Users/shanghuang/Documents/PERSON-PROJECT-CV/AK-STM32/stm32f_porting/AK\ Firmware\ F103\ Custom\ Porting/Drivers/EDP/ak/inc/fsm.h \
  C:/Users/shanghuang/Documents/PERSON-PROJECT-CV/AK-STM32/stm32f_porting/AK\ Firmware\ F103\ Custom\ Porting/Drivers/EDP/ak/inc/task.h \
  C:/Users/shanghuang/Documents/PERSON-PROJECT-CV/AK-STM32/stm32f_porting/AK\ Firmware\ F103\ Custom\ Porting/Drivers/EDP/ak/inc/port.h \
  C:/Users/shanghuang/Documents/PERSON-PROJECT-CV/AK-STM32/stm32f_porting/AK\ Firmware\ F103\ Custom\ Porting/Drivers/EDP/common/container/log_queue.h \
+ C:/Users/shanghuang/Documents/PERSON-PROJECT-CV/AK-STM32/stm32f_porting/AK\ Firmware\ F103\ Custom\ Porting/Drivers/EDP/ak/inc/message.h \
+ C:/Users/shanghuang/Documents/PERSON-PROJECT-CV/AK-STM32/stm32f_porting/AK\ Firmware\ F103\ Custom\ Porting/Drivers/EDP/ak/inc/ak.h \
+ C:/Users/shanghuang/Documents/PERSON-PROJECT-CV/AK-STM32/stm32f_porting/AK\ Firmware\ F103\ Custom\ Porting/Drivers/EDP/ak/inc/task.h \
+ C:/Users/shanghuang/Documents/PERSON-PROJECT-CV/AK-STM32/stm32f_porting/AK\ Firmware\ F103\ Custom\ Porting/Drivers/EDP/app/task_list.h \
+ ../Core/Src/../../Drivers/EDP/app/app.h \
  ../Core/Src/../../Drivers/EDP/app/app_if.h \
  ../Core/Src/../../Drivers/EDP/app/app_eeprom.h \
  ../Core/Src/../../Drivers/EDP/app/app.h \
@@ -75,12 +80,17 @@ C:/Users/shanghuang/Documents/PERSON-PROJECT-CV/AK-STM32/stm32f_porting/AK\ Firm
 C:/Users/shanghuang/Documents/PERSON-PROJECT-CV/AK-STM32/stm32f_porting/AK\ Firmware\ F103\ Custom\ Porting/Core/Inc/spi.h:
 C:/Users/shanghuang/Documents/PERSON-PROJECT-CV/AK-STM32/stm32f_porting/AK\ Firmware\ F103\ Custom\ Porting/Core/Inc/usart.h:
 C:/Users/shanghuang/Documents/PERSON-PROJECT-CV/AK-STM32/stm32f_porting/AK\ Firmware\ F103\ Custom\ Porting/Core/Inc/gpio.h:
-../Core/Src/../../Drivers/EDP/app/app.h:
+C:/Users/shanghuang/Documents/PERSON-PROJECT-CV/AK-STM32/stm32f_porting/AK\ Firmware\ F103\ Custom\ Porting/Test/Sample/sample.h:
 C:/Users/shanghuang/Documents/PERSON-PROJECT-CV/AK-STM32/stm32f_porting/AK\ Firmware\ F103\ Custom\ Porting/Drivers/EDP/ak/inc/ak.h:
 C:/Users/shanghuang/Documents/PERSON-PROJECT-CV/AK-STM32/stm32f_porting/AK\ Firmware\ F103\ Custom\ Porting/Drivers/EDP/ak/inc/fsm.h:
 C:/Users/shanghuang/Documents/PERSON-PROJECT-CV/AK-STM32/stm32f_porting/AK\ Firmware\ F103\ Custom\ Porting/Drivers/EDP/ak/inc/task.h:
 C:/Users/shanghuang/Documents/PERSON-PROJECT-CV/AK-STM32/stm32f_porting/AK\ Firmware\ F103\ Custom\ Porting/Drivers/EDP/ak/inc/port.h:
 C:/Users/shanghuang/Documents/PERSON-PROJECT-CV/AK-STM32/stm32f_porting/AK\ Firmware\ F103\ Custom\ Porting/Drivers/EDP/common/container/log_queue.h:
+C:/Users/shanghuang/Documents/PERSON-PROJECT-CV/AK-STM32/stm32f_porting/AK\ Firmware\ F103\ Custom\ Porting/Drivers/EDP/ak/inc/message.h:
+C:/Users/shanghuang/Documents/PERSON-PROJECT-CV/AK-STM32/stm32f_porting/AK\ Firmware\ F103\ Custom\ Porting/Drivers/EDP/ak/inc/ak.h:
+C:/Users/shanghuang/Documents/PERSON-PROJECT-CV/AK-STM32/stm32f_porting/AK\ Firmware\ F103\ Custom\ Porting/Drivers/EDP/ak/inc/task.h:
+C:/Users/shanghuang/Documents/PERSON-PROJECT-CV/AK-STM32/stm32f_porting/AK\ Firmware\ F103\ Custom\ Porting/Drivers/EDP/app/task_list.h:
+../Core/Src/../../Drivers/EDP/app/app.h:
 ../Core/Src/../../Drivers/EDP/app/app_if.h:
 ../Core/Src/../../Drivers/EDP/app/app_eeprom.h:
 ../Core/Src/../../Drivers/EDP/app/app.h:

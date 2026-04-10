@@ -6,6 +6,16 @@
 
 ---
 
+## Ghi chú
+
+Hiện tại theo kiểm tra tài liệu và đối chiếu với code thì có 1 số sai lệch cần được chỉnh sửa.
+
+Tuy nhiên các nguồn tham khảo vẫn có phần lớn giá trị về mặt tham khảo kiến trúc và cách sử dụng EDP Core, nên sẽ giữ nguyên nội dung hiện tại của tài liệu. 
+
+Các phần sai lệch sẽ được chỉnh sửa lại ở các commit sau để đảm bảo tính chính xác của tài liệu, đồng thời sẽ bổ sung thêm các ví dụ thực tế để minh họa cách sử dụng EDP Core trong các tình huống cụ thể.
+
+---
+
 ## Mục lục
 
 1. [Giới thiệu chung](#giới-thiệu-chung)
@@ -58,13 +68,13 @@ Ngoài ra EDP còn đại diện cho Event-Driven Programming, một mô hình l
 ├─────────────────────────────────────────────────────────┤
 │            AK Kernel Core (ak/)                         │
 │  ┌──────────────┬──────────────┬──────────────────────┐ │
-│  │   Task Mgmt  │ Message Mgmt  │   Timer Mgmt | FSM  │ │
+│  │   Task Mgmt  │ Message Mgmt │   Timer Mgmt | FSM   │ │
 │  └──────────────┴──────────────┴──────────────────────┘ │
 ├─────────────────────────────────────────────────────────┤
 │         System & Platform Layer (sys/)                  │
 │  ┌──────────────┬──────────────┬──────────────────────┐ │
 │  │ Interrupt    │  Platform    │   I/O & Device       │ │
-│  │ Management   │  Abstraction  │   Drivers (UART,LED)│ │
+│  │ Management   │  Abstraction │   Drivers (UART,LED) │ │
 │  └──────────────┴──────────────┴──────────────────────┘ │
 ├─────────────────────────────────────────────────────────┤
 │        Utility Libraries (common/)                      │

@@ -46,4 +46,5 @@ Drivers/EDP/common/container \
 Drivers/EDP/common \
 Drivers/EDP/sys \
 Drivers/STM32F1xx_HAL_Driver/Src \
+Test/Sample \
 
