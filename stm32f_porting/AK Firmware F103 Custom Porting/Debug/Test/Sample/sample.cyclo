@@ -1,0 +1,3 @@
+../Test/Sample/sample.c:25:6:void task_a_handler(ak_msg_t*)	3
+../Test/Sample/sample.c:43:6:void task_b_handler(ak_msg_t*)	4
+../Test/Sample/sample.c:62:5:int sample_main()	3

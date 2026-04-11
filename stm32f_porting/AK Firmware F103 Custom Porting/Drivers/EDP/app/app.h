@@ -16,8 +16,6 @@ extern "C"
 #include "ak.h"
 
 #include "app_if.h"
-#include "app_eeprom.h"
-#include "app_data.h"
 
 /*****************************************************************************/
 /*  LIFE task define
@@ -78,7 +76,7 @@ enum {
 /*  app function declare
  */
 /*****************************************************************************/
-#define APP_MAGIC_NUMBER	0xAABBCCDD
+#define APP_MAGIC_NUMBER	0x18112005
 #define APP_VER				{0, 0, 0, 3}
 
 typedef struct {

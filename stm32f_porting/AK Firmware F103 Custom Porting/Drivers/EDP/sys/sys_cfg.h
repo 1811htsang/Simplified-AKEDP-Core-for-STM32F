@@ -20,11 +20,6 @@ extern "C"
 #define SYS_CONSOLE_ENABLE 0U
 #define SYS_CONSOLE_BAUDRATE 115200U
 
-extern UART_HandleTypeDef huart1;
-extern UART_HandleTypeDef huart2;
-extern ADC_HandleTypeDef hadc1;
-extern SPI_HandleTypeDef hspi1;
-
 void sys_cfg_init(void);
 void sys_cfg_clock(void);
 void sys_cfg_tick(void);

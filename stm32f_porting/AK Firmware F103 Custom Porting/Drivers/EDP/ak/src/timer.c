@@ -5,10 +5,7 @@
  ******************************************************************************
 **/
 
-#include "ak_dbg.h"
-
 #include "timer.h"
-
 #include "sys_dbg.h"
 #include "task_list.h"
 

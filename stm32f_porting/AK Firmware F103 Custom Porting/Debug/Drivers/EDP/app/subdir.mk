@@ -6,39 +6,18 @@
 # Add inputs and outputs from these tool invocations to the build variables 
 CPP_SRCS += \
 ../Drivers/EDP/app/app.cpp \
-../Drivers/EDP/app/app_bsp.cpp \
-../Drivers/EDP/app/app_data.cpp \
-../Drivers/EDP/app/app_non_clear_ram.cpp \
-../Drivers/EDP/app/task_dbg.cpp \
 ../Drivers/EDP/app/task_if.cpp \
-../Drivers/EDP/app/task_life.cpp \
-../Drivers/EDP/app/task_list.cpp \
-../Drivers/EDP/app/task_system.cpp \
-../Drivers/EDP/app/task_uart_if.cpp 
+../Drivers/EDP/app/task_list.cpp 
 
 OBJS += \
 ./Drivers/EDP/app/app.o \
-./Drivers/EDP/app/app_bsp.o \
-./Drivers/EDP/app/app_data.o \
-./Drivers/EDP/app/app_non_clear_ram.o \
-./Drivers/EDP/app/task_dbg.o \
 ./Drivers/EDP/app/task_if.o \
-./Drivers/EDP/app/task_life.o \
-./Drivers/EDP/app/task_list.o \
-./Drivers/EDP/app/task_system.o \
-./Drivers/EDP/app/task_uart_if.o 
+./Drivers/EDP/app/task_list.o 
 
 CPP_DEPS += \
 ./Drivers/EDP/app/app.d \
-./Drivers/EDP/app/app_bsp.d \
-./Drivers/EDP/app/app_data.d \
-./Drivers/EDP/app/app_non_clear_ram.d \
-./Drivers/EDP/app/task_dbg.d \
 ./Drivers/EDP/app/task_if.d \
-./Drivers/EDP/app/task_life.d \
-./Drivers/EDP/app/task_list.d \
-./Drivers/EDP/app/task_system.d \
-./Drivers/EDP/app/task_uart_if.d 
+./Drivers/EDP/app/task_list.d 
 
 
 # Each subdirectory must supply rules for building sources it contributes
@@ -48,7 +27,7 @@ Drivers/EDP/app/%.o Drivers/EDP/app/%.su Drivers/EDP/app/%.cyclo: ../Drivers/EDP
 clean: clean-Drivers-2f-EDP-2f-app
 
 clean-Drivers-2f-EDP-2f-app:
-	-$(RM) ./Drivers/EDP/app/app.cyclo ./Drivers/EDP/app/app.d ./Drivers/EDP/app/app.o ./Drivers/EDP/app/app.su ./Drivers/EDP/app/app_bsp.cyclo ./Drivers/EDP/app/app_bsp.d ./Drivers/EDP/app/app_bsp.o ./Drivers/EDP/app/app_bsp.su ./Drivers/EDP/app/app_data.cyclo ./Drivers/EDP/app/app_data.d ./Drivers/EDP/app/app_data.o ./Drivers/EDP/app/app_data.su ./Drivers/EDP/app/app_non_clear_ram.cyclo ./Drivers/EDP/app/app_non_clear_ram.d ./Drivers/EDP/app/app_non_clear_ram.o ./Drivers/EDP/app/app_non_clear_ram.su ./Drivers/EDP/app/task_dbg.cyclo ./Drivers/EDP/app/task_dbg.d ./Drivers/EDP/app/task_dbg.o ./Drivers/EDP/app/task_dbg.su ./Drivers/EDP/app/task_if.cyclo ./Drivers/EDP/app/task_if.d ./Drivers/EDP/app/task_if.o ./Drivers/EDP/app/task_if.su ./Drivers/EDP/app/task_life.cyclo ./Drivers/EDP/app/task_life.d ./Drivers/EDP/app/task_life.o ./Drivers/EDP/app/task_life.su ./Drivers/EDP/app/task_list.cyclo ./Drivers/EDP/app/task_list.d ./Drivers/EDP/app/task_list.o ./Drivers/EDP/app/task_list.su ./Drivers/EDP/app/task_system.cyclo ./Drivers/EDP/app/task_system.d ./Drivers/EDP/app/task_system.o ./Drivers/EDP/app/task_system.su ./Drivers/EDP/app/task_uart_if.cyclo ./Drivers/EDP/app/task_uart_if.d ./Drivers/EDP/app/task_uart_if.o ./Drivers/EDP/app/task_uart_if.su
+	-$(RM) ./Drivers/EDP/app/app.cyclo ./Drivers/EDP/app/app.d ./Drivers/EDP/app/app.o ./Drivers/EDP/app/app.su ./Drivers/EDP/app/task_if.cyclo ./Drivers/EDP/app/task_if.d ./Drivers/EDP/app/task_if.o ./Drivers/EDP/app/task_if.su ./Drivers/EDP/app/task_list.cyclo ./Drivers/EDP/app/task_list.d ./Drivers/EDP/app/task_list.o ./Drivers/EDP/app/task_list.su
 
 .PHONY: clean-Drivers-2f-EDP-2f-app
 

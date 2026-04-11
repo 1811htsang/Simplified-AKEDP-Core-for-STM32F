@@ -23,9 +23,8 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 
-#include "../../Drivers/EDP/sys/sys_cfg.h"
-#include "../../Drivers/EDP/sys/sys_ctrl.h"
-#include "../../Drivers/EDP/sys/sys_irq.h"
+#include "sys_cfg.h"
+#include "sys_ctrl.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -248,8 +247,6 @@ void SysTick_Handler(void)
   if (systick_10ms_counter >= 10U)
   {
     systick_10ms_counter = 0U;
-    sys_irq_timer_10ms();
-
     systick_100ms_counter++;
     if (systick_100ms_counter >= 10U)
     {
@@ -283,7 +280,7 @@ void USART1_IRQHandler(void)
 
 void USART2_IRQHandler(void)
 {
-  sys_irq_uart2();
+
 }
 
 /* USER CODE END 1 */

@@ -7,7 +7,6 @@
 #include <stdlib.h>
 
 #include "ak.h"			// Khai báo các hằng số và macro liên quan đến tin nhắn
-#include "ak_dbg.h"	// Khai báo các hàm và macro liên quan đến debug
 #include "task.h"		// Khai báo các cấu trúc và hàm để quản lý tác vụ
 #include "sys_dbg.h"// Khai báo các hàm và macro liên quan đến debug hệ thống
 
@@ -525,17 +524,7 @@ uint8_t msg_is_valid_or_null(const ak_msg_t* msg) {
  * debug message function define.
  *****************************************************************************/
 void msg_dbg_dum(ak_msg_t* msg) {
-	xprintf("stid:%d dtid:%d rfc:%02X sig:%d Istid:%d Idtid:%d Ist:%d Idt:%d Isig:%d\n",	\
-			msg->src_task_id,	\
-			msg->des_task_id,	\
-			msg->ref_count,		\
-			msg->sig,			\
-			msg->if_src_task_id,\
-			msg->if_des_task_id,\
-			msg->if_src_type,	\
-			msg->if_des_type,	\
-			msg->if_sig			\
-			);
+	return;
 }
 
 

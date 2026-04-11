@@ -1,4 +1,1 @@
-../Drivers/EDP/sys/sys_dbg.c:25:6:void sys_dbg_fatal(const int8_t*, uint8_t)	112	static,ignoring_inline_asm
-../Drivers/EDP/sys/sys_dbg.c:285:6:void sys_dbg_func_stack_dump(uint32_t*)	16	static
-../Drivers/EDP/sys/sys_dbg.c:309:6:void sys_dbg_cpu_dump()	4	static
-../Drivers/EDP/sys/sys_dbg.c:317:6:void sys_dbg_stack_space_dump()	24	static,ignoring_inline_asm
+../Drivers/EDP/sys/sys_dbg.c:22:6:void sys_dbg_fatal(const int8_t*, uint8_t)	56	static,ignoring_inline_asm

@@ -36,16 +36,9 @@ Drivers/EDP/sys/sys_dbg.o: ../Drivers/EDP/sys/sys_dbg.c \
  ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_pwr.h \
  ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_spi.h \
  ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h \
- C:/Users/shanghuang/Documents/PERSON-PROJECT-CV/AK-STM32/stm32f_porting/AK\ Firmware\ F103\ Custom\ Porting/Drivers/EDP/common/xprintf.h \
- C:/Users/shanghuang/Documents/PERSON-PROJECT-CV/AK-STM32/stm32f_porting/AK\ Firmware\ F103\ Custom\ Porting/Drivers/EDP/app/app_eeprom.h \
- C:/Users/shanghuang/Documents/PERSON-PROJECT-CV/AK-STM32/stm32f_porting/AK\ Firmware\ F103\ Custom\ Porting/Drivers/EDP/app/app.h \
- C:/Users/shanghuang/Documents/PERSON-PROJECT-CV/AK-STM32/stm32f_porting/AK\ Firmware\ F103\ Custom\ Porting/Drivers/EDP/app/app_if.h \
- C:/Users/shanghuang/Documents/PERSON-PROJECT-CV/AK-STM32/stm32f_porting/AK\ Firmware\ F103\ Custom\ Porting/Drivers/EDP/app/app_eeprom.h \
- C:/Users/shanghuang/Documents/PERSON-PROJECT-CV/AK-STM32/stm32f_porting/AK\ Firmware\ F103\ Custom\ Porting/Drivers/EDP/app/app_data.h \
  C:/Users/shanghuang/Documents/PERSON-PROJECT-CV/AK-STM32/stm32f_porting/AK\ Firmware\ F103\ Custom\ Porting/Drivers/EDP/app/app_flash.h \
  ../Drivers/EDP/sys/flash.h ../Drivers/EDP/sys/io_cfg.h \
- ../Core/Inc/main.h ../Drivers/EDP/sys/sys_cfg.h \
- ../Drivers/EDP/sys/sys_irq.h
+ ../Core/Inc/main.h ../Drivers/EDP/sys/sys_cfg.h
 C:/Users/shanghuang/Documents/PERSON-PROJECT-CV/AK-STM32/stm32f_porting/AK\ Firmware\ F103\ Custom\ Porting/Drivers/EDP/ak/inc/ak.h:
 C:/Users/shanghuang/Documents/PERSON-PROJECT-CV/AK-STM32/stm32f_porting/AK\ Firmware\ F103\ Custom\ Porting/Drivers/EDP/ak/inc/fsm.h:
 C:/Users/shanghuang/Documents/PERSON-PROJECT-CV/AK-STM32/stm32f_porting/AK\ Firmware\ F103\ Custom\ Porting/Drivers/EDP/ak/inc/task.h:
@@ -84,15 +77,8 @@ C:/Users/shanghuang/Documents/PERSON-PROJECT-CV/AK-STM32/stm32f_porting/AK\ Firm
 ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_pwr.h:
 ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_spi.h:
 ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h:
-C:/Users/shanghuang/Documents/PERSON-PROJECT-CV/AK-STM32/stm32f_porting/AK\ Firmware\ F103\ Custom\ Porting/Drivers/EDP/common/xprintf.h:
-C:/Users/shanghuang/Documents/PERSON-PROJECT-CV/AK-STM32/stm32f_porting/AK\ Firmware\ F103\ Custom\ Porting/Drivers/EDP/app/app_eeprom.h:
-C:/Users/shanghuang/Documents/PERSON-PROJECT-CV/AK-STM32/stm32f_porting/AK\ Firmware\ F103\ Custom\ Porting/Drivers/EDP/app/app.h:
-C:/Users/shanghuang/Documents/PERSON-PROJECT-CV/AK-STM32/stm32f_porting/AK\ Firmware\ F103\ Custom\ Porting/Drivers/EDP/app/app_if.h:
-C:/Users/shanghuang/Documents/PERSON-PROJECT-CV/AK-STM32/stm32f_porting/AK\ Firmware\ F103\ Custom\ Porting/Drivers/EDP/app/app_eeprom.h:
-C:/Users/shanghuang/Documents/PERSON-PROJECT-CV/AK-STM32/stm32f_porting/AK\ Firmware\ F103\ Custom\ Porting/Drivers/EDP/app/app_data.h:
 C:/Users/shanghuang/Documents/PERSON-PROJECT-CV/AK-STM32/stm32f_porting/AK\ Firmware\ F103\ Custom\ Porting/Drivers/EDP/app/app_flash.h:
 ../Drivers/EDP/sys/flash.h:
 ../Drivers/EDP/sys/io_cfg.h:
 ../Core/Inc/main.h:
 ../Drivers/EDP/sys/sys_cfg.h:
-../Drivers/EDP/sys/sys_irq.h:

@@ -53,10 +53,7 @@ enum {
 /*****************************************************************************/
 /* APP TASKS */
 extern void task_system(ak_msg_t*);
-extern void task_life(ak_msg_t*);
 extern void task_if(ak_msg_t*);
-extern void task_uart_if(ak_msg_t*);
-extern void task_dbg(ak_msg_t*);
 
 /*****************************************************************************/
 /*  DECLARE: Task polling

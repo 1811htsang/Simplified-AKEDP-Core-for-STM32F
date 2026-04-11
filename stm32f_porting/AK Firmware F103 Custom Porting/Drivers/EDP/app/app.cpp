@@ -1,21 +1,14 @@
 ﻿// Khai báo thư viện sử dụng
 #include <stdint.h>
-#include "SPI.h"
 #include "app.h"
 #include "ak.h"
 #include "fsm.h"
 #include "message.h"
 #include "timer.h"
-#include "app_dbg.h"
 #include "task_if.h"
-#include "task_life.h"
 #include "task_list.h"
-#include "task_uart_if.h"
-#include "led.h"
 #include "sys_ctrl.h"
-#include "sys_dbg.h"
-#include "sys_io.h"
-#include "sys_irq.h"
+#include "io_cfg.h"
 
 // Khai báo directive build
 #if defined(RELEASE)
@@ -26,7 +19,7 @@
 
 const app_info_t app_info { \
 	APP_MAGIC_NUMBER, \
-			APP_VER, \
+	APP_VER, \
 };
 
 static uint8_t app_run_edp_init_probe();
@@ -339,72 +332,26 @@ static uint8_t app_validate_polling_table(const task_polling_t* polling_tbl) {
  */
 /*****************************************************************************/
 int main_app() {
-	APP_PRINT("App run mode: %s, App version: %d.%d.%d.%d\n", app_run_mode, app_info.version[0] \
-			, app_info.version[1]	\
-			, app_info.version[2]	\
-			, app_info.version[3]);
-
 	g_app_startup_diag.task_tbl_ptr = app_task_table;
 	g_app_startup_diag.polling_tbl_ptr = app_task_polling_table;
 	g_app_startup_diag.app_info_valid = (app_info.magic_number == APP_MAGIC_NUMBER) ? AK_ENABLE : AK_DISABLE;
 	g_app_startup_diag.task_table_valid = app_validate_task_table(app_task_table);
 	g_app_startup_diag.polling_table_valid = app_validate_polling_table(app_task_polling_table);
 
-	APP_PRINT("AK init check: app_info=%d, task_tbl=%d(count=%d), polling_tbl=%d(count=%d)\n",
-			g_app_startup_diag.app_info_valid,
-			g_app_startup_diag.task_table_valid,
-			g_app_startup_diag.task_count,
-			g_app_startup_diag.polling_table_valid,
-			g_app_startup_diag.polling_task_count);
-
 	if ((g_app_startup_diag.app_info_valid == AK_DISABLE)
 			|| (g_app_startup_diag.task_table_valid == AK_DISABLE)
 			|| (g_app_startup_diag.polling_table_valid == AK_DISABLE)) {
-		APP_PRINT("AK init check fail: bad_task_id=%d, bad_pri=%d, bad_polling_id=%d, bad_ability=%d\n",
-				g_app_startup_diag.first_invalid_task_id,
-				g_app_startup_diag.first_invalid_task_pri,
-				g_app_startup_diag.first_invalid_polling_id,
-				g_app_startup_diag.first_invalid_polling_ability);
 		return -1;
 	}
 
 	if (app_run_edp_init_probe() == AK_DISABLE) {
-		APP_PRINT("EDP init probe fail: ret=%d, table_created=%d/%d, queue_removed=%d, pool_before=%lu, pool_after=%lu\n",
-				g_app_startup_diag.edp_init_ret,
-				g_app_startup_diag.created_task_table_size,
-				g_app_startup_diag.expected_task_table_size,
-				g_app_startup_diag.queue_probe_removed_count,
-				(unsigned long)g_app_startup_diag.pure_pool_used_before_queue_probe,
-				(unsigned long)g_app_startup_diag.pure_pool_used_after_queue_probe);
 		return -2;
 	}
 
-	APP_PRINT("EDP init probe pass: ret=%d, table_created=%d/%d, queue_removed=%d, pool_before=%lu, pool_after=%lu\n",
-			g_app_startup_diag.edp_init_ret,
-			g_app_startup_diag.created_task_table_size,
-			g_app_startup_diag.expected_task_table_size,
-			g_app_startup_diag.queue_probe_removed_count,
-			(unsigned long)g_app_startup_diag.pure_pool_used_before_queue_probe,
-			(unsigned long)g_app_startup_diag.pure_pool_used_after_queue_probe);
-
 	int edp_two_task_ret = app_run_edp_two_task_debug();
 	if (edp_two_task_ret != 0) {
-		APP_PRINT("EDP two-task debug fail: ret=%d, a_rx=%d, b_rx=%d, done=%d, deinit=%d\n",
-				edp_two_task_ret,
-				g_app_edp_two_task_dbg.task_a_rx_count,
-				g_app_edp_two_task_dbg.task_b_rx_count,
-				g_app_edp_two_task_dbg.transfer_done,
-				g_app_edp_two_task_dbg.deinit_done);
-		return -3;
 	}
 
-	APP_PRINT("EDP two-task debug pass: first_sig=0x%x, second_sig=0x%x, payload=%s, deinit=%d\n",
-			g_app_edp_two_task_dbg.first_sig_seen,
-			g_app_edp_two_task_dbg.second_sig_seen,
-			g_app_edp_two_task_dbg.sample_payload,
-			g_app_edp_two_task_dbg.deinit_done);
-
-	APP_PRINT("AK runtime is bypassed: diagnostics captured only, no task init/create/run executed.\n");
 	return 0;
 }
 

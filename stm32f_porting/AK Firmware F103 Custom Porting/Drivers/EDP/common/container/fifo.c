@@ -2,7 +2,6 @@
 
 #include <stdbool.h>
 #include <stdlib.h>
-
 #include "sys_dbg.h"
 
 void fifo_init(fifo_t* fifo, void* buffer, uint32_t buffer_size, uint32_t element_size) {

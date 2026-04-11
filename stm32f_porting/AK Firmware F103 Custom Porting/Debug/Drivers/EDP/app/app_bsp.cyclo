@@ -1,3 +1,0 @@
-../Drivers/EDP/app/app_bsp.cpp:11:6:void btn_mode_callback(void*)	5
-../Drivers/EDP/app/app_bsp.cpp:34:6:void btn_up_callback(void*)	5
-../Drivers/EDP/app/app_bsp.cpp:57:6:void btn_down_callback(void*)	5

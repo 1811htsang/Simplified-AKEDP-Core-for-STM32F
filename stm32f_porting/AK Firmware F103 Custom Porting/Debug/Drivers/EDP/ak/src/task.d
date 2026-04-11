@@ -9,7 +9,6 @@ Drivers/EDP/ak/src/task.o: ../Drivers/EDP/ak/src/task.c \
  C:/Users/shanghuang/Documents/PERSON-PROJECT-CV/AK-STM32/stm32f_porting/AK\ Firmware\ F103\ Custom\ Porting/Drivers/EDP/ak/inc/timer.h \
  C:/Users/shanghuang/Documents/PERSON-PROJECT-CV/AK-STM32/stm32f_porting/AK\ Firmware\ F103\ Custom\ Porting/Drivers/EDP/ak/inc/message.h \
  C:/Users/shanghuang/Documents/PERSON-PROJECT-CV/AK-STM32/stm32f_porting/AK\ Firmware\ F103\ Custom\ Porting/Drivers/EDP/ak/inc/ak.h \
- C:/Users/shanghuang/Documents/PERSON-PROJECT-CV/AK-STM32/stm32f_porting/AK\ Firmware\ F103\ Custom\ Porting/Drivers/EDP/ak/inc/ak_dbg.h \
  C:/Users/shanghuang/Documents/PERSON-PROJECT-CV/AK-STM32/stm32f_porting/AK\ Firmware\ F103\ Custom\ Porting/Drivers/EDP/ak/inc/message.h \
  C:/Users/shanghuang/Documents/PERSON-PROJECT-CV/AK-STM32/stm32f_porting/AK\ Firmware\ F103\ Custom\ Porting/Drivers/EDP/app/task_list.h \
  C:/Users/shanghuang/Documents/PERSON-PROJECT-CV/AK-STM32/stm32f_porting/AK\ Firmware\ F103\ Custom\ Porting/Drivers/EDP/common/utils.h \
@@ -43,8 +42,7 @@ Drivers/EDP/ak/src/task.o: ../Drivers/EDP/ak/src/task.c \
  ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_spi.h \
  ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h \
  C:/Users/shanghuang/Documents/PERSON-PROJECT-CV/AK-STM32/stm32f_porting/AK\ Firmware\ F103\ Custom\ Porting/Drivers/EDP/sys/sys_dbg.h \
- C:/Users/shanghuang/Documents/PERSON-PROJECT-CV/AK-STM32/stm32f_porting/AK\ Firmware\ F103\ Custom\ Porting/Drivers/EDP/sys/sys_ctrl.h \
- C:/Users/shanghuang/Documents/PERSON-PROJECT-CV/AK-STM32/stm32f_porting/AK\ Firmware\ F103\ Custom\ Porting/Drivers/EDP/common/xprintf.h
+ C:/Users/shanghuang/Documents/PERSON-PROJECT-CV/AK-STM32/stm32f_porting/AK\ Firmware\ F103\ Custom\ Porting/Drivers/EDP/sys/sys_ctrl.h
 C:/Users/shanghuang/Documents/PERSON-PROJECT-CV/AK-STM32/stm32f_porting/AK\ Firmware\ F103\ Custom\ Porting/Drivers/EDP/ak/inc/task.h:
 C:/Users/shanghuang/Documents/PERSON-PROJECT-CV/AK-STM32/stm32f_porting/AK\ Firmware\ F103\ Custom\ Porting/Drivers/EDP/ak/inc/port.h:
 C:/Users/shanghuang/Documents/PERSON-PROJECT-CV/AK-STM32/stm32f_porting/AK\ Firmware\ F103\ Custom\ Porting/Drivers/EDP/common/container/log_queue.h:
@@ -55,7 +53,6 @@ C:/Users/shanghuang/Documents/PERSON-PROJECT-CV/AK-STM32/stm32f_porting/AK\ Firm
 C:/Users/shanghuang/Documents/PERSON-PROJECT-CV/AK-STM32/stm32f_porting/AK\ Firmware\ F103\ Custom\ Porting/Drivers/EDP/ak/inc/timer.h:
 C:/Users/shanghuang/Documents/PERSON-PROJECT-CV/AK-STM32/stm32f_porting/AK\ Firmware\ F103\ Custom\ Porting/Drivers/EDP/ak/inc/message.h:
 C:/Users/shanghuang/Documents/PERSON-PROJECT-CV/AK-STM32/stm32f_porting/AK\ Firmware\ F103\ Custom\ Porting/Drivers/EDP/ak/inc/ak.h:
-C:/Users/shanghuang/Documents/PERSON-PROJECT-CV/AK-STM32/stm32f_porting/AK\ Firmware\ F103\ Custom\ Porting/Drivers/EDP/ak/inc/ak_dbg.h:
 C:/Users/shanghuang/Documents/PERSON-PROJECT-CV/AK-STM32/stm32f_porting/AK\ Firmware\ F103\ Custom\ Porting/Drivers/EDP/ak/inc/message.h:
 C:/Users/shanghuang/Documents/PERSON-PROJECT-CV/AK-STM32/stm32f_porting/AK\ Firmware\ F103\ Custom\ Porting/Drivers/EDP/app/task_list.h:
 C:/Users/shanghuang/Documents/PERSON-PROJECT-CV/AK-STM32/stm32f_porting/AK\ Firmware\ F103\ Custom\ Porting/Drivers/EDP/common/utils.h:
@@ -90,4 +87,3 @@ C:/Users/shanghuang/Documents/PERSON-PROJECT-CV/AK-STM32/stm32f_porting/AK\ Firm
 ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h:
 C:/Users/shanghuang/Documents/PERSON-PROJECT-CV/AK-STM32/stm32f_porting/AK\ Firmware\ F103\ Custom\ Porting/Drivers/EDP/sys/sys_dbg.h:
 C:/Users/shanghuang/Documents/PERSON-PROJECT-CV/AK-STM32/stm32f_porting/AK\ Firmware\ F103\ Custom\ Porting/Drivers/EDP/sys/sys_ctrl.h:
-C:/Users/shanghuang/Documents/PERSON-PROJECT-CV/AK-STM32/stm32f_porting/AK\ Firmware\ F103\ Custom\ Porting/Drivers/EDP/common/xprintf.h:

@@ -43,9 +43,6 @@ Core/Src/main.o: ../Core/Src/main.cpp \
  C:/Users/shanghuang/Documents/PERSON-PROJECT-CV/AK-STM32/stm32f_porting/AK\ Firmware\ F103\ Custom\ Porting/Drivers/EDP/app/task_list.h \
  ../Core/Src/../../Drivers/EDP/app/app.h \
  ../Core/Src/../../Drivers/EDP/app/app_if.h \
- ../Core/Src/../../Drivers/EDP/app/app_eeprom.h \
- ../Core/Src/../../Drivers/EDP/app/app.h \
- ../Core/Src/../../Drivers/EDP/app/app_data.h \
  ../Core/Src/../../Drivers/EDP/sys/sys_cfg.h \
  ../Core/Src/../../Drivers/EDP/sys/system.h
 C:/Users/shanghuang/Documents/PERSON-PROJECT-CV/AK-STM32/stm32f_porting/AK\ Firmware\ F103\ Custom\ Porting/Core/Inc/main.h:
@@ -92,8 +89,5 @@ C:/Users/shanghuang/Documents/PERSON-PROJECT-CV/AK-STM32/stm32f_porting/AK\ Firm
 C:/Users/shanghuang/Documents/PERSON-PROJECT-CV/AK-STM32/stm32f_porting/AK\ Firmware\ F103\ Custom\ Porting/Drivers/EDP/app/task_list.h:
 ../Core/Src/../../Drivers/EDP/app/app.h:
 ../Core/Src/../../Drivers/EDP/app/app_if.h:
-../Core/Src/../../Drivers/EDP/app/app_eeprom.h:
-../Core/Src/../../Drivers/EDP/app/app.h:
-../Core/Src/../../Drivers/EDP/app/app_data.h:
 ../Core/Src/../../Drivers/EDP/sys/sys_cfg.h:
 ../Core/Src/../../Drivers/EDP/sys/system.h:

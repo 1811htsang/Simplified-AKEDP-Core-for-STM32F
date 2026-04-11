@@ -1,4 +1,4 @@
-../Drivers/EDP/common/container/log_queue.c:12:9:uint8_t log_queue_init(log_queue_t*, uint32_t, uint32_t, uint32_t, q_ctrl, q_ctrl)	24	static
-../Drivers/EDP/common/container/log_queue.c:40:10:uint32_t log_queue_len(log_queue_t*)	16	static
-../Drivers/EDP/common/container/log_queue.c:44:9:uint8_t log_queue_put(log_queue_t*, void*)	16	static
-../Drivers/EDP/common/container/log_queue.c:83:9:uint8_t log_queue_get(log_queue_t*, void*)	16	static
+../Drivers/EDP/common/container/log_queue.c:10:9:uint8_t log_queue_init(log_queue_t*, uint32_t, uint32_t, uint32_t, q_ctrl, q_ctrl)	24	static
+../Drivers/EDP/common/container/log_queue.c:38:10:uint32_t log_queue_len(log_queue_t*)	16	static
+../Drivers/EDP/common/container/log_queue.c:42:9:uint8_t log_queue_put(log_queue_t*, void*)	16	static
+../Drivers/EDP/common/container/log_queue.c:81:9:uint8_t log_queue_get(log_queue_t*, void*)	16	static

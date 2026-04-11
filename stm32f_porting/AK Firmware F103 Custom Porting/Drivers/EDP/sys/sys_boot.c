@@ -2,8 +2,7 @@
 
 #include <string.h>
 
-#include "sys_dbg.h"
-#include "sys_io.h"
+#include "io_cfg.h"
 
 static sys_boot_t sys_boot_obj;
 

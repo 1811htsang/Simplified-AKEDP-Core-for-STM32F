@@ -1,105 +1,45 @@
 C:/Users/shanghuang/Documents/PERSON-PROJECT-CV/AK-STM32/stm32f_porting/AK Firmware F103 Custom Porting/Drivers/CMSIS/Include/core_cm3.h:1762:34:void __NVIC_SystemReset()	4	static,ignoring_inline_asm
-../Drivers/EDP/sys/porting_compat.cpp:47:13:void init_gpio_output(GPIO_TypeDef*, uint16_t)	32	static
-../Drivers/EDP/sys/porting_compat.cpp:57:13:void init_gpio_input_pullup(GPIO_TypeDef*, uint16_t)	32	static
-../Drivers/EDP/sys/porting_compat.cpp:66:16:uint8_t gpio_read_active_low(GPIO_TypeDef*, uint16_t)	16	static
-../Drivers/EDP/sys/porting_compat.cpp:71:13:void gpio_set(GPIO_TypeDef*, uint16_t, GPIO_PinState)	16	static
-../Drivers/EDP/sys/porting_compat.cpp:76:13:void enable_dwt_cycle_counter()	4	static
-../Drivers/EDP/sys/porting_compat.cpp:83:17:uint32_t get_flash_length_bytes()	4	static
-../Drivers/EDP/sys/porting_compat.cpp:88:17:uint32_t normalize_flash_address(uint32_t)	16	static
-../Drivers/EDP/sys/porting_compat.cpp:96:16:uint8_t is_internal_flash_address(uint32_t)	24	static
-../Drivers/EDP/sys/porting_compat.cpp:102:13:void flash_program_bytes(uint32_t, const uint8_t*, uint32_t)	48	static
-../Drivers/EDP/sys/porting_compat.cpp:126:13:void flash_erase_pages(uint32_t, uint32_t)	48	static
-../Drivers/EDP/sys/porting_compat.cpp:150:6:void platform_enter_critical()	4	static,ignoring_inline_asm
-../Drivers/EDP/sys/porting_compat.cpp:155:6:void platform_exit_critical()	4	static,ignoring_inline_asm
-../Drivers/EDP/sys/porting_compat.cpp:160:6:void button_init(button_t*, uint16_t, uint8_t, button_init_func_t, button_read_func_t, button_callback_t)	24	static
-../Drivers/EDP/sys/porting_compat.cpp:185:6:void button_enable(button_t*)	16	static
-../Drivers/EDP/sys/porting_compat.cpp:192:6:void button_disable(button_t*)	16	static
-../Drivers/EDP/sys/porting_compat.cpp:199:6:void button_timer_polling(button_t*)	24	static
-../Drivers/EDP/sys/porting_compat.cpp:226:6:void led_init(led_t*, led_init_func_t, led_action_func_t, led_action_func_t)	24	static
-../Drivers/EDP/sys/porting_compat.cpp:245:6:void led_on(led_t*)	16	static
-../Drivers/EDP/sys/porting_compat.cpp:253:6:void led_off(led_t*)	16	static
-../Drivers/EDP/sys/porting_compat.cpp:261:6:void led_toggle(led_t*)	16	static
-../Drivers/EDP/sys/porting_compat.cpp:274:9:uint8_t io_button_mode_init()	16	static
-../Drivers/EDP/sys/porting_compat.cpp:281:9:uint8_t io_button_up_init()	8	static
-../Drivers/EDP/sys/porting_compat.cpp:287:9:uint8_t io_button_down_init()	16	static
-../Drivers/EDP/sys/porting_compat.cpp:295:9:uint8_t io_button_mode_read()	8	static
-../Drivers/EDP/sys/porting_compat.cpp:300:9:uint8_t io_button_up_read()	8	static
-../Drivers/EDP/sys/porting_compat.cpp:305:9:uint8_t io_button_down_read()	8	static
-../Drivers/EDP/sys/porting_compat.cpp:310:6:void led_life_init()	16	static
-../Drivers/EDP/sys/porting_compat.cpp:316:6:void led_life_on()	8	static
-../Drivers/EDP/sys/porting_compat.cpp:321:6:void led_life_off()	8	static
-../Drivers/EDP/sys/porting_compat.cpp:326:6:void flash_io_ctrl_init()	40	static
-../Drivers/EDP/sys/porting_compat.cpp:361:6:void flash_cs_low()	8	static
-../Drivers/EDP/sys/porting_compat.cpp:366:6:void flash_cs_high()	8	static
-../Drivers/EDP/sys/porting_compat.cpp:371:9:uint8_t flash_transfer(uint8_t)	32	static
-../Drivers/EDP/sys/porting_compat.cpp:378:6:void nrf24l01_io_ctrl_init()	32	static
-../Drivers/EDP/sys/porting_compat.cpp:400:6:void nrf24l01_spi_ctrl_init()	8	static
-../Drivers/EDP/sys/porting_compat.cpp:405:6:void nrf24l01_ce_low()	8	static
-../Drivers/EDP/sys/porting_compat.cpp:410:6:void nrf24l01_ce_high()	8	static
-../Drivers/EDP/sys/porting_compat.cpp:415:6:void nrf24l01_csn_low()	8	static
-../Drivers/EDP/sys/porting_compat.cpp:420:6:void nrf24l01_csn_high()	8	static
-../Drivers/EDP/sys/porting_compat.cpp:425:9:uint8_t nrf24l01_spi_rw(uint8_t)	16	static
-../Drivers/EDP/sys/porting_compat.cpp:430:6:void io_cfg_adc1()	32	static
-../Drivers/EDP/sys/porting_compat.cpp:451:6:void adc_bat_io_cfg()	24	static
-../Drivers/EDP/sys/porting_compat.cpp:460:10:uint16_t adc_bat_io_read(uint8_t)	24	static
-../Drivers/EDP/sys/porting_compat.cpp:478:6:void ssd1306_clk_input_mode()	4	static
-../Drivers/EDP/sys/porting_compat.cpp:479:6:void ssd1306_clk_output_mode()	4	static
-../Drivers/EDP/sys/porting_compat.cpp:480:6:void ssd1306_clk_digital_write_low()	4	static
-../Drivers/EDP/sys/porting_compat.cpp:481:6:void ssd1306_clk_digital_write_high()	4	static
-../Drivers/EDP/sys/porting_compat.cpp:482:5:int ssd1306_clk_digital_read()	4	static
-../Drivers/EDP/sys/porting_compat.cpp:483:6:void ssd1306_data_input_mode()	4	static
-../Drivers/EDP/sys/porting_compat.cpp:484:6:void ssd1306_data_output_mode()	4	static
-../Drivers/EDP/sys/porting_compat.cpp:485:6:void ssd1306_data_digital_write_low()	4	static
-../Drivers/EDP/sys/porting_compat.cpp:486:6:void ssd1306_data_digital_write_high()	4	static
-../Drivers/EDP/sys/porting_compat.cpp:487:5:int ssd1306_data_digital_read()	4	static
-../Drivers/EDP/sys/porting_compat.cpp:489:6:void io_uart2_cfg()	32	static
-../Drivers/EDP/sys/porting_compat.cpp:507:6:void io_uart_rs485_cfg()	32	static
-../Drivers/EDP/sys/porting_compat.cpp:518:6:void internal_flash_unlock()	8	static
-../Drivers/EDP/sys/porting_compat.cpp:523:6:void internal_flash_lock()	8	static
-../Drivers/EDP/sys/porting_compat.cpp:528:6:void internal_flash_erase_pages_cal(uint32_t, uint32_t)	16	static
-../Drivers/EDP/sys/porting_compat.cpp:533:6:void internal_flash_write_cal(uint32_t, uint8_t*, uint32_t)	24	static
-../Drivers/EDP/sys/porting_compat.cpp:538:6:void flash_read(uint32_t, uint8_t*, uint32_t)	32	static
-../Drivers/EDP/sys/porting_compat.cpp:554:6:void flash_write(uint32_t, uint8_t*, uint32_t)	24	static
-../Drivers/EDP/sys/porting_compat.cpp:559:6:void flash_erase_sector(uint32_t)	16	static
-../Drivers/EDP/sys/porting_compat.cpp:564:6:void flash_erase_block_64k(uint32_t)	16	static
-../Drivers/EDP/sys/porting_compat.cpp:569:6:void eeprom_read(uint32_t, uint8_t*, uint32_t)	24	static
-../Drivers/EDP/sys/porting_compat.cpp:579:6:void eeprom_write(uint32_t, const uint8_t*, uint32_t)	24	static
-../Drivers/EDP/sys/porting_compat.cpp:586:6:void eeprom_erase(uint32_t, uint32_t)	16	static
-../Drivers/EDP/sys/porting_compat.cpp:622:6:void BUZZER_Init()	16	static
-../Drivers/EDP/sys/porting_compat.cpp:629:6:void BUZZER_PlayTones(const buzzer_tone_t*)	24	static
-../Drivers/EDP/sys/porting_compat.cpp:647:6:void sys_cfg_clock()	8	static
-../Drivers/EDP/sys/porting_compat.cpp:654:6:void sys_cfg_tick()	8	static
-../Drivers/EDP/sys/porting_compat.cpp:659:6:void sys_cfg_console()	4	static
-../Drivers/EDP/sys/porting_compat.cpp:698:6:void sys_cfg_update_info()	4	static
-../Drivers/EDP/sys/porting_compat.cpp:717:6:void sys_cfg_init()	8	static
-../Drivers/EDP/sys/porting_compat.cpp:725:6:void sys_ctrl_reset()	8	static
-../Drivers/EDP/sys/porting_compat.cpp:730:6:void sys_ctrl_independent_watchdog_init()	4	static
-../Drivers/EDP/sys/porting_compat.cpp:753:6:void sys_ctrl_independent_watchdog_reset()	4	static
-../Drivers/EDP/sys/porting_compat.cpp:762:6:void sys_ctrl_soft_watchdog_init(uint32_t)	16	static
-../Drivers/EDP/sys/porting_compat.cpp:769:6:void sys_ctrl_soft_watchdog_reset()	4	static
-../Drivers/EDP/sys/porting_compat.cpp:774:6:void sys_ctrl_soft_watchdog_enable()	4	static
-../Drivers/EDP/sys/porting_compat.cpp:779:6:void sys_ctrl_soft_watchdog_disable()	4	static
-../Drivers/EDP/sys/porting_compat.cpp:784:6:void sys_ctrl_soft_watchdog_increase_counter()	8	static
-../Drivers/EDP/sys/porting_compat.cpp:794:6:void sys_ctrl_delay(uint32_t)	16	static,ignoring_inline_asm
-../Drivers/EDP/sys/porting_compat.cpp:801:6:void sys_ctrl_delay_ms(uint32_t)	16	static
-../Drivers/EDP/sys/porting_compat.cpp:806:6:void sys_ctrl_delay_us(uint32_t)	32	static
-../Drivers/EDP/sys/porting_compat.cpp:815:10:uint32_t sys_ctrl_micros()	16	static
-../Drivers/EDP/sys/porting_compat.cpp:824:10:uint32_t sys_ctrl_millis()	8	static
-../Drivers/EDP/sys/porting_compat.cpp:829:9:uint8_t sys_ctrl_shell_get_char()	4	static
-../Drivers/EDP/sys/porting_compat.cpp:841:6:void sys_ctrl_shell_put_char(uint8_t)	16	static
-../Drivers/EDP/sys/porting_compat.cpp:853:6:void sys_ctrl_shell_put_char_block(uint8_t)	16	static
-../Drivers/EDP/sys/porting_compat.cpp:862:6:void sys_ctrl_shell_sw_to_block()	4	static
-../Drivers/EDP/sys/porting_compat.cpp:868:6:void sys_ctrl_shell_sw_to_nonblock()	4	static
-../Drivers/EDP/sys/porting_compat.cpp:874:6:void sys_ctrl_get_firmware_info(firmware_header_t*)	16	static
-../Drivers/EDP/sys/porting_compat.cpp:885:6:void sys_ctr_sleep_wait_for_irq()	4	static,ignoring_inline_asm
-../Drivers/EDP/sys/porting_compat.cpp:890:10:uint32_t sys_ctr_get_exception_number()	16	static,ignoring_inline_asm
-../Drivers/EDP/sys/porting_compat.cpp:895:6:void sys_ctr_restart_app()	8	static
-../Drivers/EDP/sys/porting_compat.cpp:900:10:uint32_t sys_ctr_get_vbat_voltage()	16	static
-../Drivers/EDP/sys/porting_compat.cpp:906:10:uint32_t sys_ctr_get_mcu_temperature()	4	static
-../Drivers/EDP/sys/porting_compat.cpp:911:6:void sys_ctr_stop_mcu()	8	static
-../Drivers/EDP/sys/porting_compat.cpp:916:5:int asm_test_add(int, int)	16	static
-../Drivers/EDP/sys/porting_compat.cpp:921:10:uint32_t sys_stack_count_init()	8	static
-../Drivers/EDP/sys/porting_compat.cpp:926:10:uint32_t sys_stack_usage()	16	static,ignoring_inline_asm
-../Drivers/EDP/sys/porting_compat.cpp:933:10:uint32_t sys_stack_get_size()	4	static
-../Drivers/EDP/sys/porting_compat.cpp:940:6:void sys_irq_nrf24l01()	4	static
-../Drivers/EDP/sys/porting_compat.cpp:944:6:void sys_irq_uart2()	4	static
+../Drivers/EDP/sys/porting_compat.cpp:30:13:void enable_dwt_cycle_counter()	4	static
+../Drivers/EDP/sys/porting_compat.cpp:37:17:uint32_t get_flash_length_bytes()	4	static
+../Drivers/EDP/sys/porting_compat.cpp:42:17:uint32_t normalize_flash_address(uint32_t)	16	static
+../Drivers/EDP/sys/porting_compat.cpp:50:16:uint8_t is_internal_flash_address(uint32_t)	24	static
+../Drivers/EDP/sys/porting_compat.cpp:56:13:void flash_program_bytes(uint32_t, const uint8_t*, uint32_t)	48	static
+../Drivers/EDP/sys/porting_compat.cpp:80:13:void flash_erase_pages(uint32_t, uint32_t)	48	static
+../Drivers/EDP/sys/porting_compat.cpp:104:6:void platform_enter_critical()	4	static,ignoring_inline_asm
+../Drivers/EDP/sys/porting_compat.cpp:109:6:void platform_exit_critical()	4	static,ignoring_inline_asm
+../Drivers/EDP/sys/porting_compat.cpp:114:9:uint8_t flash_transfer(uint8_t)	32	static
+../Drivers/EDP/sys/porting_compat.cpp:121:6:void internal_flash_unlock()	8	static
+../Drivers/EDP/sys/porting_compat.cpp:126:6:void internal_flash_lock()	8	static
+../Drivers/EDP/sys/porting_compat.cpp:131:6:void internal_flash_erase_pages_cal(uint32_t, uint32_t)	16	static
+../Drivers/EDP/sys/porting_compat.cpp:136:6:void internal_flash_write_cal(uint32_t, uint8_t*, uint32_t)	24	static
+../Drivers/EDP/sys/porting_compat.cpp:141:6:void flash_read(uint32_t, uint8_t*, uint32_t)	32	static
+../Drivers/EDP/sys/porting_compat.cpp:157:6:void flash_write(uint32_t, uint8_t*, uint32_t)	24	static
+../Drivers/EDP/sys/porting_compat.cpp:162:6:void flash_erase_sector(uint32_t)	16	static
+../Drivers/EDP/sys/porting_compat.cpp:167:6:void flash_erase_block_64k(uint32_t)	16	static
+../Drivers/EDP/sys/porting_compat.cpp:172:6:void sys_cfg_clock()	8	static
+../Drivers/EDP/sys/porting_compat.cpp:179:6:void sys_cfg_tick()	8	static
+../Drivers/EDP/sys/porting_compat.cpp:184:6:void sys_cfg_update_info()	4	static
+../Drivers/EDP/sys/porting_compat.cpp:203:6:void sys_cfg_init()	8	static
+../Drivers/EDP/sys/porting_compat.cpp:210:6:void sys_ctrl_reset()	8	static
+../Drivers/EDP/sys/porting_compat.cpp:215:6:void sys_ctrl_independent_watchdog_init()	4	static
+../Drivers/EDP/sys/porting_compat.cpp:238:6:void sys_ctrl_independent_watchdog_reset()	4	static
+../Drivers/EDP/sys/porting_compat.cpp:247:6:void sys_ctrl_soft_watchdog_init(uint32_t)	16	static
+../Drivers/EDP/sys/porting_compat.cpp:254:6:void sys_ctrl_soft_watchdog_reset()	4	static
+../Drivers/EDP/sys/porting_compat.cpp:259:6:void sys_ctrl_soft_watchdog_enable()	4	static
+../Drivers/EDP/sys/porting_compat.cpp:264:6:void sys_ctrl_soft_watchdog_disable()	4	static
+../Drivers/EDP/sys/porting_compat.cpp:269:6:void sys_ctrl_soft_watchdog_increase_counter()	8	static
+../Drivers/EDP/sys/porting_compat.cpp:279:6:void sys_ctrl_delay(uint32_t)	16	static,ignoring_inline_asm
+../Drivers/EDP/sys/porting_compat.cpp:286:6:void sys_ctrl_delay_ms(uint32_t)	16	static
+../Drivers/EDP/sys/porting_compat.cpp:291:6:void sys_ctrl_delay_us(uint32_t)	32	static
+../Drivers/EDP/sys/porting_compat.cpp:300:10:uint32_t sys_ctrl_micros()	16	static
+../Drivers/EDP/sys/porting_compat.cpp:309:10:uint32_t sys_ctrl_millis()	8	static
+../Drivers/EDP/sys/porting_compat.cpp:314:6:void sys_ctrl_get_firmware_info(firmware_header_t*)	16	static
+../Drivers/EDP/sys/porting_compat.cpp:325:6:void sys_ctr_sleep_wait_for_irq()	4	static,ignoring_inline_asm
+../Drivers/EDP/sys/porting_compat.cpp:330:10:uint32_t sys_ctr_get_exception_number()	16	static,ignoring_inline_asm
+../Drivers/EDP/sys/porting_compat.cpp:335:6:void sys_ctr_restart_app()	8	static
+../Drivers/EDP/sys/porting_compat.cpp:340:10:uint32_t sys_ctr_get_mcu_temperature()	4	static
+../Drivers/EDP/sys/porting_compat.cpp:345:6:void sys_ctr_stop_mcu()	8	static
+../Drivers/EDP/sys/porting_compat.cpp:350:5:int asm_test_add(int, int)	16	static
+../Drivers/EDP/sys/porting_compat.cpp:355:10:uint32_t sys_stack_count_init()	8	static
+../Drivers/EDP/sys/porting_compat.cpp:360:10:uint32_t sys_stack_usage()	16	static,ignoring_inline_asm
+../Drivers/EDP/sys/porting_compat.cpp:367:10:uint32_t sys_stack_get_size()	4	static

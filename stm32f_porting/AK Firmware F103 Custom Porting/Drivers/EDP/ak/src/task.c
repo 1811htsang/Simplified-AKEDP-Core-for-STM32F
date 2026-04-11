@@ -4,7 +4,6 @@
 
 #include "timer.h"
 #include "ak.h"
-#include "ak_dbg.h"
 #include "message.h"
 #include "timer.h"
 #include "task_list.h"
@@ -371,8 +370,6 @@ int task_run() {
 				   , mem_read);
 #endif
 
-	SYS_PRINT("[task_run] Active Objects is ready\n\n");
-
 	for (;;) {
 		task_sheduler();
 		task_polling_run();
@@ -640,14 +637,6 @@ void task_pri_queue_dump() {
 			t_msg = t_tcb->qhead;
 
 			while (t_msg != NULL) {
-
-				/* dump message queue */
-				xprintf("srcTaskID:%d\tdesTaskID:%d\tmsgType:0x%x\trefCnt:%d\tsig:%d\n"\
-						, t_msg->src_task_id \
-						, t_msg->des_task_id \
-						, (t_msg->ref_count & AK_MSG_TYPE_MASK) \
-						, (t_msg->ref_count & AK_MSG_REF_COUNT_MASK) \
-						, t_msg->sig);
 
 				/* consider the next message */
 				t_msg = t_msg->next;

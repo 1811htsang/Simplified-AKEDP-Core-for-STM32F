@@ -5,16 +5,13 @@
 
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS += \
-../Drivers/EDP/common/utils.c \
-../Drivers/EDP/common/xprintf.c 
+../Drivers/EDP/common/utils.c 
 
 C_DEPS += \
-./Drivers/EDP/common/utils.d \
-./Drivers/EDP/common/xprintf.d 
+./Drivers/EDP/common/utils.d 
 
 OBJS += \
-./Drivers/EDP/common/utils.o \
-./Drivers/EDP/common/xprintf.o 
+./Drivers/EDP/common/utils.o 
 
 
 # Each subdirectory must supply rules for building sources it contributes
@@ -24,7 +21,7 @@ Drivers/EDP/common/%.o Drivers/EDP/common/%.su Drivers/EDP/common/%.cyclo: ../Dr
 clean: clean-Drivers-2f-EDP-2f-common
 
 clean-Drivers-2f-EDP-2f-common:
-	-$(RM) ./Drivers/EDP/common/utils.cyclo ./Drivers/EDP/common/utils.d ./Drivers/EDP/common/utils.o ./Drivers/EDP/common/utils.su ./Drivers/EDP/common/xprintf.cyclo ./Drivers/EDP/common/xprintf.d ./Drivers/EDP/common/xprintf.o ./Drivers/EDP/common/xprintf.su
+	-$(RM) ./Drivers/EDP/common/utils.cyclo ./Drivers/EDP/common/utils.d ./Drivers/EDP/common/utils.o ./Drivers/EDP/common/utils.su
 
 .PHONY: clean-Drivers-2f-EDP-2f-common
 

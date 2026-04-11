@@ -17,19 +17,6 @@ extern "C"
 #include "task.h"
 #include "message.h"
 #include "sys_ctrl.h"
-#include "xprintf.h"
-
-#if defined(SYS_DBG_EN)
-#define SYS_DBG(fmt, ...)       xprintf((const char*)fmt, ##__VA_ARGS__)
-#else
-#define SYS_DBG(fmt, ...)
-#endif
-
-#if defined(SYS_PRINT_EN)
-#define SYS_PRINT(fmt, ...)       xprintf((const char*)fmt, ##__VA_ARGS__)
-#else
-#define SYS_PRINT(fmt, ...)
-#endif
 
 typedef struct {
 	uint32_t ipsr;
@@ -52,7 +39,6 @@ typedef struct {
 #define FATAL(s, c) \
 	do { \
 		DISABLE_INTERRUPTS(); \
-		sys_ctrl_shell_sw_to_block(); \
 		sys_dbg_fatal((const int8_t*)s, (uint8_t)c); \
 	} while (0)
 
@@ -60,15 +46,11 @@ typedef struct {
 	do { \
 		if (!expr) { \
 			DISABLE_INTERRUPTS(); \
-			sys_ctrl_shell_sw_to_block(); \
 			sys_dbg_fatal((const int8_t*)s, (uint8_t)c); \
 		} \
 	} while (0)
 
 extern void sys_dbg_fatal(const int8_t* s, uint8_t c);
-extern void sys_dbg_func_stack_dump(uint32_t*);
-extern void sys_dbg_cpu_dump();
-extern void sys_dbg_stack_space_dump();
 
 #ifdef __cplusplus
 }
