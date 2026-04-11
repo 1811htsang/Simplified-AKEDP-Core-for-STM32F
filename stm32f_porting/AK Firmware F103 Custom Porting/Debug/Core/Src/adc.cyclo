@@ -1,3 +1,0 @@
-../Core/Src/adc.c:30:6:void MX_ADC1_Init()	3
-../Core/Src/adc.c:72:6:void HAL_ADC_MspInit(ADC_HandleTypeDef*)	2
-../Core/Src/adc.c:98:6:void HAL_ADC_MspDeInit(ADC_HandleTypeDef*)	2

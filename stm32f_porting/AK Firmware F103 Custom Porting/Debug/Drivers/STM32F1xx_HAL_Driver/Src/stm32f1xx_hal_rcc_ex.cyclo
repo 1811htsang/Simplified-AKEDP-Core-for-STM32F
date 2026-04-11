@@ -1,3 +1,0 @@
-../Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rcc_ex.c:98:19:HAL_StatusTypeDef HAL_RCCEx_PeriphCLKConfig(RCC_PeriphCLKInitTypeDef*)	14
-../Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rcc_ex.c:292:6:void HAL_RCCEx_GetPeriphCLKConfig(RCC_PeriphCLKInitTypeDef*)	1
-../Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rcc_ex.c:385:10:uint32_t HAL_RCCEx_GetPeriphCLKFreq(uint32_t)	17

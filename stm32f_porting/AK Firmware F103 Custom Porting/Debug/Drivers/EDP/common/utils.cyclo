@@ -1,8 +1,0 @@
-../Drivers/EDP/common/utils.c:12:10:uint32_t str_len(const int8_t*)	2
-../Drivers/EDP/common/utils.c:20:7:void* mem_set(void*, int, size_t)	2
-../Drivers/EDP/common/utils.c:28:7:void* mem_cpy(void*, const void*, size_t)	2
-../Drivers/EDP/common/utils.c:36:5:int mem_cmp(const void*, const void*, size_t)	5
-../Drivers/EDP/common/utils.c:59:9:uint8_t mem_read(uint32_t, uint8_t*, uint32_t)	2
-../Drivers/EDP/common/utils.c:70:9:uint8_t mem_write(uint32_t, uint8_t*, uint32_t)	2
-../Drivers/EDP/common/utils.c:81:9:int32_t str_cmp(const int8_t*, const int8_t*)	6
-../Drivers/EDP/common/utils.c:95:10:int8_t* str_cpy(int8_t*, const int8_t*)	4

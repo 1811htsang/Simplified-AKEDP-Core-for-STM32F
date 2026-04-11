@@ -1,3 +1,0 @@
-../Core/Src/main.cpp:74:16:int main()	8	static
-../Core/Src/main.cpp:124:17:void SystemClock_Config()	88	static
-../Core/Src/main.cpp:174:17:void Error_Handler()	4	static,ignoring_inline_asm

@@ -1,0 +1,9 @@
+# Chặn thư mục build và các file tạm
+stm32f_porting/AK Firmware F103 Custom Porting/Debug/*
+*.o
+*.su
+*.cyclo
+*.d
+
+# Chặn cấu hình riêng của IDE
+stm32f_porting/AK Firmware F103 Custom Porting/.settings/*

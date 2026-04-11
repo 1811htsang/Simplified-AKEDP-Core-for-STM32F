@@ -1,2 +1,0 @@
-../Drivers/EDP/app/task_if.cpp:19:6:void task_if(ak_msg_t*)	1
-../Drivers/EDP/app/task_if.cpp:24:6:void if_des_type_handler(ak_msg_t*)	7
