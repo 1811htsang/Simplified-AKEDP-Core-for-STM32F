@@ -41,9 +41,6 @@
     // Khai báo hàm để lấy biến timer hệ thống hiện tại theo đơn vị 1ms
     extern uint32_t sys_ctrl_millis();
 
-    // Khai báo hàm để lấy ký tự từ console hệ thống
-    extern uint8_t sys_ctrl_shell_get_char();
-
     // Khai báo hàm để chuyển hệ thống vào chế độ ngủ và chờ ngắt
     extern void sys_ctrl_sleep_wait_for_irq();
 

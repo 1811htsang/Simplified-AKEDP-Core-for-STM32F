@@ -1,6 +1,5 @@
 ﻿// Khai báo các thư viện sử dụng
 #include "ak.h"
-#include "app_flash.h"
 #include "sys_cfg.h"
 #include "sys_ctrl.h"
 #include "ak.h"

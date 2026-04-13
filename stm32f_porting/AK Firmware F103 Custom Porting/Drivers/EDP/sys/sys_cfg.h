@@ -18,6 +18,12 @@
     void sys_cfg_tick(void);        // Hàm cấu hình hệ thống tick (systick)
     void sys_cfg_update_info(void); // Hàm cập nhật thông tin hệ thống 
 
+    /**
+     * Ghi chú:
+     * Phần này đang trong quá trình cân nhắc
+     * loại bỏ do các chức năng có thể được HAL xử lý.
+     */
+
   #ifdef __cplusplus
   }
   #endif
