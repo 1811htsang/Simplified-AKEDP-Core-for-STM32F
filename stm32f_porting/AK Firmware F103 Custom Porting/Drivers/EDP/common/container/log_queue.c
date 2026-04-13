@@ -1,12 +1,7 @@
-﻿/**
- ******************************************************************************
- * @author: GaoKong
- * @date:   17/11/2016
- ******************************************************************************
-**/
-
+﻿// Khai báo thư viện sử dụng
 #include "log_queue.h"
 
+// Hàm khởi tạo log queue
 uint8_t log_queue_init(log_queue_t* q, uint32_t b, uint32_t q_l, uint32_t e_l, q_ctrl f_w, q_ctrl f_r) {
 	q->base		= b;
 	q->head		= b;
@@ -35,10 +30,12 @@ uint8_t log_queue_init(log_queue_t* q, uint32_t b, uint32_t q_l, uint32_t e_l, q
 	return LOG_QUEUE_RET_OK;
 }
 
+// Hàm lấy số lượng phần tử hiện có trong log queue
 uint32_t log_queue_len(log_queue_t* q) {
 	return q->counter;
 }
 
+// Hàm thêm phần tử vào log queue
 uint8_t log_queue_put(log_queue_t* q, void* d) {
 
 	/* check invalib address */
@@ -78,6 +75,7 @@ uint8_t log_queue_put(log_queue_t* q, void* d) {
 	return LOG_QUEUE_RET_OK;
 }
 
+// Hàm lấy phần tử ra khỏi log queue
 uint8_t log_queue_get(log_queue_t* q, void* d) {
 
 	/* check data exist */

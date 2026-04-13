@@ -1,35 +1,35 @@
 ﻿#ifndef __AK_H__
   #define __AK_H__
 
-  // Khai bÃ¡o C directive cho C++ 
+  // Khai báo C directive cho C++ 
   #ifdef __cplusplus
   extern "C"
   {
   #endif
 
-    // Khai bÃ¡o cÃ¡c thÆ° viá»‡n sá»­ dá»¥ng
+    // Khai báo các thư viện sử dụng
     #include <string.h>
-    #include "fsm.h"  // ThÆ° viá»‡n FSM (Finite State Machine) Ä‘á»ƒ quáº£n lÃ½ tráº¡ng thÃ¡i cá»§a há»‡ thá»‘ng
-    #include "task.h" // ThÆ° viá»‡n quáº£n lÃ½ tÃ¡c vá»¥, giÃºp táº¡o vÃ  quáº£n lÃ½ cÃ¡c tÃ¡c vá»¥ trong há»‡ thá»‘ng
-    #include "port.h" // ThÆ° viá»‡n quáº£n lÃ½ attribute vÃ  dynamic allocation
+    #include "fsm.h"  // Thư viện FSM (Finite State Machine) để quản lý trạng thái của hệ thống
+    #include "task.h" // Thư viện quản lý tác vụ, giúp tạo và quản lý các tác vụ trong hệ thống
+    #include "port.h" // Thư viện quản lý attribute và dynamic allocation
 
-    // Khai bÃ¡o phiÃªn báº£n AK-EDP
+    // Khai báo phiên bản của AK Firmware
     #define AK_VERSION						"1.0"
 
-    // Khai bÃ¡o háº±ng sá»‘ chung
-    #define AK_ENABLE						(0x01u)
-    #define AK_DISABLE					(0x00u)
-    #define AK_FLAG_ON					(0x01u)
-    #define AK_FLAG_OFF					(0x00u)
-    #define AK_RET_OK						(0x01u)
-    #define AK_RET_NG						(0x00u)
+    // Khai báo các hằng số và macro để quản lý trạng thái, tín hiệu, và mức độ ưu tiên của tác vụ
+    #define AK_ENABLE						(0x01u) // Quản lý trạng thái bật, giúp xác định khi nào một tính năng hoặc chức năng được kích hoạt trong hệ thống
+    #define AK_DISABLE					(0x00u) // Quản lý trạng thái tắt, giúp xác định khi nào một tính năng hoặc chức năng được vô hiệu hóa trong hệ thống
+    #define AK_FLAG_ON					(0x01u) // Quản lý trạng thái bật của cờ, giúp xác định khi nào một cờ hoặc điều kiện được kích hoạt trong hệ thống
+    #define AK_FLAG_OFF					(0x00u) // Quản lý trạng thái tắt của cờ, giúp xác định khi nào một cờ hoặc điều kiện được vô hiệu hóa trong hệ thống
+    #define AK_RET_OK						(0x01u) // Quản lý trạng thái trả về thành công, giúp xác định khi nào một hàm hoặc thao tác đã hoàn thành thành công trong hệ thống
+    #define AK_RET_NG						(0x00u) // 
 
-    // Khai bÃ¡o háº±ng sá»‘ cho tÃ­n hiá»‡u ngÆ°á»i dÃ¹ng
+    // Khai báo hằng số cho tín hiệu tự định nghĩa của người dùng
     #define AK_USER_DEFINE_SIG				(10)
 
-    // Khai bÃ¡o háº±ng sá»‘ cho má»©c Æ°u tiÃªn cá»§a tÃ¡c vá»¥
+    // Khai báo hằng số cho mức độ ưu tiên của tác vụ
     #define TASK_PRI_MAX_SIZE				(8)
-    #define TASK_PRI_LEVEL_0				(0) 
+    #define TASK_PRI_LEVEL_0				(0) // Ưu tiên thấp nhất
     #define TASK_PRI_LEVEL_1				(1)
     #define TASK_PRI_LEVEL_2				(2)
     #define TASK_PRI_LEVEL_3				(3)
@@ -38,9 +38,8 @@
     #define TASK_PRI_LEVEL_6				(6)
     #define TASK_PRI_LEVEL_7				(7)
 
-    // Khai bÃ¡o háº±ng sá»‘ cho ID cá»§a tÃ¡c vá»¥
-    #define AK_TASK_INTERRUPT_ID		(0xEE) // Quáº£n lÃ½ ID cá»§a tÃ¡c vá»¥ ngáº¯t, giÃºp xÃ¡c Ä‘á»‹nh vÃ  xá»­ lÃ½ cÃ¡c tÃ¡c vá»¥ liÃªn quan Ä‘áº¿n ngáº¯t trong há»‡ thá»‘ng
-    #define AK_TASK_IDLE_ID					(0xEF) // Quáº£n lÃ½ ID cá»§a tÃ¡c vá»¥ nhÃ n rá»—i, giÃºp xÃ¡c Ä‘á»‹nh vÃ  xá»­ lÃ½ tÃ¡c vá»¥ nhÃ n rá»—i trong há»‡ thá»‘ng
+    // Khai báo hằng số cho ID của tác vụ
+    #define AK_TASK_IDLE_ID					(0xEF) // Quản lý ID của tác vụ nhàn rỗi, giúp xác định và xử lý tác vụ nhàn rỗi trong hệ thống
 
   #ifdef __cplusplus
   }

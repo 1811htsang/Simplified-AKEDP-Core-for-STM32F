@@ -273,9 +273,7 @@ void SysTick_Handler(void)
 
 void USART1_IRQHandler(void)
 {
-#if (SYS_CONSOLE_ENABLE != 0U)
-  sys_irq_shell();
-#endif
+  
 }
 
 void USART2_IRQHandler(void)

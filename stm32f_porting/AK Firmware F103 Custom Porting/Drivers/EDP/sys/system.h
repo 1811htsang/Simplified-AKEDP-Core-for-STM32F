@@ -10,30 +10,24 @@
 	// Khai báo thư viện sử dụng
 	#include <stdint.h>
 
-	typedef enum {
-		IRQ_PRIO_UART0_CONSOLE = 2,
-		IRQ_PRIO_UART2 = 3,
-		IRQ_PRIO_EXTI = 4,
-		IRQ_PRIO_TIMER_10MS = 5,
-	} system_irq_prio_e;
-
+	// Định nghĩa cấu trúc để lưu trữ thông tin hệ thống
 	typedef struct {
-		uint32_t flash_used;
-		uint32_t ram_used;
-		uint32_t data_init_size;
-		uint32_t data_non_init_size;
-		uint32_t stack_avail;
-		uint32_t heap_avail;
-		uint32_t ram_other;
-		uint32_t cpu_clock;
-		uint32_t tick;
-		uint32_t console_baudrate;
+		uint32_t flash_used; 					// Lượng flash đã sử dụng
+		uint32_t ram_used;						// Lượng RAM đã sử dụng
+		uint32_t data_init_size;			// Kích thước dữ liệu đã khởi tạo
+		uint32_t data_non_init_size;	// Kích thước dữ liệu chưa khởi tạo
+		uint32_t stack_avail;					// Lượng stack còn trống
+		uint32_t heap_avail;					// Lượng heap còn trống
+		uint32_t ram_other;						// Lượng RAM khác
+		uint32_t cpu_clock;						// Tốc độ clock của CPU
+		uint32_t tick;								// Giá trị tick
 	} system_info_t;
 
+	// Khai báo biến toàn cục để lưu trữ thông tin hệ thống
 	extern system_info_t system_info;
 
-#ifdef __cplusplus
-	}
-#endif
+	#ifdef __cplusplus
+		}
+	#endif
 
 #endif

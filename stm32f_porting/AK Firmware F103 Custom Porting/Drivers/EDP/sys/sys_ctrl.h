@@ -1,100 +1,72 @@
-﻿/**
- ******************************************************************************
- * @author: GaoKong
- * @date:   12/09/2016
- ******************************************************************************
-**/
-#ifndef __SYS_CTRL_H__
-#define __SYS_CTRL_H__
+﻿#ifndef __SYS_CTRL_H__
+  #define __SYS_CTRL_H__
 
-#ifdef __cplusplus
-extern "C"
-{
-#endif
+  // Khai báo directive C cho C++
+  #ifdef __cplusplus
+  extern "C"
+  {
+  #endif
 
-#include <stdint.h>
-#include "system.h"
-#include "platform.h"
+    // Khai báo thư viện sử dụng
+    #include <stdint.h>
+    #include "system.h"
+    #include "platform.h"
 
-/*****************************************************************************
- * system utilities function.
- *****************************************************************************/
-#define SYS_POWER_ON_RESET			0x00
-#define SYS_NON_POWER_ON_RESET		0x01
+    // Khai báo hàm reset hệ thống, sử dụng NVIC_SystemReset để khởi động lại vi điều khiển
+    extern void sys_ctrl_reset();
 
-/* reset system (soft reset) */
-extern void sys_ctrl_reset();
+    // Khai báo hàm quản lý watchdog
+    extern void sys_ctrl_independent_watchdog_init();   // Khởi tạo watchdog độc lập
+    extern void sys_ctrl_independent_watchdog_reset();  // Reset watchdog độc lập để ngăn chặn reset hệ thống
 
-/* hardware watchdog interface */
-extern void sys_ctrl_independent_watchdog_init();
-extern void sys_ctrl_independent_watchdog_reset();
+    // Khai báo hàm quản lý soft watchdog
+    extern void sys_ctrl_soft_watchdog_init(uint32_t);      // Khởi tạo soft watchdog với thời gian timeout được chỉ định
+    extern void sys_ctrl_soft_watchdog_reset();             // Reset soft watchdog, đặt lại bộ đếm tick về 0
+    extern void sys_ctrl_soft_watchdog_enable();            // Kích hoạt soft watchdog, cho phép soft watchdog hoạt động
+    extern void sys_ctrl_soft_watchdog_disable();           // Vô hiệu hóa soft watchdog, ngăn chặn soft watchdog hoạt động
+    extern void sys_ctrl_soft_watchdog_increase_counter();  // Tăng bộ đếm của soft watchdog
 
-/* software watchdog interface */
-extern void sys_ctrl_soft_watchdog_init(uint32_t);
-extern void sys_ctrl_soft_watchdog_reset();
-extern void sys_ctrl_soft_watchdog_enable();
-extern void sys_ctrl_soft_watchdog_disable();
-extern void sys_ctrl_soft_watchdog_increase_counter();
+    // Khai báo hàm tạo độ trễ, sử dụng vòng lặp đếm để tạo độ trễ chính xác
+    extern void sys_ctrl_delay(volatile uint32_t count);
 
-/* delay 3 cycles clock of system */
-extern void sys_ctrl_delay(volatile uint32_t count);
+    // Khai báo hàm tạo độ trễ theo miligiây, sử dụng timer delay
+    extern void sys_ctrl_delay_ms(volatile uint32_t count);
 
-/* system delay ms unit, this function using timer delay */
-extern void sys_ctrl_delay_ms(volatile uint32_t count);
+    // Khai báo hàm tạo độ trễ theo micro giây, sử dụng CPU delay dựa trên bộ đếm chu kỳ DWT để tạo độ trễ chính xác
+    extern void sys_ctrl_delay_us(volatile uint32_t count);
 
-/* system delay us, uint this function using CPU delay*/
-extern void sys_ctrl_delay_us(volatile uint32_t count);
+    // Khai báo hàm để lấy biến timer hệ thống hiện tại theo đơn vị 1ns
+    extern uint32_t sys_ctrl_micros();
 
-/* get current 1ns system timer variable */
-extern uint32_t sys_ctrl_micros();
+    // Khai báo hàm để lấy biến timer hệ thống hiện tại theo đơn vị 1ms
+    extern uint32_t sys_ctrl_millis();
 
-/* get current 1ms system timer variable */
-extern uint32_t sys_ctrl_millis();
+    // Khai báo hàm để lấy ký tự từ console hệ thống
+    extern uint8_t sys_ctrl_shell_get_char();
 
-/* get character of system console */
-extern uint8_t sys_ctrl_shell_get_char();
+    // Khai báo hàm để chuyển hệ thống vào chế độ ngủ và chờ ngắt
+    extern void sys_ctrl_sleep_wait_for_irq();
 
-/* put character of system console (NON-BLOCKING using interrupt) */
-extern void sys_ctrl_shell_put_char(uint8_t);
+    // Khai báo hàm để lấy số exception
+    extern uint32_t sys_ctrl_get_exception_number();
 
-/* put character of system console (BLOCKING)*/
-extern void sys_ctrl_shell_put_char_block(uint8_t);
+    // Khai báo hàm để khởi động lại ứng dụng
+    extern void sys_ctrl_restart_app();
 
-/* switch shell put char with blocking */
-extern void sys_ctrl_shell_sw_to_block();
+    // Khai báo hàm để dừng MCU, đưa vi điều khiển vào chế độ standby để giảm thiểu tiêu thụ năng lượng
+    extern void sys_ctrl_stop_mcu();
 
-/* switch shell put char with non-blocking */
-extern void sys_ctrl_shell_sw_to_nonblock();
+    // Khai báo hàm để lấy thông tin firmware, điền vào cấu trúc firmware_header_t với các giá trị như psk, độ dài binary và checksum
+    extern int asm_test_add(int, int);
 
-/* goto sleep mode and wait for interrupt */
-extern void sys_ctr_sleep_wait_for_irq();
+    // Khai báo hàm để lấy thông tin stack
+    extern uint32_t sys_stack_count_init(); // Hàm này trả về kích thước stack ban đầu
+    extern uint32_t sys_stack_usage();      // Hàm này trả về lượng stack đã sử dụng
+    extern uint32_t sys_stack_get_size();   // Hàm này trả về tổng kích thước stack
 
-/* get exception number */
-extern uint32_t sys_ctr_get_exception_number();
-
-/* system restart application */
-extern void sys_ctr_restart_app();
-
-/* get vbat voltage */
-extern uint32_t sys_ctr_get_vbat_voltage();
-
-/* get MCU temperature */
-extern uint32_t sys_ctr_get_mcu_temperature();
-
-extern void sys_ctr_stop_mcu();
-
-extern int asm_test_add(int, int);
-
-/*****************************************************************************
- * system memory function.
- *****************************************************************************/
-extern uint32_t sys_stack_count_init(); //clean stack, return stack size
-extern uint32_t sys_stack_usage();
-extern uint32_t sys_stack_get_size();
-
-#ifdef __cplusplus
-}
-#endif
+  #ifdef __cplusplus
+  }
+  #endif
 
 #endif // __SYS_CTRL_H__
 

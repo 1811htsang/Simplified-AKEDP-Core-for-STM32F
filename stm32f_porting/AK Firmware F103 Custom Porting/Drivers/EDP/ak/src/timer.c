@@ -1,35 +1,29 @@
-/**
- ******************************************************************************
- * @author: GaoKong
- * @date:   05/09/2016
- ******************************************************************************
-**/
-
+// Khai báo thư viện sử dụng
 #include "timer.h"
 #include "sys_dbg.h"
 #include "task_list.h"
 
-/* define message data is transfered between interrupt heart beat and timer task */
+// Khai báo payload sử dụng cho timer trong ngắt
 struct ak_timer_payload_irq_t {
 	uint32_t counter;
 	uint32_t enable_post_msg;
 };
 
+// Khai báo biến toàn cục cho payload của timer trong ngắt
 static volatile struct ak_timer_payload_irq_t ak_timer_payload_irq = {0, AK_DISABLE};
 
-/* data to manage memory of timer message */
-static ak_timer_t timer_pool[AK_TIMER_POOL_SIZE];
-static ak_timer_t* free_list_timer_pool;
-static uint32_t free_list_timer_used;
-static uint32_t free_list_timer_used_max;
-static ak_timer_t* timer_list_head;
+// Định nghĩa hằng số và biến toàn cục
+static ak_timer_t timer_pool[AK_TIMER_POOL_SIZE]; // Pool chứa các timer message, được quản lý thông qua free list
+static ak_timer_t* free_list_timer_pool; 					// Con trỏ đến đầu free list của timer message
+static uint32_t free_list_timer_used; 						// Biến đếm số lượng timer message đang được sử dụng
+static uint32_t free_list_timer_used_max; 				// Biến đếm số lượng timer message đã sử dụng tối đa
+static ak_timer_t* timer_list_head; 							// Con trỏ đến đầu danh sách liên kết của các timer đang hoạt động
 
-/* allocate/free memory of timer message */
-static void timer_msg_pool_init();
-static ak_timer_t* get_timer_msg();
-static void free_timer_msg(ak_timer_t* msg);
-
-static uint8_t timer_remove_msg(task_id_t des_task_id, timer_sig_t sig);
+// Khai báo các hàm nội bộ (private) để quản lý pool và danh sách timer
+static void timer_msg_pool_init();																				// Hàm khởi tạo pool của timer message, thiết lập free list ban đầu
+static ak_timer_t* get_timer_msg(); 																			// Hàm lấy một timer message từ pool
+static void free_timer_msg(ak_timer_t* msg); 															// Hàm trả lại một timer message vào pool
+static uint8_t timer_remove_msg(task_id_t des_task_id, timer_sig_t sig); 	// Hàm xóa một timer message khỏi danh sách liên kết dựa trên des_task_id và sig
 
 void timer_msg_pool_init() {
 	uint32_t index;
@@ -198,7 +192,10 @@ void timer_tick(uint32_t t) {
 	}
 }
 
-uint8_t timer_set(task_id_t des_task_id, timer_sig_t sig, uint32_t duty, timer_type_t type) {
+uint8_t timer_set(
+	task_id_t des_task_id, timer_sig_t sig, 
+	uint32_t duty, timer_type_t type
+) {
 	ak_timer_t* timer_msg;
 
 	/* Validate des_task_id before processing */

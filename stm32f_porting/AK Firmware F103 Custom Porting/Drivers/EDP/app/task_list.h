@@ -1,65 +1,44 @@
 ﻿#ifndef __TASK_LIST_H__
-#define __TASK_LIST_H__
+	#define __TASK_LIST_H__
 
-#include "ak.h"
-#include "task.h"
+	// Khai báo thư viện sử dụng
+	#include "ak.h"
+	#include "task.h"
 
-extern const task_t app_task_table[];
-extern const task_polling_t app_task_polling_table[];
+	/**
+	 * Khai báo danh sách tác vụ và tác vụ polling của ứng dụng
+	 * nhằm để người dùng tự định nghĩa mở rộng các tác vụ và tác vụ polling
+	 * theo nhu cầu
+	 */
+	extern const task_t app_task_table[];
+	extern const task_polling_t app_task_polling_table[];
 
-/*****************************************************************************/
-/*  DECLARE: Internal Task ID
- *  Note: Task id MUST be increasing order.
- */
-/*****************************************************************************/
-enum {
-	/* SYSTEM TASKS */
-	TASK_TIMER_TICK_ID,
+	// Khai báo ID của các tác vụ trong ứng dụng mặc định
+	typedef enum app_task_id_t {
+		// Tác vụ timer hệ thống
+		TASK_TIMER_TICK_ID,
+		// Tác vụ hệ thống
+		AC_TASK_SYSTEM_ID,
+		// Tác vụ giao diện
+		AC_TASK_IF_ID,
+		// Tác vụ cuối cùng
+		AK_TASK_EOT_ID,
+	} app_task_id_t;
 
-	/* APP TASKS */
-	AC_TASK_SYSTEM_ID,
-	AC_TASK_LIFE_ID,
-	AC_TASK_IF_ID,
-	AC_TASK_UART_IF_ID,
-	AC_TASK_DBG_ID,
+	// Khai báo ID của các tác vụ polling trong ứng dụng mặc định
+	typedef enum app_task_polling_id_t {
+		/* EOT polling task ID */
+		AK_TASK_POLLING_EOT_ID,
+	} app_task_polling_id_t;
 
-	/* LINK */
-#if defined (IF_LINK_UART_EN)
-	AC_LINK_PHY_ID,
-	AC_LINK_MAC_ID,
-	AC_LINK_ID,
-#endif
+	// Khai báo hàm xử lý của các tác vụ trong ứng dụng
+	extern void task_if(ak_msg_t*);     // Hàm xử lý của tác vụ giao diện
 
-	/* EOT task ID */
-	AK_TASK_EOT_ID,
-};
-
-/*****************************************************************************/
-/*  DECLARE: Internal Polling Task ID
- *  Note: Task id MUST be increasing order.
- */
-/*****************************************************************************/
-enum {
-	/* APP TASKS */
-	AC_TASK_POLLING_CONSOLE_ID,
-
-	/* EOT polling task ID */
-	AK_TASK_POLLING_EOT_ID,
-};
-
-/*****************************************************************************/
-/*  DECLARE: Task entry point
- */
-/*****************************************************************************/
-/* APP TASKS */
-extern void task_system(ak_msg_t*);
-extern void task_if(ak_msg_t*);
-
-/*****************************************************************************/
-/*  DECLARE: Task polling
- */
-/*****************************************************************************/
-extern void task_polling_console();
+	/**
+	 * Ghi chú:
+	 * Hàm task_system chưa được định nghĩa trong core,
+	 * sẽ xử lý sau
+	 */
 
 #endif //__TASK_LIST_H__
 

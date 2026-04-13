@@ -1,22 +1,16 @@
-﻿/**
- ******************************************************************************
- * @author: GaoKong
- * @date:   05/09/2016
- ******************************************************************************
-**/
-#include "ak.h"
-
-#include "sys_dbg.h"
-
+﻿// Khai báo các thư viện sử dụng
 #include "ak.h"
 #include "app_flash.h"
 #include "flash.h"
-#include "io_cfg.h"
 #include "sys_cfg.h"
 #include "sys_ctrl.h"
+#include "ak.h"
+#include "sys_dbg.h"
 
+// Định nghĩa kích thước đơn vị dump RAM vào flash
 #define DUMP_RAM_UNIT_SIZE			256
 
+// Khai báo biến toàn cục để lưu trữ thông tin fatal log
 static fatal_log_t fatal_log;
 
 void sys_dbg_fatal(const int8_t* s, uint8_t c) {

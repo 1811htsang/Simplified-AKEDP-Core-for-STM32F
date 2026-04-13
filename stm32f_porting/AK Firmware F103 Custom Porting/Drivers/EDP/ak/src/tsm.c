@@ -1,13 +1,5 @@
-﻿/**
- ******************************************************************************
- * @author: GaoKong
- * @date:   12/02/2017
- * @brief:  table state machine.
- ******************************************************************************
-**/
-
+﻿// Khai báo thư viện sử dụng
 #include "tsm.h"
-
 #include "sys_dbg.h"
 
 void tsm_init(tsm_tbl_t* tsm_tbl, tsm_t** tbl, tsm_state_t state) {

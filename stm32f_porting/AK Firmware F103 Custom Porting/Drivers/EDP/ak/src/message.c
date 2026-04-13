@@ -1,14 +1,12 @@
 ﻿// Khai báo các thư viện sử dụng
-#include "message.h"// Khai báo các cấu trúc và hàm để quản lý tin nhắn
-
 #include <string.h>
 #include <stdio.h>
 #include <stdint.h>
 #include <stdlib.h>
-
-#include "ak.h"			// Khai báo các hằng số và macro liên quan đến tin nhắn
-#include "task.h"		// Khai báo các cấu trúc và hàm để quản lý tác vụ
-#include "sys_dbg.h"// Khai báo các hàm và macro liên quan đến debug hệ thống
+#include "ak.h"
+#include "message.h"
+#include "task.h"
+#include "sys_dbg.h"
 
 // Khai báo bộ nhớ cho pool tin nhắn thuần túy
 static ak_msg_pure_t msg_pure_pool[AK_PURE_MSG_POOL_SIZE]; // Biến đại diện
@@ -163,13 +161,12 @@ void* ak_malloc(size_t size) {
 	return ak_heap;
 }
 
+// Hàm giải phóng bộ nhớ đã cấp phát cho tin nhắn
 void ak_free(void* ptr) {
 	free(ptr);
 }
 
-/*****************************************************************************
- * pure message function define.
- *****************************************************************************/
+// Hàm khởi tạo pool tin nhắn thuần túy
 void pure_msg_pool_init() {
 	uint32_t index;
 
@@ -201,14 +198,17 @@ void pure_msg_pool_init() {
 	EXIT_CRITICAL();
 }
 
+// Hàm lấy số lượng tin nhắn thuần túy đã được sử dụng từ pool
 uint32_t get_pure_msg_pool_used() {
 	return free_list_pure_used;
 }
 
+// Hàm lấy số lượng tin nhắn thuần túy đã được sử dụng tối đa từ pool
 uint32_t get_pure_msg_pool_used_max() {
 	return free_list_pure_used_max;
 }
 
+// Hàm lấy một tin nhắn thuần túy từ pool
 ak_msg_t* get_pure_msg() {
 	ak_msg_t* allocate_message;
 
@@ -245,6 +245,7 @@ ak_msg_t* get_pure_msg() {
 	return allocate_message;
 }
 
+// Hàm giải phóng một tin nhắn thuần túy
 void free_pure_msg(ak_msg_t* msg) {
 
 	ENTRY_CRITICAL();
@@ -257,9 +258,7 @@ void free_pure_msg(ak_msg_t* msg) {
 	EXIT_CRITICAL();
 }
 
-/*****************************************************************************
- * common message function define.
- *****************************************************************************/
+// Hàm khởi tạo pool tin nhắn thông thường
 void common_msg_pool_init() {
 	uint32_t index;
 
@@ -292,14 +291,17 @@ void common_msg_pool_init() {
 	EXIT_CRITICAL();
 }
 
+// Hàm lấy một tin nhắn thông thường từ pool
 uint32_t get_common_msg_pool_used() {
 	return free_list_common_used;
 }
 
+// Hàm lấy số lượng tin nhắn thông thường đã được sử dụng tối đa từ pool
 uint32_t get_common_msg_pool_used_max() {
 	return free_list_common_used_max;
 }
 
+// Hàm lấy một tin nhắn thông thường từ pool
 ak_msg_t* get_common_msg() {
 	ak_msg_t* allocate_message;
 
@@ -338,6 +340,7 @@ ak_msg_t* get_common_msg() {
 	return allocate_message;
 }
 
+// Hàm giải phóng một tin nhắn thông thường
 void free_common_msg(ak_msg_t* msg) {
 
 	ENTRY_CRITICAL();
@@ -350,6 +353,7 @@ void free_common_msg(ak_msg_t* msg) {
 	EXIT_CRITICAL();
 }
 
+// Hàm khởi tạo pool tin nhắn động
 uint8_t set_data_common_msg(ak_msg_t* msg, uint8_t* data, uint8_t size) {
 	if (get_msg_type(msg) != COMMON_MSG_TYPE) {
 		FATAL("MF", 0x23);
@@ -365,6 +369,7 @@ uint8_t set_data_common_msg(ak_msg_t* msg, uint8_t* data, uint8_t size) {
 	return AK_MSG_OK;
 }
 
+// Hàm lấy dữ liệu từ một tin nhắn thông thường
 uint8_t* get_data_common_msg(ak_msg_t* msg) {
 
 	if (get_msg_type(msg) != COMMON_MSG_TYPE) {
@@ -374,6 +379,7 @@ uint8_t* get_data_common_msg(ak_msg_t* msg) {
 	return ((ak_msg_common_t*)msg)->data;
 }
 
+// Hàm lấy độ dài dữ liệu từ một tin nhắn thông thường
 uint8_t get_data_len_common_msg(ak_msg_t* msg) {
 
 	if (get_msg_type(msg) != COMMON_MSG_TYPE) {
@@ -383,9 +389,7 @@ uint8_t get_data_len_common_msg(ak_msg_t* msg) {
 	return ((ak_msg_common_t*)msg)->len;
 }
 
-/*****************************************************************************
- * dynamic message function define.
- *****************************************************************************/
+// Hàm khởi tạo pool tin nhắn động
 void dynamic_msg_pool_init() {
 	uint32_t index;
 
@@ -419,14 +423,17 @@ void dynamic_msg_pool_init() {
 	EXIT_CRITICAL();
 }
 
+// Hàm lấy số lượng tin nhắn động đã được sử dụng từ pool
 uint32_t get_dynamic_msg_pool_used() {
 	return free_list_dynamic_used;
 }
 
+// Hàm lấy số lượng tin nhắn động đã được sử dụng tối đa từ pool
 uint32_t get_dynamic_msg_pool_used_max() {
 	return free_list_dynamic_used_max;
 }
 
+// Hàm giải phóng một tin nhắn động
 void free_dynamic_msg(ak_msg_t* msg) {
 
 	ENTRY_CRITICAL();
@@ -441,6 +448,7 @@ void free_dynamic_msg(ak_msg_t* msg) {
 	EXIT_CRITICAL();
 }
 
+// Hàm lấy một tin nhắn động từ pool
 ak_msg_t* get_dynamic_msg() {
 	ak_msg_t* allocate_message;
 
@@ -480,6 +488,7 @@ ak_msg_t* get_dynamic_msg() {
 	return allocate_message;
 }
 
+// Hàm thiết lập dữ liệu cho một tin nhắn động
 uint8_t set_data_dynamic_msg(ak_msg_t* msg, uint8_t* data, uint32_t size) {
 	if (get_msg_type(msg) != DYNAMIC_MSG_TYPE) {
 		FATAL("MF", 0x43);
@@ -492,6 +501,7 @@ uint8_t set_data_dynamic_msg(ak_msg_t* msg, uint8_t* data, uint32_t size) {
 	return AK_MSG_OK;
 }
 
+// Hàm lấy dữ liệu từ một tin nhắn động
 uint8_t* get_data_dynamic_msg(ak_msg_t* msg) {
 	if (get_msg_type(msg) != DYNAMIC_MSG_TYPE) {
 		FATAL("MF", 0x46);
@@ -500,10 +510,12 @@ uint8_t* get_data_dynamic_msg(ak_msg_t* msg) {
 	return ((ak_msg_dynamic_t*)msg)->data;
 }
 
+// Hàm lấy độ dài dữ liệu từ một tin nhắn động
 uint32_t get_data_len_dynamic_msg(ak_msg_t* msg) {
 	return ((ak_msg_dynamic_t*)msg)->len;
 }
 
+// Hàm kiểm tra con trỏ tin nhắn có hợp lệ hay không
 uint8_t msg_is_valid_ptr(const ak_msg_t* msg) {
 	if (msg == NULL) {
 		return AK_MSG_NG;
@@ -512,6 +524,7 @@ uint8_t msg_is_valid_ptr(const ak_msg_t* msg) {
 	return msg_ptr_belongs_to_pool(msg);
 }
 
+// Hàm kiểm tra con trỏ tin nhắn có hợp lệ hoặc là NULL hay không
 uint8_t msg_is_valid_or_null(const ak_msg_t* msg) {
 	if (msg == NULL) {
 		return AK_MSG_OK;
@@ -519,12 +532,3 @@ uint8_t msg_is_valid_or_null(const ak_msg_t* msg) {
 
 	return msg_ptr_belongs_to_pool(msg);
 }
-
-/*****************************************************************************
- * debug message function define.
- *****************************************************************************/
-void msg_dbg_dum(ak_msg_t* msg) {
-	return;
-}
-
-

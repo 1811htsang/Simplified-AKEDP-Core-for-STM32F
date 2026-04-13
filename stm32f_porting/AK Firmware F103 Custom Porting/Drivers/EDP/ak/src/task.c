@@ -1,9 +1,8 @@
-﻿#include "task.h"
-
+﻿// Khai báo thư viện sử dụng
 #include <string.h>
-
 #include "timer.h"
 #include "ak.h"
+#include "task.h"
 #include "message.h"
 #include "timer.h"
 #include "task_list.h"
@@ -12,38 +11,36 @@
 #include "sys_ctrl.h"
 #include "sys_dbg.h"
 
+// Khai báo cấu trúc dữ liệu và biến toàn cục cho quản lý task
 typedef struct {
-	task_pri_t  pri;
-	uint8_t     mask;
-	ak_msg_t*   qhead;
-	ak_msg_t*   qtail;
+	task_pri_t  pri;  		// Mức ưu tiên tác vụ
+	uint8_t     mask; 		// Mặt nạ bit để xác định vị trí của tác vụ trong biến task_ready
+	ak_msg_t*   qhead;		// Con trỏ tin nhắn đầu tiên trong hàng đợi tác vụ
+	ak_msg_t*   qtail;		// Con trỏ tin nhắn cuối cùng trong hàng đợi tác vụ
 } tcb_t;
 
-static task_id_t current_task_id;
-static task_t current_task_info;
-static ak_msg_t current_active_object;
+// Biến toàn cục quản lý trạng thái hiện tại của task
+static task_id_t current_task_id;     	// ID của tác vụ hiện tại đang được thực thi
+static task_t current_task_info;      	// Thông tin chi tiết của tác vụ hiện tại
+static ak_msg_t current_active_object;  // Đối tượng tin nhắn hiện tại đang được xử lý
 
-#if defined(AK_TASK_OBJ_LOG_ENABLE)
-log_queue_t log_task_dbg_object_queue;
-static uint8_t task_dbg_active_obj_queue[LOG_QUEUE_OBJECT_SIZE];
-#endif
-
-#if defined(AK_IRQ_OBJ_LOG_ENABLE)
-log_queue_t log_irq_queue;
-static uint8_t irq_queue[LOG_QUEUE_IRQ_SIZE];
-#endif
-
+// Biến toàn cục quản lý hàng đợi tác vụ theo mức ưu tiên và bảng thông tin tác vụ
 static tcb_t	task_pri_queue[TASK_PRI_MAX_SIZE];
-static task_t*	task_table = (task_t*)0;
-static uint8_t	task_table_size = 0;
-static uint8_t	task_current = 0;
-static uint8_t	task_ready = 0;
 
-static task_polling_t* task_polling_table = (task_polling_t*)0;
-static uint8_t	task_polling_table_size = 0;
+// Biến toàn cục quản lý bảng thông tin tác vụ và tác vụ polling
+static task_t*	task_table = (task_t*)0; // Bảng thông tin tác vụ, được khởi tạo thông qua hàm task_create()
+static uint8_t	task_table_size = 0;		 // Kích thước bảng thông tin tác vụ
+static uint8_t	task_current = 0;				 // ID của tác vụ hiện tại đang được thực thi, được cập nhật trong quá trình chạy scheduler
+static uint8_t	task_ready = 0;					 // Biến bitmask quản lý trạng thái sẵn sàng của các tác vụ
 
+// Biến toàn cục quản lý bảng thông tin tác vụ polling
+static task_polling_t* task_polling_table = (task_polling_t*)0; // Bảng thông tin tác vụ polling, được khởi tạo thông qua hàm task_polling_create()
+static uint8_t	task_polling_table_size = 0;										// Kích thước bảng thông tin tác vụ polling
+
+// Khai báo các hàm nội bộ của task manager
 static void task_sheduler();
 
+// Hàm kiểm tra tính toàn vẹn của hàng đợi tác vụ, đảm bảo rằng con trỏ đầu và cuối của hàng đợi hợp lệ và nhất quán
 static void task_queue_integrity_check(tcb_t* t_tcb, uint8_t err_code) {
 	if (msg_is_valid_or_null(t_tcb->qhead) == AK_MSG_NG) {
 		FATAL("TK", err_code);
@@ -56,20 +53,6 @@ static void task_queue_integrity_check(tcb_t* t_tcb, uint8_t err_code) {
 	if ((t_tcb->qhead == NULL) && (t_tcb->qtail != NULL)) {
 		FATAL("TK", err_code);
 	}
-}
-
-/* function MUST-BE redefine */
-__AK_WEAK void task_irq_io_entry_trigger() {
-#if defined(AK_IO_IRQ_ANALYZER)
-	FATAL("TK", 0x03);
-#endif
-}
-
-/* function MUST-BE redefine */
-__AK_WEAK void task_irq_io_exit_trigger() {
-#if defined(AK_IO_IRQ_ANALYZER)
-	FATAL("TK", 0x04);
-#endif
 }
 
 /*
@@ -150,14 +133,6 @@ void task_post(task_id_t des_task_id, ak_msg_t* msg) {
 	msg->if_src_task_id = msg->src_task_id;
 	msg->if_des_task_id = des_task_id;
 
-#if defined(AK_TASK_OBJ_LOG_ENABLE)
-	if (get_msg_ref_count(msg) <= 1) {
-		msg->dbg_handler.start_exe = 0;
-		msg->dbg_handler.stop_exe = 0;
-		msg->dbg_handler.start_post = sys_ctrl_millis();
-	}
-#endif
-
 	if (t_tcb->qtail == NULL) {
 		/* put message to queue */
 		t_tcb->qtail = msg;
@@ -183,6 +158,12 @@ void task_post(task_id_t des_task_id, ak_msg_t* msg) {
 	EXIT_CRITICAL();
 }
 
+/**
+ * Loại bỏ tất cả tin nhắn có tín hiệu (sig) cụ thể khỏi hàng đợi của tác vụ được chỉ định bởi task_id.
+ * Hàm này duyệt qua hàng đợi tin nhắn của tác vụ, kiểm tra từng tin nhắn 
+ * để xác định xem nó có phải là tin nhắn cần loại bỏ hay không (dựa trên des_task_id và sig), 
+ * và nếu có, nó sẽ loại bỏ tin nhắn đó khỏi hàng đợi và giải phóng bộ nhớ của nó.
+ */
 uint8_t task_remove_msg(task_id_t task_id, uint8_t sig) {
 	tcb_t* t_tcb;
 	uint8_t total_rm_msg = 0;
@@ -262,12 +243,14 @@ uint8_t task_remove_msg(task_id_t task_id, uint8_t sig) {
 	return total_rm_msg;
 }
 
+// Hàm post tin nhắn thuần túy (không có dữ liệu) đến một tác vụ đích với tín hiệu cụ thể
 void task_post_pure_msg(task_id_t des_task_id, uint8_t sig) {
 	ak_msg_t* s_msg = get_pure_msg();
 	set_msg_sig(s_msg, sig);
 	task_post(des_task_id, s_msg);
 }
 
+// Hàm post tin nhắn thông thường (có dữ liệu nhỏ) đến một tác vụ đích với tín hiệu cụ thể
 void task_post_common_msg(task_id_t des_task_id, uint8_t sig, uint8_t* data, uint8_t len) {
 	ak_msg_t* s_msg = get_common_msg();
 	set_msg_sig(s_msg, sig);
@@ -275,6 +258,7 @@ void task_post_common_msg(task_id_t des_task_id, uint8_t sig, uint8_t* data, uin
 	task_post(des_task_id, s_msg);
 }
 
+// Hàm post tin nhắn động (có dữ liệu lớn) đến một tác vụ đích với tín hiệu cụ thể
 void task_post_dynamic_msg(task_id_t des_task_id, uint8_t sig, uint8_t* data, uint32_t len) {
 	ak_msg_t* s_msg = get_dynamic_msg();
 	set_msg_sig(s_msg, sig);
@@ -282,34 +266,7 @@ void task_post_dynamic_msg(task_id_t des_task_id, uint8_t sig, uint8_t* data, ui
 	task_post(des_task_id, s_msg);
 }
 
-void task_entry_interrupt() {
-
-	ENTRY_CRITICAL();
-
-	task_irq_io_entry_trigger();
-	current_task_id = AK_TASK_INTERRUPT_ID;
-
-#if defined(AK_IRQ_OBJ_LOG_ENABLE)
-	exception_info_t exception_info;
-	exception_info.except_number = sys_ctr_get_exception_number();
-	exception_info.timestamp = sys_ctrl_millis();
-
-	log_queue_put(&log_irq_queue, &exception_info);
-#endif
-
-	EXIT_CRITICAL();
-}
-
-void task_exit_interrupt() {
-
-	ENTRY_CRITICAL();
-
-	current_task_id = current_task_info.id;
-	task_irq_io_exit_trigger();
-
-	EXIT_CRITICAL();
-}
-
+// Hàm khởi tạo task manager, thiết lập trạng thái ban đầu cho scheduler, hàng đợi tác vụ, và khởi tạo hệ thống tin nhắn và timer
 int task_init() {
 	uint8_t pri;
 	tcb_t* t_tcb;
@@ -350,26 +307,6 @@ int task_init() {
  * sau đó mới chạy nhóm task polling.
  */
 int task_run() {
-	/* init active object log queue */
-#if defined(AK_TASK_OBJ_LOG_ENABLE)
-	log_queue_init(&log_task_dbg_object_queue \
-				   , (uint32_t)task_dbg_active_obj_queue \
-				   , (LOG_QUEUE_OBJECT_SIZE / sizeof(ak_msg_t)) \
-				   , sizeof(ak_msg_t) \
-				   , mem_write \
-				   , mem_read);
-#endif
-
-	/* init irq log queue */
-#if defined(AK_IRQ_OBJ_LOG_ENABLE)
-	log_queue_init(&log_irq_queue \
-				   , (uint32_t)irq_queue \
-				   , (LOG_QUEUE_IRQ_SIZE / sizeof(exception_info_t)) \
-				   , sizeof(exception_info_t) \
-				   , mem_write \
-				   , mem_read);
-#endif
-
 	for (;;) {
 		task_sheduler();
 		task_polling_run();
@@ -448,6 +385,7 @@ void task_deinit() {
 	timer_init();
 }
 
+// Hàm thiết lập khả năng (ability) cho một tác vụ polling cụ thể, cho phép bật hoặc tắt khả năng thực thi của tác vụ polling dựa trên ID của nó
 void task_polling_set_ability(task_id_t task_polling_id, uint8_t ability) {
 	task_polling_t* __task_polling_table = task_polling_table;
 
@@ -472,6 +410,7 @@ void task_polling_set_ability(task_id_t task_polling_id, uint8_t ability) {
 	}
 }
 
+// Hàm chạy tất cả các tác vụ polling có khả năng được bật
 void task_polling_run() {
 	task_polling_t* __task_polling_table = task_polling_table;
 
@@ -490,179 +429,125 @@ void task_polling_run() {
 	}
 }
 
+/**
+ * Hàm scheduler chính của AK, được gọi trong vòng lặp runtime 
+ * để quản lý và thực thi các tác vụ dựa trên trạng thái sẵn sàng của chúng.
+ * Scheduler này ưu tiên chạy tác vụ có mức ưu tiên cao nhất đang sẵn sàng, 
+ * lấy tin nhắn từ hàng đợi của tác vụ đó, cập nhật thông tin tác vụ hiện tại 
+ * và đối tượng tin nhắn đang xử lý, sau đó gọi hàm xử lý của tác vụ với tin nhắn đó.
+ * Sau khi thực thi xong, scheduler sẽ kiểm tra và giải phóng tin nhắn nếu cần thiết, 
+ * và tiếp tục vòng lặp để tìm tác vụ tiếp theo sẵn sàng để chạy.
+ */
 void task_sheduler() {
+	// Tạo biến cục bộ để lưu ID của tác vụ mới được chọn để chạy, giúp quản lý việc chuyển đổi giữa các tác vụ một cách hiệu quả trong quá trình thực thi scheduler
 	uint8_t t_task_new;
 
-	ENTRY_CRITICAL();
+	ENTRY_CRITICAL(); // Báo bước vào critical section
 
-	uint8_t t_task_current = task_current;
+	uint8_t t_task_current = task_current; // Lưu ID của tác vụ hiện tại vào biến cục bộ để so sánh với tác vụ mới được chọn trong quá trình chạy scheduler
 
-	/* task_ready phải có ít nhất một bit được set trước khi gọi LOG2LKUP(). */
+	// task_ready phải có ít nhất một bit được set trước khi gọi LOG2LKUP().
 	while ((task_ready != 0) && ((t_task_new = LOG2LKUP(task_ready)) > t_task_current)) {
-		/* get task */
+		
+		// Lấy con trỏ đến control block của tác vụ mới được chọn để chạy
 		tcb_t* t_tcb = &task_pri_queue[t_task_new];
+
+		// Kiểm tra tính toàn vẹn của hàng đợi tác vụ mới được chọn
 		task_queue_integrity_check(t_tcb, 0x11);
 
+		// Kiểm tra xem hàng đợi của tác vụ mới có tin nhắn nào không, nếu không có thì có lỗi trong quản lý hàng đợi và báo lỗi
 		if (t_tcb->qhead == NULL) {
 			FATAL("TK", 0x11);
 		}
 
-		/* get message */
+		// Lấy tin nhắn đầu tiên trong hàng đợi của tác vụ mới được chọn để xử lý
 		ak_msg_t* t_msg = t_tcb->qhead;
+		
+		// Kiểm tra tính hợp lệ của tin nhắn được lấy từ hàng đợi, nếu tin nhắn không hợp lệ thì có lỗi trong quản lý tin nhắn và báo lỗi
 		if (msg_is_valid_ptr(t_msg) == AK_MSG_NG) {
 			FATAL("TK", 0x11);
 		}
 
+		// Kiểm tra tính toàn vẹn của liên kết tin nhắn trong hàng đợi, đảm bảo rằng con trỏ next của tin nhắn hợp lệ hoặc là NULL
 		if (msg_is_valid_or_null(t_msg->next) == AK_MSG_NG) {
 			FATAL("TK", 0x11);
 		}
+
+		// Cập nhật con trỏ đầu của hàng đợi tác vụ mới để trỏ đến tin nhắn tiếp theo sau tin nhắn hiện tại
 		t_tcb->qhead = t_msg->next;
 
-		/* last message of queue */
+		// Nếu sau khi lấy tin nhắn hiện tại, con trỏ đầu của hàng đợi trở thành NULL, nghĩa là hàng đợi đã hết tin nhắn
 		if (t_msg->next == NULL) {
+			// Cập nhật con trỏ cuối của hàng đợi thành NULL vì không còn tin nhắn nào trong hàng đợi
 			t_tcb->qtail = NULL;
-			/* change status of task to inactive */
+			// Cập nhật trạng thái của tác vụ mới thành không sẵn sàng vì không còn tin nhắn nào để xử lý
 			task_ready &= ~t_tcb->mask;
 		}
 
-		/* update current task */
+		// Cập nhật ID của tác vụ hiện tại thành ID của tác vụ mới được chọn để chạy
 		task_current = t_task_new;
 
-		/* start task debug */
-#if defined(AK_TASK_OBJ_LOG_ENABLE) || defined(AK_TASK_LOG_CONSOLE_ENABLE)
-		t_msg->dbg_handler.start_exe = sys_ctrl_millis();
-#endif
+		// Kiểm tra xem ID của tác vụ đích trong tin nhắn có hợp lệ không, nếu không hợp lệ thì có lỗi trong quản lý tin nhắn và báo lỗi
 		if (t_msg->des_task_id >= task_table_size) {
 			FATAL("TK", 0x09);
 		}
 
+		// Kiểm tra xem hàm xử lý của tác vụ đích có hợp lệ không, nếu không hợp lệ thì có lỗi trong quản lý tác vụ và báo lỗi
 		if (task_table[t_msg->des_task_id].task == (pf_task)0) {
 			FATAL("TK", 0x0A);
 		}
 
-		/* update current ak object */
+		// Cập nhật thông tin của tác vụ hiện tại bằng cách sao chép thông tin từ bảng tác vụ dựa trên ID của tác vụ đích trong tin nhắn
 		memcpy(&current_task_info, &task_table[t_msg->des_task_id], sizeof(task_t));
 		memcpy(&current_active_object, t_msg, sizeof(ak_msg_t));
 
-		/* update current task id by local scheduler destination */
+		// Cập nhật ID của tác vụ hiện tại thành ID của tác vụ đích trong tin nhắn
 		current_task_id = t_msg->des_task_id;
 
-		/* execute task */
-		EXIT_CRITICAL();
+		EXIT_CRITICAL(); // Báo bước ra khỏi critical section
 
+		// Lấy con trỏ đến hàm xử lý của tác vụ đích từ bảng tác vụ dựa trên ID của tác vụ đích trong tin nhắn
 		pf_task task_handler = task_table[t_msg->des_task_id].task;
+
+		// Kiểm tra xem hàm xử lý của tác vụ đích có phải là một địa chỉ hợp lệ
 		if ((((uint32_t)task_handler) & 0x01U) == 0U) {
 			FATAL("TK", 0x08);
 		}
 
+		// Gọi hàm xử lý của tác vụ đích với tin nhắn hiện tại làm đối số, thực thi chức năng của tác vụ dựa trên nội dung của tin nhắn
 		task_handler(t_msg);
 
-		ENTRY_CRITICAL();
+		ENTRY_CRITICAL(); // Báo bước vào critical section để tiếp tục quản lý trạng thái sau khi thực thi tác vụ
 
-#if defined(AK_TASK_OBJ_LOG_ENABLE) || defined(AK_TASK_LOG_CONSOLE_ENABLE)
-		/* reject msg of timer task */
-		if (current_active_object.des_task_id > 0) {
-			current_active_object.dbg_handler.stop_exe = sys_ctrl_millis();
-
-			/* put current object to log queue */
-			log_queue_put(&log_task_dbg_object_queue, &current_active_object);
-
-#if defined(AK_TASK_LOG_CONSOLE_ENABLE)
-			{
-				uint32_t exe_time;
-				uint32_t wait_time;
-				if (current_active_object.dbg_handler.start_exe >= current_active_object.dbg_handler.start_post) {
-					wait_time = current_active_object.dbg_handler.start_exe - current_active_object.dbg_handler.start_post;
-				}
-				else {
-					wait_time = current_active_object.dbg_handler.start_exe + ((uint32_t)0xFFFFFFFF - current_active_object.dbg_handler.start_post);
-				}
-
-				if (current_active_object.dbg_handler.stop_exe >= current_active_object.dbg_handler.start_exe) {
-					exe_time = current_active_object.dbg_handler.stop_exe - current_active_object.dbg_handler.start_exe;
-				}
-				else {
-					exe_time = current_active_object.dbg_handler.stop_exe + ((uint32_t)0xFFFFFFFF - current_active_object.dbg_handler.start_exe);
-				}
-
-				xprintf("taskID: %d\tmsgType:0x%x\trefCnt:%d\tsig:%d\t\twaitTime:%d\texeTime:%d\n"\
-						, current_active_object.des_task_id								\
-						, (current_active_object.ref_count & AK_MSG_TYPE_MASK)		\
-						, (current_active_object.ref_count & AK_MSG_REF_COUNT_MASK)	\
-						, current_active_object.sig									\
-						, (wait_time)	\
-						, (exe_time));
-			}
-#endif
-		}
-
-		if (get_msg_ref_count(t_msg) > 1) {
-			t_msg->dbg_handler.start_post = current_active_object.dbg_handler.stop_exe ;
-			t_msg->dbg_handler.start_exe = 0;
-			t_msg->dbg_handler.stop_exe = 0;
-		}
-
-		/* clear current active object */
-		memset(&current_active_object, 0, sizeof(ak_msg_t));
-
-#endif
-
-		/* check and free message */
+		// Gọi giải phóng tin nhắn sau khi đã xử lý xong
 		msg_free(t_msg);
 	}
 
+	// Cập nhật ID của tác vụ hiện tại thành giá trị đã lưu trước đó
 	task_current = t_task_current;
 
+	// Nếu không có tác vụ nào sẵn sàng để chạy, đặt ID của tác vụ hiện tại thành AK_TASK_IDLE_ID để biểu thị rằng hệ thống đang ở trạng thái nhàn rỗi
 	current_task_id = AK_TASK_IDLE_ID;
 
-	EXIT_CRITICAL();
+	EXIT_CRITICAL(); // Báo bước ra khỏi critical section
 }
 
-void task_pri_queue_dump() {
-	uint8_t t_task_ready;
-	tcb_t* t_tcb;
-	ak_msg_t* t_msg;
-
-	ENTRY_CRITICAL();
-
-	t_task_ready = task_ready;
-
-	for (uint8_t pri = 1; pri <= TASK_PRI_MAX_SIZE; pri++) {
-		t_tcb = &task_pri_queue[pri - 1];
-
-		/* check task queue available */
-		if (t_task_ready & t_tcb->mask) {
-
-			/* get first message of queue */
-			t_msg = t_tcb->qhead;
-
-			while (t_msg != NULL) {
-
-				/* consider the next message */
-				t_msg = t_msg->next;
-			}
-		}
-	}
-
-	EXIT_CRITICAL();
-}
-
-task_id_t task_self() {
-	return current_task_info.id;
-}
-
+// Hàm lấy ID của tác vụ hiện tại đang được thực thi
 task_id_t get_current_task_id() {
 	return current_task_id;
 }
 
+// Hàm lấy thông tin chi tiết của tác vụ hiện tại đang được thực thi, bao gồm ID, mức ưu tiên, và hàm thực thi của tác vụ hiện tại
 task_t* get_current_task_info() {
 	return (task_t*)&current_task_info;
 }
 
+// Hàm lấy con trỏ đến đối tượng tin nhắn hiện tại đang được xử lý bởi tác vụ hiện tại
 ak_msg_t* get_current_active_object() {
 	return (ak_msg_t*)&current_active_object;
 }
 
+// Hàm lấy kích thước của bảng thông tin tác vụ, trả về số lượng tác vụ đã được đăng ký trong hệ thống
 uint8_t get_task_table_size() {
 	return task_table_size;
 }

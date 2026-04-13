@@ -1,9 +1,10 @@
-﻿#include "fifo.h"
-
+﻿// Khai báo thư viện sử dụng
+#include "fifo.h"
 #include <stdbool.h>
 #include <stdlib.h>
 #include "sys_dbg.h"
 
+// Hàm khởi tạo FIFO
 void fifo_init(fifo_t* fifo, void* buffer, uint32_t buffer_size, uint32_t element_size) {
 	fifo->tail_index = 0;
 	fifo->head_index = 0;
@@ -14,18 +15,22 @@ void fifo_init(fifo_t* fifo, void* buffer, uint32_t buffer_size, uint32_t elemen
 	fifo->element_size = element_size;
 }
 
+// Hàm lấy số lượng phần tử có thể chứa trong FIFO
 uint32_t fifo_availble(fifo_t* fifo) {
 	return fifo->fill_size;
 }
 
+// Hàm kiểm tra FIFO có rỗng hay không
 bool fifo_is_empty(fifo_t* fifo) {
 	return (fifo->fill_size == 0) ? true : false;
 }
 
+// Hàm kiểm tra FIFO có đầy hay không
 bool fifo_is_full(fifo_t* fifo) {
 	return (fifo->fill_size == fifo->buffer_size) ? true : false;
 }
 
+// Hàm thêm phần tử vào FIFO
 uint8_t fifo_put(fifo_t* fifo, void* data) {
 	uint32_t next_tail_index;
 
@@ -48,6 +53,7 @@ uint8_t fifo_put(fifo_t* fifo, void* data) {
 	return RET_FIFO_OK;
 }
 
+// Hàm lấy phần tử ra khỏi FIFO
 uint8_t fifo_get(fifo_t* fifo, void* data) {
 	uint32_t next_head_index;
 
