@@ -29,7 +29,6 @@
 			task_t		current_task;
 			ak_msg_t	current_active_object;
 			m3_core_reg_t m3_core_reg;
-			uint32_t	fatal_times;
 			uint32_t	restart_times;
 		} fatal_log_t;
 

@@ -11,7 +11,7 @@
 	// Khai báo các thư viện sử dụng
 	#include <stdio.h>
 	#include <string.h>
-	#include "stdint.h"
+	#include <stdint.h>
 	#include "ak.h"
 	#include "message.h"
 	#include "task.h"

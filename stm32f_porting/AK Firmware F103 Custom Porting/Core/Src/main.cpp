@@ -1,4 +1,3 @@
-
 /* USER CODE BEGIN Header */
 /**
   ******************************************************************************
@@ -20,17 +19,14 @@
 /* Includes ------------------------------------------------------------------*/
 extern "C" {
 #include "main.h"
-#include "adc.h"
-#include "spi.h"
-#include "usart.h"
 #include "gpio.h"
 }
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include "sample.h"
-#include "../../Drivers/EDP/app/app.h"
-#include "../../Drivers/EDP/sys/sys_cfg.h"
+#include "app.h"
+#include "sys_cfg.h"
 
 
 /* USER CODE END Includes */
@@ -96,14 +92,9 @@ extern "C" int main(void)
 
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
-  MX_ADC1_Init();
-  MX_SPI1_Init();
-  MX_USART1_UART_Init();
   /* USER CODE BEGIN 2 */
   sys_cfg_init();
-  //  (void)main_app();
-  (void)sample_main();
-
+  (void)main_app();
   /* USER CODE END 2 */
 
   /* Infinite loop */

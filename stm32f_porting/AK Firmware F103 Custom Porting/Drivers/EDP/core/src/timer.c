@@ -28,7 +28,7 @@ static uint8_t timer_remove_msg(task_id_t des_task_id, timer_sig_t sig); 	// Hà
 void timer_msg_pool_init() {
 	uint32_t index;
 
-	ENTRY_CRITICAL();
+	entry_critical();
 
 	timer_list_head = TIMER_MSG_NULL;
 	free_list_timer_pool = (ak_timer_t*)timer_pool;
@@ -51,13 +51,13 @@ void timer_msg_pool_init() {
 	free_list_timer_used = 0;
 	free_list_timer_used_max = 0;
 
-	EXIT_CRITICAL();
+	exit_critical();
 }
 
 ak_timer_t* get_timer_msg() {
 	ak_timer_t* allocate_timer;
 
-	ENTRY_CRITICAL();
+	entry_critical();
 
 	allocate_timer = free_list_timer_pool;
 
@@ -73,21 +73,21 @@ ak_timer_t* get_timer_msg() {
 		}
 	}
 
-	EXIT_CRITICAL();
+	exit_critical();
 
 	return allocate_timer;
 }
 
 void free_timer_msg(ak_timer_t* msg) {
 
-	ENTRY_CRITICAL();
+	entry_critical();
 
 	msg->next = free_list_timer_pool;
 	free_list_timer_pool = msg;
 
 	free_list_timer_used--;
 
-	EXIT_CRITICAL();
+	exit_critical();
 }
 
 uint32_t get_timer_msg_pool_used() {
@@ -107,7 +107,7 @@ void task_timer_tick(ak_msg_t* msg) {
 	uint32_t temp_counter;
 	uint32_t irq_counter;
 
-	ENTRY_CRITICAL();
+	entry_critical();
 
 	timer_list = timer_list_head;
 
@@ -116,13 +116,13 @@ void task_timer_tick(ak_msg_t* msg) {
 	ak_timer_payload_irq.counter = 0;
 	ak_timer_payload_irq.enable_post_msg = AK_ENABLE;
 
-	EXIT_CRITICAL();
+	exit_critical();
 
 	switch (msg->sig) {
 	case TIMER_TICK:
 		while (timer_list != TIMER_MSG_NULL) {
 
-			ENTRY_CRITICAL();
+			entry_critical();
 
 			if (irq_counter < timer_list->counter) {
 				timer_list->counter -= irq_counter;
@@ -133,7 +133,7 @@ void task_timer_tick(ak_msg_t* msg) {
 
 			temp_counter = timer_list->counter;
 
-			EXIT_CRITICAL();
+			exit_critical();
 
 			if (temp_counter == 0) {
 
@@ -141,7 +141,7 @@ void task_timer_tick(ak_msg_t* msg) {
 				set_msg_sig(timer_msg, timer_list->sig);
 				task_post(timer_list->des_task_id, timer_msg);
 
-				ENTRY_CRITICAL();
+				entry_critical();
 
 				if (timer_list->period) {
 					timer_list->counter = timer_list->period;
@@ -150,7 +150,7 @@ void task_timer_tick(ak_msg_t* msg) {
 					timer_del = timer_list;
 				}
 
-				EXIT_CRITICAL();
+				exit_critical();
 			}
 
 			timer_list = timer_list->next;
@@ -170,12 +170,12 @@ void task_timer_tick(ak_msg_t* msg) {
 void timer_init() {
 	timer_msg_pool_init();
 
-	ENTRY_CRITICAL();
+	entry_critical();
 
 	ak_timer_payload_irq.counter = 0;
 	ak_timer_payload_irq.enable_post_msg = AK_ENABLE;
 
-	EXIT_CRITICAL();
+	exit_critical();
 }
 
 void timer_tick(uint32_t t) {
@@ -203,7 +203,7 @@ uint8_t timer_set(
 		FATAL("TK", 0x0B);
 	}
 
-	ENTRY_CRITICAL();
+	entry_critical();
 
 	timer_msg = timer_list_head;
 
@@ -213,7 +213,7 @@ uint8_t timer_set(
 
 			timer_msg->counter = duty;
 
-			EXIT_CRITICAL();
+			exit_critical();
 
 			return TIMER_RET_OK;
 		}
@@ -244,7 +244,7 @@ uint8_t timer_set(
 		timer_list_head = timer_msg;
 	}
 
-	EXIT_CRITICAL();
+	exit_critical();
 
 	return TIMER_RET_OK;
 }
@@ -258,7 +258,7 @@ uint8_t timer_remove_msg(task_id_t des_task_id, timer_sig_t sig) {
 		FATAL("TK", 0x0C);
 	}
 
-	ENTRY_CRITICAL();
+	entry_critical();
 
 	timer_msg = timer_list_head;
 	timer_msg_prev = timer_msg;
@@ -277,7 +277,7 @@ uint8_t timer_remove_msg(task_id_t des_task_id, timer_sig_t sig) {
 
 			free_timer_msg(timer_msg);
 
-			EXIT_CRITICAL();
+			exit_critical();
 
 			return TIMER_RET_OK;
 		}
@@ -287,7 +287,7 @@ uint8_t timer_remove_msg(task_id_t des_task_id, timer_sig_t sig) {
 		}
 	}
 
-	EXIT_CRITICAL();
+	exit_critical();
 
 	return TIMER_RET_NG;
 }

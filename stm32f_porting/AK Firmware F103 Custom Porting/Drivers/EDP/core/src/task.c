@@ -124,7 +124,7 @@ void task_post(task_id_t des_task_id, ak_msg_t* msg) {
 
 	t_tcb = &task_pri_queue[task_table[des_task_id].pri - 1];
 
-	ENTRY_CRITICAL();
+	entry_critical();
 	task_queue_integrity_check(t_tcb, 0x0E);
 
 	msg->next = NULL;
@@ -155,7 +155,7 @@ void task_post(task_id_t des_task_id, ak_msg_t* msg) {
 		t_tcb->qtail = msg;
 	}
 
-	EXIT_CRITICAL();
+	exit_critical();
 }
 
 /**
@@ -177,7 +177,7 @@ uint8_t task_remove_msg(task_id_t task_id, uint8_t sig) {
 		FATAL("TK", 0x05);
 	}
 
-	ENTRY_CRITICAL();
+	entry_critical();
 
 	/* get task table control */
 	t_tcb = &task_pri_queue[task_table[task_id].pri - 1];
@@ -239,7 +239,7 @@ uint8_t task_remove_msg(task_id_t task_id, uint8_t sig) {
 		}
 	}
 
-	EXIT_CRITICAL();
+	exit_critical();
 	return total_rm_msg;
 }
 
@@ -318,14 +318,14 @@ int task_run() {
  * Trả về 1 nếu có task sẵn sàng để xử lý, trả về 0 nếu không có task nào trong queue.
  */
 int task_debug_run_once() {
-	ENTRY_CRITICAL();
+	entry_critical();
 
 	if (task_ready == 0) {
-		EXIT_CRITICAL();
+		exit_critical();
 		return 0;
 	}
 
-	EXIT_CRITICAL();
+	exit_critical();
 
 	task_sheduler();
 	task_polling_run();
@@ -334,14 +334,14 @@ int task_debug_run_once() {
 }
 
 int task_sample_run_once() {
-	ENTRY_CRITICAL();
+	entry_critical();
 
 	if (task_ready == 0) {
-		EXIT_CRITICAL();
+		exit_critical();
 		return 0;
 	}
 
-	EXIT_CRITICAL();
+	exit_critical();
 
 	task_sheduler();
 
@@ -358,7 +358,7 @@ void task_deinit() {
 	uint8_t pri;
 	tcb_t* t_tcb;
 
-	ENTRY_CRITICAL();
+	entry_critical();
 
 	current_task_id = 0;
 	memset(&current_task_info, 0, sizeof(task_t));
@@ -379,7 +379,7 @@ void task_deinit() {
 		t_tcb->qtail = NULL;
 	}
 
-	EXIT_CRITICAL();
+	exit_critical();
 
 	msg_init();
 	timer_init();
@@ -393,11 +393,11 @@ void task_polling_set_ability(task_id_t task_polling_id, uint8_t ability) {
 
 		if (__task_polling_table->id == task_polling_id) {
 
-			ENTRY_CRITICAL();
+			entry_critical();
 
 			__task_polling_table->ability = ability;
 
-			EXIT_CRITICAL();
+			exit_critical();
 
 			break;
 		}
@@ -416,14 +416,14 @@ void task_polling_run() {
 
 	while (__task_polling_table->id < AK_TASK_POLLING_EOT_ID) {
 
-		ENTRY_CRITICAL();
+		entry_critical();
 		if (__task_polling_table->ability == AK_ENABLE) {
 
-			EXIT_CRITICAL();
+			exit_critical();
 			__task_polling_table->task_polling();
 		}
 		else {
-			EXIT_CRITICAL();
+			exit_critical();
 		}
 		__task_polling_table++;
 	}
@@ -442,7 +442,7 @@ void task_sheduler() {
 	// Tạo biến cục bộ để lưu ID của tác vụ mới được chọn để chạy, giúp quản lý việc chuyển đổi giữa các tác vụ một cách hiệu quả trong quá trình thực thi scheduler
 	uint8_t t_task_new;
 
-	ENTRY_CRITICAL(); // Báo bước vào critical section
+	entry_critical(); // Báo bước vào critical section
 
 	uint8_t t_task_current = task_current; // Lưu ID của tác vụ hiện tại vào biến cục bộ để so sánh với tác vụ mới được chọn trong quá trình chạy scheduler
 
@@ -504,7 +504,7 @@ void task_sheduler() {
 		// Cập nhật ID của tác vụ hiện tại thành ID của tác vụ đích trong tin nhắn
 		current_task_id = t_msg->des_task_id;
 
-		EXIT_CRITICAL(); // Báo bước ra khỏi critical section
+		exit_critical(); // Báo bước ra khỏi critical section
 
 		// Lấy con trỏ đến hàm xử lý của tác vụ đích từ bảng tác vụ dựa trên ID của tác vụ đích trong tin nhắn
 		pf_task task_handler = task_table[t_msg->des_task_id].task;
@@ -517,7 +517,7 @@ void task_sheduler() {
 		// Gọi hàm xử lý của tác vụ đích với tin nhắn hiện tại làm đối số, thực thi chức năng của tác vụ dựa trên nội dung của tin nhắn
 		task_handler(t_msg);
 
-		ENTRY_CRITICAL(); // Báo bước vào critical section để tiếp tục quản lý trạng thái sau khi thực thi tác vụ
+		entry_critical(); // Báo bước vào critical section để tiếp tục quản lý trạng thái sau khi thực thi tác vụ
 
 		// Gọi giải phóng tin nhắn sau khi đã xử lý xong
 		msg_free(t_msg);
@@ -529,7 +529,7 @@ void task_sheduler() {
 	// Nếu không có tác vụ nào sẵn sàng để chạy, đặt ID của tác vụ hiện tại thành AK_TASK_IDLE_ID để biểu thị rằng hệ thống đang ở trạng thái nhàn rỗi
 	current_task_id = AK_TASK_IDLE_ID;
 
-	EXIT_CRITICAL(); // Báo bước ra khỏi critical section
+	exit_critical(); // Báo bước ra khỏi critical section
 }
 
 // Hàm lấy ID của tác vụ hiện tại đang được thực thi

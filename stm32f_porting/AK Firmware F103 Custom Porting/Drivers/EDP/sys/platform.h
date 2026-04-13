@@ -19,8 +19,8 @@
   #define ENABLE_INTERRUPTS() __enable_irq()
 
   // Định nghĩa các macro quản lý critical section
-  #define ENTRY_CRITICAL() platform_enter_critical()
-  #define EXIT_CRITICAL() platform_exit_critical()
+  #define entry_critical() platform_enter_critical()
+  #define exit_critical() platform_exit_critical()
 
   // Định nghĩa macro để lấy vị trí bit ưu tiên cao nhất đang sẵn sàng từ biến mask
   #ifndef LOG2LKUP

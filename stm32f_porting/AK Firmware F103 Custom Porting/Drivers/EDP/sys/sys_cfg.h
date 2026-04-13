@@ -12,15 +12,6 @@
     #include "main.h"
     #include "system.h"
 
-    // Khai báo các định nghĩa về chế độ watchdog
-    #define SYS_WATCHDOG_MODE_NONE 0U // Không sử dụng watchdog
-    #define SYS_WATCHDOG_MODE_IWDG 1U // Sử dụng Independent Watchdog (IWDG)
-    #define SYS_WATCHDOG_MODE_SOFT 2U // Sử dụng watchdog phần mềm (soft watchdog)
-
-    // Khai báo chế độ watchdog
-    #define SYS_WATCHDOG_MODE SYS_WATCHDOG_MODE_NONE // Mặc định không sử dụng watchdog
-    #define SYS_IWDG_FREEZE_IN_DEBUG 1U // Cho phép đóng băng IWDG khi debug
-
     // Khai báo các hàm cấu hình hệ thống
     void sys_cfg_init(void);        // Hàm khởi tạo cấu hình hệ thống
     void sys_cfg_clock(void);       // Hàm cấu hình hệ thống clock

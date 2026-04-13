@@ -170,7 +170,7 @@ void ak_free(void* ptr) {
 void pure_msg_pool_init() {
 	uint32_t index;
 
-	ENTRY_CRITICAL();
+	entry_critical();
 
 	free_list_pure_msg_pool = (ak_msg_t*)msg_pure_pool;
 
@@ -195,7 +195,7 @@ void pure_msg_pool_init() {
 	free_list_pure_used = 0;
 	free_list_pure_used_max = 0;
 
-	EXIT_CRITICAL();
+	exit_critical();
 }
 
 // Hàm lấy số lượng tin nhắn thuần túy đã được sử dụng từ pool
@@ -212,7 +212,7 @@ uint32_t get_pure_msg_pool_used_max() {
 ak_msg_t* get_pure_msg() {
 	ak_msg_t* allocate_message;
 
-	ENTRY_CRITICAL();
+	entry_critical();
 
 	allocate_message = free_list_pure_msg_pool;
 
@@ -240,7 +240,7 @@ ak_msg_t* get_pure_msg() {
 	allocate_message->if_des_type = 0;
 	allocate_message->if_sig = 0;
 
-	EXIT_CRITICAL();
+	exit_critical();
 
 	return allocate_message;
 }
@@ -248,21 +248,21 @@ ak_msg_t* get_pure_msg() {
 // Hàm giải phóng một tin nhắn thuần túy
 void free_pure_msg(ak_msg_t* msg) {
 
-	ENTRY_CRITICAL();
+	entry_critical();
 
 	msg->next = free_list_pure_msg_pool;
 	free_list_pure_msg_pool = msg;
 
 	free_list_pure_used--;
 
-	EXIT_CRITICAL();
+	exit_critical();
 }
 
 // Hàm khởi tạo pool tin nhắn thông thường
 void common_msg_pool_init() {
 	uint32_t index;
 
-	ENTRY_CRITICAL();
+	entry_critical();
 
 	free_list_common_msg_pool = (ak_msg_t*)msg_common_pool;
 
@@ -288,7 +288,7 @@ void common_msg_pool_init() {
 	free_list_common_used = 0;
 	free_list_common_used_max = 0;
 
-	EXIT_CRITICAL();
+	exit_critical();
 }
 
 // Hàm lấy một tin nhắn thông thường từ pool
@@ -305,7 +305,7 @@ uint32_t get_common_msg_pool_used_max() {
 ak_msg_t* get_common_msg() {
 	ak_msg_t* allocate_message;
 
-	ENTRY_CRITICAL();
+	entry_critical();
 
 	allocate_message = free_list_common_msg_pool;
 
@@ -335,7 +335,7 @@ ak_msg_t* get_common_msg() {
 
 	((ak_msg_common_t*)allocate_message)->len = 0;
 
-	EXIT_CRITICAL();
+	exit_critical();
 
 	return allocate_message;
 }
@@ -343,14 +343,14 @@ ak_msg_t* get_common_msg() {
 // Hàm giải phóng một tin nhắn thông thường
 void free_common_msg(ak_msg_t* msg) {
 
-	ENTRY_CRITICAL();
+	entry_critical();
 
 	msg->next = free_list_common_msg_pool;
 	free_list_common_msg_pool = msg;
 
 	free_list_common_used--;
 
-	EXIT_CRITICAL();
+	exit_critical();
 }
 
 // Hàm khởi tạo pool tin nhắn động
@@ -393,7 +393,7 @@ uint8_t get_data_len_common_msg(ak_msg_t* msg) {
 void dynamic_msg_pool_init() {
 	uint32_t index;
 
-	ENTRY_CRITICAL();
+	entry_critical();
 
 	free_list_dynamic_msg_pool = (ak_msg_t*)msg_dynamic_pool;
 
@@ -420,7 +420,7 @@ void dynamic_msg_pool_init() {
 	free_list_dynamic_used = 0;
 	free_list_dynamic_used_max = 0;
 
-	EXIT_CRITICAL();
+	exit_critical();
 }
 
 // Hàm lấy số lượng tin nhắn động đã được sử dụng từ pool
@@ -436,7 +436,7 @@ uint32_t get_dynamic_msg_pool_used_max() {
 // Hàm giải phóng một tin nhắn động
 void free_dynamic_msg(ak_msg_t* msg) {
 
-	ENTRY_CRITICAL();
+	entry_critical();
 
 	msg->next = free_list_dynamic_msg_pool;
 	free_list_dynamic_msg_pool = msg;
@@ -445,14 +445,14 @@ void free_dynamic_msg(ak_msg_t* msg) {
 
 	free_list_dynamic_used--;
 
-	EXIT_CRITICAL();
+	exit_critical();
 }
 
 // Hàm lấy một tin nhắn động từ pool
 ak_msg_t* get_dynamic_msg() {
 	ak_msg_t* allocate_message;
 
-	ENTRY_CRITICAL();
+	entry_critical();
 
 	allocate_message = free_list_dynamic_msg_pool;
 
@@ -483,7 +483,7 @@ ak_msg_t* get_dynamic_msg() {
 	((ak_msg_dynamic_t*)allocate_message)->len = 0;
 	((ak_msg_dynamic_t*)allocate_message)->data = ((uint8_t*)0);
 
-	EXIT_CRITICAL();
+	exit_critical();
 
 	return allocate_message;
 }
